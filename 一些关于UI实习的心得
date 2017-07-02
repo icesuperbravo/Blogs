@@ -1,0 +1,83 @@
+S1. 基本情况（Basic Information about the Intern）
+Position: Summer Trainee
+When: from 03.2017- now on
+What: UI Construction && Data Visualization
+Where: ABB Finland, CPM R&D department
+Technology Stack(s): D3.js, Javascript, HTML5
+ 
+S2.  关于公司（About the Cooperation）
+个人认为公司文化及氛围对工作满意度会产生极大（70% 以上？？）程度的影响。当初选择ABB很大程度是基于对国际外资公司的向往。至于公司文化，企业氛围根本不在我当时考虑范围。但入职以后还是感觉到了文化氛围的必要性。
+ABB是个比较老牌的机械制造公司，主营业务包括但并不仅限于高中低压电气产品，PLC相关电子产品， 机器人， 引擎以及工厂级别CRM等。 和施耐德，西门子，GE等公司同为竞争对手，但竞争优势各异，其利润来源区别还是很大的。目前ABB面临从传统工业制造向工业互联网企业的转型阶段。ABB为此投入了大部分精力打造一个从底层传感器，电气， 到终端CRM，云端的巨大电子化信息共享系统（ABB Ability），并且收购了位于奥地利的贝加莱工业自动化公司（B&R ）以提升ABB在软件服务和工业自动化方面的相关短板， 目的就是在未来行业互联网化的巨大趋势下分得一杯羹。而相比之下，GE， 这家号称要成为未来互联网公司TOP10的老朋友， 目前已经完成从重工业到工业互联网转型的第一阶段，并开发了一个名为Predix的Paas平台来提升其竞争力。
+说了这么多废话，其实ABB目前面对十分严峻的挑战，和非常有力的竞争对手，同时也是一个不可错过的良好机遇。但是从我单方面的感知来看，公司虽然盈利良好，但利润来源大部分并不来自于软件级别产品。在面临转型的严重挑战下，浮现所有大公司的通病： 员工老龄化，缺乏新鲜年轻的想法，氛围沉闷无聊等（此部分全为本人主观体验和感受）。 我个人认为未来的转型道路将任重而道远，而GE可能是会是ABB一个非常好的活标本。
+ 
+S3. 同事 & 文化（Collegue & Enterprise Culture）
+我所在的部门部分大部分员工都在30岁以上，基于实习地区限制，70%以上的同事都是芬兰本地人。在职的亚裔人士除我以外，只有一个越南人和印度尼西亚人（目前又多了一位同胞！）。 众所周知（呃。也许并不是那么众所周知）芬兰人以内敛沉默而闻名，和同样位于Scandinavia半岛邻国上的瑞典人相比，都要害羞沉默不少。 和芬兰的同事的交道都基本止于浅尝辄止，芬兰人虽不精于英语（部分芬兰人口音还是很强大的，还是喜欢我瑞），但英语的普及程度绝对不差， 然而公司强大的芬兰语男子天团， 让我感受到了强大的文化隔阂。芬兰人的社交距离是绝对远高于其他国家的(如果没有直观感受可以去看看一本叫Finnish Nightmare的漫画 )， 从办公室的隔间就能充分感受。到现在，我看到老板还是无限尴尬。 而我所在的部门可能由于行业差异，到现在也只有我一个女生， 新入职的实习生因为部门的工位紧缺，都被发配到了另一个办公地点， 到现在我都不认识。 但，转念一想， 认识又怎样呢？ 还不是无限尬聊， 所以也失去了那份期待的惊喜。对于集体融入， 我基本已经属于半放弃状态。
+当然，在芬兰还是有很多国际化并更加多元的公司和部门， 我的主观感受和个体案例并不能代表整个芬兰的公司／文化氛围。 很多周围的中国朋友也在相关的互联网公司里如鱼得水。 
+ 
+S4. 我学到了什么？(What I learnt from the internship period?)
+这是个我需要问自己的问题，目前已入职两个月有余。除了对公司的整体感知，项目上手程度感知，剩下的可能才是真正需要内化的内容。我工作期间的主要职责是在公司已有的庞杂的前端可视化系统上进一步构建一些图形化的User interfaces。
+4.1 D3 
+version: 3.5.17
+注： d3 4.0相较于d3 3.0API接口已经做了较大变动。本文中介绍的接口均基于d3 v3.5.17
+开发过程中我基本使用了大量的D3 Library，感觉这个库对于数据可视化的开发还是非常高效有用的。D3调用函数也相对简化了原生javascript 函数. 
+比如，选中一个DOM element 可写为：  d3. select(“name”);
+再比如， 对DOM的attributes的各种操作可写为： d3.selection.attr(“a”, “b”), etc;
+同样，D3能很好的胜任对动态数据的处理， 通过dataEnter, dataUpdate, dataExit三个步骤就能简单实现数据在图形界面上的更新。 
+some refs:
+ https://medium.com/@c_behrens/enter-update-exit-6cafc6014c36
+ https://bost.ocks.org/mike/join/
+(第二篇完美的解释了该机制)
+同样， 我也使用了很多d3 tree layout 和 d3 force graph layout.
+D3 tree 可以实现对数据的树状结构可视化，对于想要静态显示拓扑结构和树状结构的图形来说都十分有用。 
+some demo(s): 
+http://bl.ocks.org/robschmuecker/7880033
+https://bl.ocks.org/mbostock/4339083
+some ref(s):
+https://github.com/d3/d3-3.x-api-reference/blob/master/Tree-Layout.md
+D3 force graph用起来就更得心应手了，实际上调用过程也十分地简单。它能完美的实现拓扑结构的动态展示。 
+Quote from:  https://github.com/d3/d3-3.x-api-reference/blob/master/Force-Layout.md
+‘A flexible force-directed graph layout implementation using position Verlet integration to allow simple constraints. For more on physical simulations, see Thomas Jakobsen. This implementation uses a quadtree to accelerate charge interaction using the Barnes–Hut approximation. In addition to the repulsive charge force, a pseudo-gravity force keeps nodes centered in the visible area and avoids expulsion of disconnected subgraphs, while links are fixed-distance geometric constraints. Additional custom forces and constraints may be applied on the "tick" event, simply by updating the x and y attributes of nodes.’
+引用自github上对d3-3.x的API手册，force-directed graph使用了Verlet积分对图形进行简单而灵活的约束， 为了实现更加逼真的物理系统模拟，图形使用四叉树（from Barnes–Hut approximation）提升了电荷相互作用对不同节点之间的模拟体验，并添加重力系统以保持图形始终居中于可见区域以及排除失去连接的子图形。 其次，用户可以在tick函数中自定义模拟物理系统等。 
+some demo(s): 
+http://bl.ocks.org/eyaler/10586116
+https://bl.ocks.org/mbostock/1062288
+https://stackoverflow.com/questions/21529242/d3-force-directed-graph-downward-force-simulation
+在交互方面，主要使用了库中的： 
+d3. selection.transition();      //平移效果
+d3.selection.on (“click”, clicked);  //点击事件
+d3.selection.on(“zoom”, zoomed);  //缩放事件
+d3.force.drag();  //force simulation下的拖拽事件
+d3.selection.on(“mouseover”, mouseovered);  //鼠标移经事件
+d3.selection.on(“mouseout”, mouseouted) ;   //鼠标移出事件
+在界面方面，我也做了一些调整。
+首先为整个svg画布预留了占画布5%的长度/宽度作为margin；
+为了可以使静态图形和动态图形自适应画布大小，也花费了一番努力。在刚开始只有静态图形时，选择了使用实时测量的办法来计算整个图形的大小，并使用zoom的API调节整个图形。
+但是再添加了平移效果之后，测得的图形大小收到了transition.duration（sometime）中时间延迟的影响， 所得到的数值并不准确。不得不重新调研算法。后来发现使用到d3提供的框架数据加上对误差的调整可以得到较为近似与图形真实大小的值。
+Pseudo Code: 
+mScale = [0,1];    //使图形始终在画布大小内
+mTransform.x  = somenumberx;  
+mTransform.y   =somenumbery;    //使图形始终在画布中心
+d3.select(“svg”).translate(transform + scale)  //使图形自适应画布大小
+mZoom.scale(mScale);
+mZoom.translate(mTransform.x, mTransform.y);  //将计算得到的scale和translate值写入zoom listener；
+4.2 SVG vs Canvas
+由于工作涉及到非常多网页图形的东西，自然很大程度上依赖了SVG和Canvas。
+前期在选择用哪种工具更适合自己开发进度的时，也做了一些调研。 这篇文章很完整也很全面地介绍了在选择这两种工具时需要考虑的因素。但是很遗憾的是我现在回想起来，已经不记得选择SVG的决定性因素了。
+Ref:
+https://msdn.microsoft.com/library/gg193983(v=vs.85).aspx#High_Level_Overview_of_Vector_Graphic_Scenarios
+S5. 心得（Conclusion）
+去年夏天，我在国内一家快速成长的startup实习，工作节奏虽然紧张，但工作氛围却轻松活泼，年轻人在一起相处没有矫揉造作，没有隔阂，就像大学时代身边的同学。
+而今年今日，工作环境完全不一样了。这里的工作节奏相比创业公司简直上天入地。不过难能可贵的是，公司对个体差异的尊重，对私人生活的理解。这就意味着公司给予每个人极大的自由和完全的信任。而这种自由和信任就更需要自己对自身更高的约束和对原则的坚守，否则很容易几年碌碌无为，彻底flop。 这对一个年轻工程师的职业道路来说，是致命的。 而就企业氛围来说，免不了传统公司的沉闷，无聊。 阶级我现在感觉不到，我的级别也不允许我有过多的感受。这个话题让我想到，每每就业季时，总有一群学生追问HR究竟是选择大公司还是创业公司。 我只是觉得人不能太贪心，有得必定有失。关键是，什么适合你。如果你到现在仍然无法回答这个问题，那么就请你把每种可能都尝试一遍， 那么我相信你一定能找到最终的答案。 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
