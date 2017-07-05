@@ -2,10 +2,3 @@
 一只第一次参加校招的代码狗。首战就遇到了阿里。结果相当惨烈：
 1. CSS优先级；
 2. 写一个能自增的函数；
-~~~~
-var getID = function () 
-{
-  var id = 1;
-  return function() {id++;}
-}
-~~~~
