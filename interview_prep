@@ -24,3 +24,6 @@ requirejs如何避免循环依赖
 HTTP协议：
 
 
+JS编程题：
+for in ： the JavaScript for/in statement loops through the properties of an object
+不适用于数组的求和，会输出字符拼接；
