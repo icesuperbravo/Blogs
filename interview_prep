@@ -7,6 +7,7 @@ margin坍塌？水平方向会不会坍塌
 repaint和reflow区别 
 实现布局：左边一张图片，右边一段文字（不是环绕） 
 盒子模型 
+CSS优先级
 
 #Javascript part: 
 window.onload和$(document).ready()的区别，浏览器加载转圈结束时哪个时间点？
@@ -20,9 +21,11 @@ lazyload如何实现
 点透问题
 前端安全
 requirejs如何避免循环依赖 
+ES6 Promise 
+AMD && CMD
 
 HTTP协议：
-
+可用于异步通讯： Ajax, JSONP, Websocket
 
 JS编程题：
 for in ： the JavaScript for/in statement loops through the properties of an object
