@@ -1,7 +1,9 @@
-HTML part:
+#HTML part:
 form表单当前页面无刷新提交  target iframe
+<marquee> 滚动
+<em> && <strong> 区别
 
-CSS part:
+#CSS part:
 margin坍塌？水平方向会不会坍塌
 使用flex布局实现三等分，左右两个元素分别贴到左边和右边，垂直居中
 repaint和reflow区别 
