@@ -30,9 +30,6 @@ http状态码。。。401和403区别？
 lazyload如何实现
 点透问题
 前端安全
-requirejs如何避免循环依赖 
-ES6 Promise 
-AMD && CMD
 事件类型、绑定方式
 响应式布局的方式；
 js中的对象，对象的继承；
@@ -48,17 +45,18 @@ instanceof 和 typeof 的区别：
 instanceof用于判断某个变量是否是某个对象的实例，返回值为true或false 
 typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
 object 
-
-##关于模块化
-MVC和MVVM
-React和Redux相关
-对模块化了解吗？说说有哪些模块化的库，有了解过模块化的发展的历史吗？（commonJS，RequireJS，SeaJS）
-分别说说同步和异步模块化的应用场景，说下AMD异步模块化实现的原理？（看JS设计模式的时候看过同步模块模式，所以我只答了同步模块化的实现，但是AMD异步的不会）
-如何将项目里面的所有的require的模块语法换成import的ES6的语法？
-virtual dom的实现，diff算法
 去除代码里面所有的空格和换行，你怎么做？
 js创建对象的几种方式：
 
+##关于模块化
+1.MVC和MVVM
+2.CommonJS/NodeJS, AMD/RequireJS, CMD/SeaJS  
+分别说说同步和异步模块化的应用场景，说下AMD异步模块化实现的原理？（看JS设计模式的时候看过同步模块模式，所以我只答了同步模块化的实现，但是AMD异步的不会）
+requirejs如何避免循环依赖 
+3.React和Redux相关
+对模块化了解吗？说说有哪些模块化的库，有了解过模块化的发展的历史吗？（commonJS，RequireJS，SeaJS）
+如何将项目里面的所有的require的模块语法换成import的ES6的语法？
+virtual dom的实现，diff算法
 
 
 #HTTP协议：
