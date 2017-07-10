@@ -16,6 +16,7 @@ css清除浮动的原理，clear:both和clear:left的区别；
 两列布局的方式；
 css3动画优化
 重排重绘
+瀑布流的实现
 
 
 
@@ -52,10 +53,11 @@ js创建对象的几种方式：
 1.MVC和MVVM
 2.CommonJS/NodeJS, AMD/RequireJS, CMD/SeaJS  
 分别说说同步和异步模块化的应用场景，说下AMD异步模块化实现的原理？（看JS设计模式的时候看过同步模块模式，所以我只答了同步模块化的实现，但是AMD异步的不会）
-requirejs如何避免循环依赖 
-3.React和Redux相关
 对模块化了解吗？说说有哪些模块化的库，有了解过模块化的发展的历史吗？（commonJS，RequireJS，SeaJS）
+requirejs如何避免循环依赖
 如何将项目里面的所有的require的模块语法换成import的ES6的语法？
+CommonJS采用同步加载，比较适合服务器端的模块加载（大部份文件储存在本地）。如果要从浏览器端加载服务器端内容，需要异步模式的模块化加载（AMD和CMD）
+3.React和Redux相关
 virtual dom的实现，diff算法
 
 
