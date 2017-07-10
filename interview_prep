@@ -65,6 +65,7 @@ https的原理，加密方式，怎么加密的
 HTTP请求的状态码
 session和cookie的区别；
 在地址栏输入url中间会经历什么
+cookie, localStorage, sessionStorage
 
 #关于算法
 二分法
