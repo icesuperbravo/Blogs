@@ -43,6 +43,11 @@ js基本数据类型，[]===[]吗；
 写个方法判断一个变量的类型；
 对象属性的遍历；
 在不支持json格式的浏览器中，写方法能够将json字符串与对象互相转换；
+instanceof 和 typeof 的区别： 
+instanceof用于判断某个变量是否是某个对象的实例，返回值为true或false 
+typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
+object 
+
 ##关于模块化
 MVC和MVVM
 React和Redux相关
@@ -52,10 +57,7 @@ React和Redux相关
 virtual dom的实现，diff算法
 去除代码里面所有的空格和换行，你怎么做？
 js创建对象的几种方式：
-instanceof 和 typeof 的区别： 
-instanceof用于判断某个变量是否是某个对象的实例，返回值为true或false 
-typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
-object 
+
 
 
 #HTTP协议：
