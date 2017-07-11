@@ -27,11 +27,11 @@ css3动画优化
 window.onload和$(document).ready()的区别，浏览器加载转圈结束时哪个时间点？
 说下对this的理解
 实现bind函数
-http状态码。。。401和403区别？
 lazyload如何实现
 点透问题
 前端安全
 事件类型、绑定方式
+
 js中的对象，对象的继承；
 对象属性的遍历；
 js创建对象的几种方式：
@@ -47,7 +47,6 @@ instanceof用于判断某个变量是否是某个对象的实例，返回值为t
 typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
 去除代码里面所有的空格和换行，你怎么做？
 
-
 ##关于模块化
 1.MVC和MVVM
 2.CommonJS/NodeJS, AMD/RequireJS, CMD/SeaJS  
@@ -58,7 +57,6 @@ requirejs如何避免循环依赖
 CommonJS采用同步加载，比较适合服务器端的模块加载（大部份文件储存在本地）。如果要从浏览器端加载服务器端内容，需要异步模式的模块化加载（AMD和CMD）
 3.React和Redux相关
 virtual dom的实现，diff算法
-
 
 #HTTP协议：
 https的原理，加密方式，怎么加密的;
@@ -76,8 +74,6 @@ DFS
 图论最短路径
 数组和链表的区别 
 
-
-
 #Extra:
 TCP/IP协议； 
 TCP五层协议
@@ -87,6 +83,4 @@ TCP五层协议
 
 移动端/PC端性能优化
 
-JS编程题：
-for in ： the JavaScript for/in statement loops through the properties of an object
-不适用于数组的求和，会输出字符拼接；
+
