@@ -61,10 +61,10 @@ virtual dom的实现，diff算法
 
 
 #HTTP协议：
-https的原理，加密方式，怎么加密的
+https的原理，加密方式，怎么加密的;
+什么是HTTP2.0；
 HTTP请求的状态码
 session和cookie的区别；
-在地址栏输入url中间会经历什么
 cookie, localStorage, sessionStorage
 
 #关于算法
@@ -78,7 +78,9 @@ DFS
 
 
 
-#Extra: 
+#Extra:
+TCP/IP协议； 
+TCP五层协议
 浏览器内核有哪些；
 浏览器中从输入url到显示页面都发生了什么（经典题）；
 浏览器的渲染方式；
