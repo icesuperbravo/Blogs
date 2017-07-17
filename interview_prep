@@ -1,8 +1,21 @@
 #HTML part:
-行内元素和块级元素的区别；
-form表单当前页面无刷新提交  target iframe
-<marquee> 滚动
-<em> && <strong> 区别
+Q:行内元素和块级元素的区别?
+A:
+Block:
+总是独占一行，表现为另起一行开始，而且其后的元素也必须另起一行显示;
+宽度(width)、高度(height)、内边距(padding)和外边距(margin)都可控制;
+Inline:
+和相邻的内联元素在同一行,不自动换行
+宽度(width)、高度(height)、内边距的top/bottom(padding-top/padding-bottom)和外边距的top/bottom(margin-top/margin-bottom)都不可改变，就是里面文字或图片的大小;
+Tips: 
+1. 内联元素的margin-left / margin-right及padding-left / padding-rigtht是可以控制的，所以可以通过这4个属性来控制内联元素的宽度。
+2. 内联元素的内部也可以放块级元素标签，而且内部的块级元素标签会撑大外部的内联标签，所以可以通过放块元素来控制内联元素的高度(网上介绍的是内联元素只能放文本及其他内联元素)
+Q: form表单当前页面无刷新提交 
+A:将表单的target的属性指向当前页面下一个隐藏的iframe， 此时表单将提交至target指向的iframe中执行。这样就避免了页面刷新。
+
+Q: <em> && <strong> 区别
+A: <em>和<strong>区别于<i>,<b>来说是语义元素(phrase element)；
+<em> 用于对文本内容进行强调，强调位置的不同通常会改变句子的含义。如果仅仅在语态或语气上为了突出某一个文本，那应该使用 <i>。但如果为了突出某一部分的重要性、严重性或紧急性，那应该使用 <strong>。
 
 #CSS part:
 W3C盒子模型和IE盒子模型
