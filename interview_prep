@@ -82,8 +82,11 @@ CommonJS采用同步加载，比较适合服务器端的模块加载（大部份
 virtual dom的实现，diff算法
 
 #HTTP协议：
-https的原理，加密方式，怎么加密的;
-什么是HTTP2.0；
+Q:https的原理，加密方式，怎么加密的;
+A：http://blog.csdn.net/clh604/article/details/22179907
+Q: 什么是HTTP2.0；
+A: 1.二进制分帧 2.首部压缩 3.TCP低延迟：建立一条持续的TCP连接 4.双向字节流 5.优先级 6.服务器推送
+http://www.alloyteam.com/2015/03/http2-0-di-qi-miao-ri-chang/
 HTTP请求的状态码
 session和cookie的区别；
 cookie, localStorage, sessionStorage
