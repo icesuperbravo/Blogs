@@ -67,6 +67,8 @@ instanceof 和 typeof 的区别：
 instanceof用于判断某个变量是否是某个对象的实例，返回值为true或false 
 typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
 去除代码里面所有的空格和换行，你怎么做？
+异步请求的原理：
+![alt](https://segmentfault.com/img/bVxLvF)
 
 ##关于模块化
 1.MVC和MVVM
