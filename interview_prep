@@ -29,16 +29,20 @@ A: css引入伪类和伪元素概念是为了格式化文档树以外的信息�
 区别： 从上述例子中可以看出，伪类的操作对象是文档树中已有的元素，而伪元素则创建了一个文档数外的元素。因此，伪类与伪元素的区别在于：有没有创建一个文档树之外的元素。
 http://www.alloyteam.com/2016/05/summary-of-pseudo-classes-and-pseudo-elements/
 Q: BFC, margin坍塌？水平方向会不会坍塌
-使用flex布局实现三等分，左右两个元素分别贴到左边和右边，垂直居中
 repaint和reflow区别  
 float的用法
-实现布局：左边一张图片，右边一段文字（不是环绕）
 css清除浮动的原理，clear:both和clear:left的区别；
+css3动画优化
+#CSS布局
+实现布局：左边一张图片，右边一段文字（不是环绕）
+使用flex布局实现三等分，左右两个元素分别贴到左边和右边，垂直居中
 css垂直水平居中有哪些方法；
 两列布局的方式；
-css3动画优化
 瀑布流的实现
 响应式布局的方式；
+##CSSHack:
+Q: 谈谈优雅降级与渐进增强的区别。
+A:
 
 #Javascript part: 
 1.ES 6 Promise:
@@ -68,6 +72,7 @@ typeof 用来获取运算数的数据类型。返回的值有number、boolean、
 去除代码里面所有的空格和换行，你怎么做？
 异步请求的原理：
 ![alt](https://segmentfault.com/img/bVxLvF)
+如何设计开发一个图片轮播组件？简述要点或写代码。
 
 ##关于模块化
 1.MVC和MVVM
@@ -88,7 +93,8 @@ A: 1.二进制分帧 2.首部压缩 3.TCP低延迟：建立一条持续的TCP连
 http://www.alloyteam.com/2015/03/http2-0-di-qi-miao-ri-chang/
 HTTP请求的状态码
 session和cookie的区别；
-cookie, localStorage, sessionStorage
+Q:cookie, localStorage, sessionStorage的区别
+A:http://www.cnblogs.com/zhengyeye/p/5619506.html
 
 #关于算法
 二分法
