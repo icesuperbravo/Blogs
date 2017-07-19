@@ -34,7 +34,7 @@ Q:repaint和reflow区别
 A:https://rlilyyy.github.io/2016/06/17/reflow-%E5%92%8C-repaint-%E7%AE%80%E6%98%93%E5%88%86%E6%9E%90/
 float的用法及清除浮动的原理，clear:both和clear:left的区别；
 css3动画优化
-#CSS布局
+##CSS布局
 实现布局：左边一张图片，右边一段文字（不是环绕）
 使用flex布局实现三等分，左右两个元素分别贴到左边和右边，垂直居中
 css垂直水平居中有哪些方法；
@@ -46,8 +46,16 @@ Q: 谈谈优雅降级与渐进增强的区别。
 A: http://www.jianshu.com/p/d313f1108862
 
 #Javascript part: 
-1.ES 6 Promise:
-如何避免多重回调—promise，promise简单描述一下，如何在外部进行resolve()?
+##JS基本
+js基本数据类型，[]===[]吗；
+写个方法判断一个变量的类型；
+在不支持json格式的浏览器中，写方法能够将json字符串与对象互相转换；
+instanceof 和 typeof 的区别： 
+instanceof用于判断某个变量是否是某个对象的实例，返回值为true或false 
+typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
+去除代码里面所有的空格和换行，你怎么做？
+闭包的问题；
+
 window.onload和$(document).ready()的区别，浏览器加载转圈结束时哪个时间点？
 说下对this的理解
 实现bind函数
@@ -56,24 +64,19 @@ lazyload如何实现
 前端安全
 事件类型、绑定方式
 
+##JS对象
 js中的深拷贝与浅拷贝；
 js中的对象，对象的继承；
 对象属性的遍历；
 js创建对象的几种方式：
-闭包的问题；
-JS跨域问题,iframe实现跨域的具体方法；
 写个Animal类，有个Cat类继承它，要求新建一个Cat的实例，可以调用catch方法输出自己的名字“大白的猫”；
-js基本数据类型，[]===[]吗；
-写个方法判断一个变量的类型；
-在不支持json格式的浏览器中，写方法能够将json字符串与对象互相转换；
-instanceof 和 typeof 的区别： 
-instanceof用于判断某个变量是否是某个对象的实例，返回值为true或false 
-typeof 用来获取运算数的数据类型。返回的值有number、boolean、undefined、function、object、string
-去除代码里面所有的空格和换行，你怎么做？
+##JS通信
+JS跨域问题,iframe实现跨域的具体方法；
 异步请求的原理：
 ![alt](https://segmentfault.com/img/bVxLvF)
 如何设计开发一个图片轮播组件？简述要点或写代码。
-
+ES 6 Promise:
+如何避免多重回调—promise，promise简单描述一下，如何在外部进行resolve()?
 ##关于模块化
 1.MVC和MVVM
 2.CommonJS/NodeJS, AMD/RequireJS, CMD/SeaJS  
