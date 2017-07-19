@@ -110,6 +110,11 @@ DFS
 TCP/IP协议； 
 TCP五层协议
 浏览器内核有哪些；
+Gecko: FireFox浏览器；
+Trident： IE，搜狗，360；
+webkit：猎豹，Google，Safari
+Presto:Opera浏览器
+
 浏览器中从输入url到显示页面都发生了什么（经典题）；
 浏览器的渲染方式；
 
