@@ -103,6 +103,23 @@ A:http://www.cnblogs.com/zhengyeye/p/5619506.html
 #关于算法
 二分法
 冒泡排序
+function bubbleSort(array) {
+   var length = array.length,
+       i,
+       j,
+       temp;
+   for (i = length - 1; 0 < i; i--) {
+       for (j = 0; j < i; j++) {
+           if (array[j] > array[j + 1]) {
+               temp = array[j];
+               array[j] = array[j + 1];
+               array[j + 1] = temp;
+           }
+       }
+   }
+   return array;
+}
+
 快速排序
 链表的算法
 BFS
