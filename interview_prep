@@ -108,12 +108,12 @@ function bubbleSort(array) {
        i,
        j,
        temp;
-   for (i = length - 1; 0 < i; i--) {
-       for (j = 0; j < i; j++) {
-           if (array[j] > array[j + 1]) {
+   for (i = length - 1; 0 < i; i--) {   //Control the numbers of outside loop 如：6个数的数组只用实施5次冒泡
+       for (j = 0; j < i; j++) {  //For each bubbling, we can confirm arr[i]'s order
+           if (array[j] > array[j + 1]) {   
                temp = array[j];
                array[j] = array[j + 1];
-               array[j + 1] = temp;
+               array[j + 1] = temp;   //swap 
            }
        }
    }
