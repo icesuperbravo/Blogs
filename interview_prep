@@ -29,10 +29,12 @@ A: css引入伪类和伪元素概念是为了格式化文档树以外的信息�
 http://www.alloyteam.com/2016/05/summary-of-pseudo-classes-and-pseudo-elements/
 Q: BFC, margin坍塌？水平方向会不会坍塌
 A:http://www.html-js.com/article/1866,水平方向不会坍塌
+Q:css3动画性能优化
+A: https://segmentfault.com/a/1190000000490328#articleHeader4
 Q:repaint和reflow区别  
 A:https://rlilyyy.github.io/2016/06/17/reflow-%E5%92%8C-repaint-%E7%AE%80%E6%98%93%E5%88%86%E6%9E%90/
 float的用法及清除浮动的原理，clear:both和clear:left的区别；
-css3动画优化
+
 ##CSS布局（layout）
 实现布局：左边一张图片，右边一段文字（不是环绕）
 使用flex布局实现三等分，左右两个元素分别贴到左边和右边，垂直居中
