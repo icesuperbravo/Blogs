@@ -60,8 +60,8 @@ typeof 用来获取运算数的数据类型。返回的值有number、boolean、
 闭包的问题；
 
 Q:window.onload和$(document).ready()的区别，浏览器加载转圈结束时哪个时间点？
-A:window.onload(): JSwindows对象的函数， 要在js,css, html, img全加载完后
-  $(document).ready()： Jquery函数，DOM加载完毕后就执行，不必等到加载完毕。 　　
+A:window.onload(): JSwindows对象的函数， 要在js,css, html, img全加载完后;<-----浏览器加载转圈结束时在onload事件完成时
+  $(document).ready()： Jquery函数，DOM加载完毕后就执行，不必等到加载完毕;
 说下对this的理解
 实现bind函数： 改变this指向；Curry化的应用；
 lazyload如何实现
