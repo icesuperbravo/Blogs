@@ -10,8 +10,10 @@ MQTT为MQ Telemetry Transport的缩写，该协议定义了在机器对机器或
 
 Ref:http://mqtt.org/faq 
 ### 为什么使用MQTT协议？
-在使用Power BI作为可视化方案时，曾成功使用REST API直接将数据源通过HTTP推送到POWER BI所提供的endpoint。因此在架构这套服务之初，我并没有打算使用MQTT作为数据传输协议。但经过一番研究后，在我的案例当中，发现使用HTTP协议有以下局限性：
+在使用Power BI作为可视化方案时，曾成功使用REST API直接将数据源通过HTTP推送到POWER BI所提供的endpoint。因此在架构这套服务之初，我并没有打算使用MQTT作为数据传输协议。但经过一番研究后，在我的案例当中，发现使用HTTP协议有以下局限性：  
+
 1. 在Telegraf的input plugins中，和HTTP相关的插件有两个：一个是HTTP JSON，另一个是HTTP Listener（HTTP Response由于不符合个体案例没有做研究）； HTTP JSON主要通过向拥有数据的HTTP URLs发送请求，并从对应响应中的json中获取数据。由于我的IoT设备仅仅是一个模拟的数据发送器且并没有为其部署本地服务器或云端服务器，因此无法分配到URL地址和端口，同时另一个考虑是希望减少在部署服务器上花费的成本，更好的集中在可视化工具上的研究上。 因此这个插件并不适合我的情况；HTTP Listener主要监听HTTP POST上的消息。Telegraf可以作为代理服务器来处理原本通过InfluxDB HTTP API 上 /write 写入的数据。听起来这个似乎深得我心，没有多余的学习成本---与使用POWER　BI时情景类似，可以将数据直接推入InfluxDB的API终端，然后设置Telegraf作为代理在写入数据库之前对数据流做process或aggregation的工作，使得数据变得更加具有可读性（meaningful）。简单粗暴快捷。唯一也是致命的缺点是如果使用HTTP Listener将仅支持[InfluxDB line protocol format](https://docs.influxdata.com/telegraf/v1.5/concepts/data_formats_input/) 作为数据写入格式。这就使得数据源的格式大大受限，数据输入格式解析的功能也相当于无法使用了，那么使用telegraf的意义就变得不那么大（对数据流进行格式解析和聚合）；
+
 2. 我使用的IoT Simulator对MQTT协议有较为全面的支持，无需二次开发接口；
 
 Ref:https://docs.influxdata.com/telegraf/v1.5/plugins/inputs/
@@ -28,16 +30,18 @@ MQTT client1(sub)--->MQTT broker<----MQTT Client2(pub)
 
 * Topic setting: 话题可以被划分层级，用/来表示具体层级结构。 例如： sensors/COMPUTER_NAME/temperature/HARDDRIVE_NAME
 two wildcards: # and +
-"+" for a single level of hierarchy，+/+/+/HARDDRIVE_NAME表示了包含上述例子的一个父集
-"#" for all remaining levels of hierarchy，sensors/COMPUTER_NAME/temperature/# 表示了包含上述例子的一个父集
-* Quality of Service: **Higher levels of QoS are more reliable, but involve higher latency and have higher bandwidth requirements.**
-0: The broker/client will deliver the message once, with no confirmation.
-1: The broker/client will deliver the message at least once, with confirmation required.
-2: The broker/client will deliver the message exactly once by using a four step handshake.
 
+"+" for a single level of hierarchy，+/+/+/HARDDRIVE_NAME表示了包含上述例子的一个父集
+
+"#" for all remaining levels of hierarchy，sensors/COMPUTER_NAME/temperature/# 表示了包含上述例子的一个父集
+* Quality of Service: **Higher levels of QoS are more reliable, but involve higher latency and have higher bandwidth requirements.**  
+0: The broker/client will deliver the message once, with no confirmation.  
+1: The broker/client will deliver the message at least once, with confirmation required.  
+2: The broker/client will deliver the message exactly once by using a four step handshake.  
+Downgrade for QoS 
 Ref: https://mosquitto.org/man/mqtt-7.html
 
-##
+##Telegraf和
 
 
 ### 心得
