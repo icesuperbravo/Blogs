@@ -22,26 +22,25 @@ Ref:https://docs.influxdata.com/telegraf/v1.5/plugins/inputs/
 
 * Publish/Subscribe:The MQTT protocol is based on the principle of publishing messages and subscribing to topics, or "pub/sub". Multiple clients connect to a broker and subscribe to topics that they are interested in. Clients also connect to the broker and publish messages to topics. Many clients may subscribe to the same topics and do with the information as they please. The broker and MQTT act as a simple, common interface for everything to connect to. This means that you if you have clients that dump subscribed messages to a database, to Twitter, Cosm or even a simple text file, then it becomes very simple to add new sensors or other data input to a database, Twitter or so on.
 
-MQTT client1(sub)--->MQTT broker<----MQTT Client2(pub)
-                   (message center)                          
-                          ^
-                          |
-                    MQTT client2(pub)
+MQTT client1(sub)--->MQTT broker<----MQTT Client2(pub)  
+                   (message center)                            
+                          ^  
+                          |  
+                    MQTT client2(pub)  
 
 * Topic setting: 话题可以被划分层级，用/来表示具体层级结构。 例如： sensors/COMPUTER_NAME/temperature/HARDDRIVE_NAME
-two wildcards: # and +
-
-"+" for a single level of hierarchy，+/+/+/HARDDRIVE_NAME表示了包含上述例子的一个父集
-
-"#" for all remaining levels of hierarchy，sensors/COMPUTER_NAME/temperature/# 表示了包含上述例子的一个父集
+two wildcards: # and +  
+"+" for a single level of hierarchy，+/+/+/HARDDRIVE_NAME表示了包含上述例子的一个父集  
+"#" for all remaining levels of hierarchy，sensors/COMPUTER_NAME/temperature/# 表示了包含上述例子的一个父集  
 * Quality of Service: **Higher levels of QoS are more reliable, but involve higher latency and have higher bandwidth requirements.**  
 0: The broker/client will deliver the message once, with no confirmation.  
 1: The broker/client will deliver the message at least once, with confirmation required.  
 2: The broker/client will deliver the message exactly once by using a four step handshake.  
-Downgrade for QoS 
-Ref: https://mosquitto.org/man/mqtt-7.html
-
-##Telegraf和
+Downgrade for QoS  
+Ref: https://mosquitto.org/man/mqtt-7.html  
+##InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
+Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的Grafana服务则强制采用HTTPS确保数据传输的安全性。 众所周知，HTTPS协议是HTTP协议的安全版本，其安全性能的实现主要依靠在Transport Layer之上增加的TLS/SSL层实现文本及数据的加密。HTTPS与HTTP一个重要的区别在于HTTPS增加了对身份的验证功能，因此第三方无法伪造服务端或客户端身份，由此引入了证书认证来确保功能的实现。
+为了配合云端服务所使用的HTTPS协议，因此我将InfluxDB的接口也进行了相关配置，使得API利用TLS层使用HTTPS协议进行数据的传输。　
 
 
 ### 心得
