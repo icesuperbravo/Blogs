@@ -3,9 +3,17 @@
 # 服务构架
 IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB---->Hosted Grafana(Cloud)
 # 产品服务介绍
-##数据来源
+## 数据来源
 数据来源在IoT情景下一般来自各个传感设备。 因为没有身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器,该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。  
 唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。
+**安装和配置相关请参照readme**
+对MQTT的配置
+```
+
+```
+使用以下命令开始模拟数据
+`java -jar json-data-generator-1.3.1-SNAPSHOT.jar mySimConfig.json`
+
 
 ## MQTT
 ### 什么是MQTT协议？
@@ -37,7 +45,7 @@ two wildcards: # and +
 2: The broker/client will deliver the message exactly once by using a four step handshake.  
 Downgrade for QoS  
 Ref: https://mosquitto.org/man/mqtt-7.html  
-##InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
+## InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
 Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的Grafana服务则强制采用HTTPS确保数据传输的安全性。 众所周知，HTTPS协议是HTTP协议的安全版本，其安全性能的实现主要依靠在Transport Layer之上增加的TLS/SSL层实现文本及数据的加密。HTTPS与HTTP一个重要的区别在于HTTPS增加了对身份的验证功能，因此第三方无法伪造服务端或客户端身份，引入的证书认证机制就是用来确保这一功能的实现。
 为了确保网络间通讯的安全，我将InfluxDB的接口也进行了相关配置，让其利用TLS层使用HTTPS协议进行数据的传输。
 在配置过程中我使用的证书是self-signed-certificate,使用windows系统的配置过程稍有不同（windows真是伤不起，连个配置说明都没有）
@@ -53,12 +61,12 @@ step 4:测试
 和官方文档一致，点[这里](https://docs.influxdata.com/influxdb/v1.4/administration/https_setup/#setup-https-with-a-self-signed-certificate
 ) 
 step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！
-##配置grafana datasource
+## 配置grafana datasource
 这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。这点这是太不程序员友好了，疯狂diss；  
 在没有使用https之前grafana报错：
 使用之后！Bang！（不要选proxy模式）
 
-##DEMO
+## DEMO
 最后一个折腾了我很久才得到的一个很粗略的demo。
 # 心得
 1. 作为开源产品Grafana和InfluxDB,两者的documentation和error hint做的都不是特别好，在开发过程中，我花了大量时间理解文档内容和错误提示。可以说是非常心累了，作为开源产品应该更加注重文档撰写和错误提示开发不是吗？
