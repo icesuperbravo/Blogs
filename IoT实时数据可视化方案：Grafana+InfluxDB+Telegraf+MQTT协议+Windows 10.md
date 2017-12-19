@@ -1,5 +1,6 @@
 # 为什么写这篇博客？
-网络上关于windows系统下搭建从数据源到前端可视化工具Grafana的解决方案甚少，且适合我自己本身开发所需情况的方案就更加少了。 在翻阅大量官方文档，github issues以及英文博客后，终于得到了可运行的demo。把相关详细的配置过程记录下来，方便以后学习或工作复用并造福于有相似需求的朋友。  
+* 最近被论文折磨的死去活来，实时数据可视化方案是我论文的题目。 每天都被这些技术玩弄于股掌之间，靠看文档延续生命和出成果。不得不说，做完这个论文可能以后不敢乱写readme了，大家的发量问题有可能都是看文档时产生的吧。 由此可见一个好的文档对开发人员有多么重要！！！  
+* 网络上关于windows系统下搭建从数据源到前端可视化工具Grafana的解决方案甚少，且适合我自己本身开发所需情况的方案就更加少了。 在翻阅大量官方文档，github issues以及英文博客后，终于得到了可运行的demo。把相关详细的配置过程记录下来，方便以后学习或工作复用并造福于有相似需求的朋友。  被
 # 服务构架
 IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB---->Hosted Grafana(Cloud)
 # 产品服务介绍
@@ -7,13 +8,19 @@ IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB-
 数据来源在IoT情景下一般来自各个传感设备。 因为没有身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器,该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。  
 唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。
 **安装和配置相关请参照readme**  
-在mySimConfigjson中对MQTT进行配置
+在mySimConfigjson中对MQTT进行配置（参见[配置中使用的MQTT](配置中使用的MQTT)）
 ```
-
+ {
+            "type": "mqtt",
+            "broker.server": "tcp://localhost",
+            "broker.port": 1883,
+            "topic": "sensors/iot_simulator",
+            "clientId": "iot_simulator",
+            "qos": 2
+        }
 ```
 使用以下命令开始模拟数据  
 `java -jar json-data-generator-1.3.1-SNAPSHOT.jar mySimConfig.json`  
-
 
 ## MQTT
 ### 什么是MQTT协议？
@@ -76,4 +83,5 @@ step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关
 ## DEMO
 最后一个折腾了我很久才得到的一个很粗略的demo。
 # 心得
-1. 作为开源产品Grafana和InfluxDB,两者的documentation和error hint做的都不是特别好，在开发过程中，我花了大量时间理解文档内容和错误提示。可以说是非常心累了，作为开源产品应该更加注重文档撰写和错误提示开发不是吗？
+1. 作为开源产品Grafana和InfluxDB,两者的documentation和error hint做的都不是特别好，在开发过程中，我花了大量时间理解文档内容和错误提示。可以说是非常心累了，作为开源产品应该更加注重文档撰写和错误提示开发不是吗？  
+2. 要提前熟悉一下SQL,对数据的处理会比较有帮助（该捡起来的捡，该跪着学的学）；
