@@ -23,7 +23,7 @@ IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB-
 使用以下命令开始模拟数据  
 `java -jar json-data-generator-1.3.1-SNAPSHOT.jar mySimConfig.json`  
 
-## MQTT
+## 使用MQTT协议
 ### 什么是MQTT协议？
 MQTT为MQ Telemetry Transport的缩写，该协议定义了在机器对机器或物联网环境下的通信规则。它采用发布/订阅的模式传输数据，设计思想是在尽力保证一定程度的数据可达性及稳定性的同时，减少对网络带宽和设备资源的依赖。MQTT协议简洁且轻量，适用于低带宽，高延迟或不稳定的网络环境中的设备，同时也适用于带宽和电源受限的移动应用.  
 Ref:http://mqtt.org/faq   
