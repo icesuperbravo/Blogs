@@ -5,9 +5,9 @@
 IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB---->Hosted Grafana(Cloud)
 # 配置安装流程
 ## 数据来源
-数据来源在IoT Case下一般来自各个传感设备。 因为身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。  
-唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。
-如果你的case中有使用真实的iot设备和通讯协议可自动忽略此part。
+数据来源在IoT Case下一般来自各个传感设备。 因为身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。   
+唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。   
+如果你的case中有使用真实的iot设备和通讯协议可自动忽略此part。   
 **安装和配置相关请参照readme**  
 在mySimConfigjson中对MQTT进行配置（参见[配置中使用的MQTT](配置中使用的MQTT)）
 ```
@@ -36,13 +36,14 @@ Ref:https://docs.influxdata.com/telegraf/v1.5/plugins/inputs/
 * 如何安装MQTT Broker: 参见[这里](http://www.steves-internet-guide.com/install-mosquitto-broker/)，以及[这里](https://sivatechworld.wordpress.com/2015/06/11/step-by-step-installing-and-configuring-mosquitto-with-windows-7/)
 
 * Publish/Subscribe:The MQTT protocol is based on the principle of publishing messages and subscribing to topics, or "pub/sub". Multiple clients connect to a broker and subscribe to topics that they are interested in. Clients also connect to the broker and publish messages to topics. Many clients may subscribe to the same topics and do with the information as they please. The broker and MQTT act as a simple, common interface for everything to connect to. This means that you if you have clients that dump subscribed messages to a database, to Twitter, Cosm or even a simple text file, then it becomes very simple to add new sensors or other data input to a database, Twitter or so on.
-
+```
+                          
 MQTT client1(sub)--->MQTT broker<----MQTT Client2(pub)  
                    (message center)                            
-                          ^  
+                          ^
                           |  
                     MQTT client2(pub)  
-
+```
 * Topic setting: 话题可以被划分层级，用/来表示具体层级结构。 例如： sensors/COMPUTER_NAME/temperature/HARDDRIVE_NAME
 two wildcards: # and +  
 "+" for a single level of hierarchy，+/+/+/HARDDRIVE_NAME表示了包含上述例子的一个父集  
@@ -132,15 +133,14 @@ processor plugin的功能主要是打印从mqtt broker订阅的数据并显示�
 ```
 step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保influxdb能订阅到稳定的数据流，否则influxdb有可能会报错监听不到数据写入。    
 `to\your\dir: telegraf --config telegraf.conf`   
-step 4: 检查数据是否已写入数据库
+step 4: 检查数据是否已写入数据库   
 [此处有图]     
 ref: https://docs.influxdata.com/telegraf/v1.5/
 ## 配置InfluxDB
 influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。  
-step 1: 按照官网文档下载并解压influxdb  
-
+step 1: 按照官网文档下载并解压influxdb     
 step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)   
-在influxdb解压的文件目录下： `influxd`
+`to\your\dir：influxd`
 ### InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
 Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的Grafana服务则强制采用HTTPS确保数据传输的安全性。 众所周知，HTTPS协议是HTTP协议的安全版本，其安全性能的实现主要依靠在Transport Layer之上增加的TLS/SSL层实现文本及数据的加密。HTTPS与HTTP一个重要的区别在于HTTPS增加了对身份的验证功能，因此第三方无法伪造服务端或客户端身份，引入的证书认证机制就是用来确保这一功能的实现。
 为了确保网络间通讯的安全，我将InfluxDB的接口也进行了相关配置，让其利用TLS层使用HTTPS协议进行数据的传输。
