@@ -55,12 +55,98 @@ Downgrade for QoS
 Ref: https://mosquitto.org/man/mqtt-7.html
 ## 配置Telegraf
 step 1: 安装并解压telegraf  
-step 2: 修改配置文件（主要配置input和output plugins)  
-step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保稳定的数据流，否则influxdb有可能会报错。 
+step 2: 修改配置文件telegraf.conf（主要配置input和output plugins) 
+```
+[[outputs.influxdb]]
+  # The full HTTP or UDP endpoint URL for your InfluxDB instance.
+  # Multiple urls can be specified but it is assumed that they are part of the same
+  # cluster, this means that only ONE of the urls will be written to each interval.
+  # urls = ["udp://localhost:8089"] # UDP endpoint example
+  urls = ["https://localhost:8086"] # required
+  # The target database for metrics (telegraf will create it if not exists)
+  database = "telegraf" # required
+  # Precision of writes, valid values are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+  # note: using second precision greatly helps InfluxDB compression
+  precision = "s"
+
+ ## Name of existing retention policy to write to.  Empty string writes to
+  ## the default retention policy.
+  retention_policy = ""
+  ## Write consistency (clusters only), can be: "any", "one", "quorum", "all"
+  write_consistency = "any"
+
+  ## Write timeout (for the InfluxDB client), formatted as a string.
+  ## If not provided, will default to 5s. 0s means no timeout (not recommended).
+  timeout = "5s"
+  # username = "telegraf"
+  # password = "metricsmetricsmetricsmetrics"
+  # Set the user agent for HTTP POSTs (can be useful for log differentiation)
+  # user_agent = "telegraf"
+  # Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
+  # udp_payload = 512
+  [[inputs.mqtt_consumer]]
+  ## MQTT broker URLs to be used. The format should be scheme://host:port,
+  ## schema can be tcp, ssl, or ws.
+  servers = ["tcp://localhost:1883"]
+  ## MQTT QoS, must be 0, 1, or 2
+  qos = 2
+  ## Connection timeout for initial connection in seconds
+  connection_timeout = "30s"
+
+  ## Topics to subscribe to
+  topics = [
+    "sensors/iot_simulator"
+  ]
+
+  # if true, messages that can't be delivered while the subscriber is offline
+  # will be delivered when it comes back (such as on service restart).
+  # NOTE: if true, client_id MUST be set
+  persistent_session = false
+  # If empty, a random client ID will be generated.
+  client_id = ""
+
+  ## username and password to connect MQTT server.
+  # username = "telegraf"
+  # password = "metricsmetricsmetricsmetrics"
+
+  ## Optional SSL Config
+  # ssl_ca = "/etc/telegraf/ca.pem"
+  # ssl_cert = "/etc/telegraf/cert.pem"
+  # ssl_key = "/etc/telegraf/key.pem"
+  ## Use SSL but skip chain & host verification
+  insecure_skip_verify = true
+
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  data_format = "json"
+  ## List of tag names to extract from top-level of JSON server response
+  tag_keys = [
+    "equippment name",
+    "timestamp"
+  ]
+  
+[[inputs.exec]]
+  ## Commands array
+  commands = []
+#"/tmp/test.sh", "/usr/bin/mycollector --foo=bar"
+  ## measurement name suffix (for separating different commands)
+  name_suffix = "mqtt_consumer"
+
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  data_format = "json"
+```
+step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保influxdb能订阅到稳定的数据流，否则influxdb有可能会报错监听不到数据写入。 
+`to\your\dir: telegraf --config telegraf.conf`
 step 4: 检查数据是否已写入数据库
 
+
 ## 配置InfluxDB
-influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。
+influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。  
 step 1: 按照官网文档下载并解压influxdb  
 step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)   
 在influxdb解压的文件目录下： `influxd`
