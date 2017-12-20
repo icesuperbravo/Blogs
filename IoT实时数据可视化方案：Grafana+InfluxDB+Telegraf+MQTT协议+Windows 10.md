@@ -62,7 +62,7 @@ step 4: 检查数据是否已写入数据库
 ## 配置InfluxDB
 influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。
 step 1: 按照官网文档下载并解压influxdb  
-step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)  
+step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)   
 在influxdb解压的文件目录下： `influxd`
 ### InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
 Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的Grafana服务则强制采用HTTPS确保数据传输的安全性。 众所周知，HTTPS协议是HTTP协议的安全版本，其安全性能的实现主要依靠在Transport Layer之上增加的TLS/SSL层实现文本及数据的加密。HTTPS与HTTP一个重要的区别在于HTTPS增加了对身份的验证功能，因此第三方无法伪造服务端或客户端身份，引入的证书认证机制就是用来确保这一功能的实现。
@@ -90,4 +90,4 @@ step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关
 最后一个折腾了我很久才得到的一个很粗略的demo。
 # 心得
 1. 作为开源产品Grafana和InfluxDB,两者的documentation和error hint做的都不是特别好，在开发过程中，我花了大量时间理解文档内容和错误提示。可以说是非常心累了，作为开源产品应该更加注重文档撰写和错误提示开发不是吗？  
-2. 要提前熟悉一下SQL,对数据的处理会比较有帮助（该捡起来的捡，该跪着学的学）；
+2. 要提前熟悉一下SQL,对数据处理会比较有帮助（该捡起来的捡，该跪着学的学）；
