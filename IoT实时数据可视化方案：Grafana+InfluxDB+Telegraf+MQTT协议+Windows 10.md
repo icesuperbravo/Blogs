@@ -51,24 +51,20 @@ two wildcards: # and +
 0: The broker/client will deliver the message once, with no confirmation.  
 1: The broker/client will deliver the message at least once, with confirmation required.  
 2: The broker/client will deliver the message exactly once by using a four step handshake.  
-Downgrade for QoS  
+* Downgrade for QoS  
+消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0； 
 Ref: https://mosquitto.org/man/mqtt-7.html
 ## 配置Telegraf
 step 1: 安装并解压telegraf  
-step 2: 修改配置文件telegraf.conf（主要配置input和output plugins) 
+step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins) 
+配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题](InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题)及[配置中使用的MQTT](配置中使用的MQTT)
+processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中；
 ```
 [[outputs.influxdb]]
-  # The full HTTP or UDP endpoint URL for your InfluxDB instance.
-  # Multiple urls can be specified but it is assumed that they are part of the same
-  # cluster, this means that only ONE of the urls will be written to each interval.
-  # urls = ["udp://localhost:8089"] # UDP endpoint example
   urls = ["https://localhost:8086"] # required
   # The target database for metrics (telegraf will create it if not exists)
   database = "telegraf" # required
-  # Precision of writes, valid values are "ns", "us" (or "µs"), "ms", "s", "m", "h".
-  # note: using second precision greatly helps InfluxDB compression
   precision = "s"
-
  ## Name of existing retention policy to write to.  Empty string writes to
   ## the default retention policy.
   retention_policy = ""
@@ -78,12 +74,7 @@ step 2: 修改配置文件telegraf.conf（主要配置input和output plugins)
   ## Write timeout (for the InfluxDB client), formatted as a string.
   ## If not provided, will default to 5s. 0s means no timeout (not recommended).
   timeout = "5s"
-  # username = "telegraf"
-  # password = "metricsmetricsmetricsmetrics"
-  # Set the user agent for HTTP POSTs (can be useful for log differentiation)
-  # user_agent = "telegraf"
-  # Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
-  # udp_payload = 512
+  
   [[inputs.mqtt_consumer]]
   ## MQTT broker URLs to be used. The format should be scheme://host:port,
   ## schema can be tcp, ssl, or ws.
@@ -104,10 +95,6 @@ step 2: 修改配置文件telegraf.conf（主要配置input和output plugins)
   persistent_session = false
   # If empty, a random client ID will be generated.
   client_id = ""
-
-  ## username and password to connect MQTT server.
-  # username = "telegraf"
-  # password = "metricsmetricsmetricsmetrics"
 
   ## Optional SSL Config
   # ssl_ca = "/etc/telegraf/ca.pem"
@@ -139,12 +126,14 @@ step 2: 修改配置文件telegraf.conf（主要配置input和output plugins)
   ## more about them here:
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "json"
+  
+  [[processors.printer]]
 ```
 step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保influxdb能订阅到稳定的数据流，否则influxdb有可能会报错监听不到数据写入。 
 `to\your\dir: telegraf --config telegraf.conf`
 step 4: 检查数据是否已写入数据库
-
-
+[此处有图]  
+ref: https://docs.influxdata.com/telegraf/v1.5/
 ## 配置InfluxDB
 influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。  
 step 1: 按照官网文档下载并解压influxdb  
@@ -169,11 +158,13 @@ step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关
 ## 配置grafana datasource
 这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点是不是太不程序员友好了，疯狂diss ）
 在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）
-
+[此处有图]
 使用之后！Bang！（不要选proxy模式）
-
+[此处有图]
 ## DEMO
 最后一个折腾了我很久才得到的一个很粗略的demo。
+[此处有图]
 # 心得
 1. 作为开源产品Grafana和InfluxDB,两者的documentation和error hint做的都不是特别好，在开发过程中，我花了大量时间理解文档内容和错误提示。可以说是非常心累了，作为开源产品应该更加注重文档撰写和错误提示开发不是吗？  
 2. 要提前熟悉一下SQL,对数据处理会比较有帮助（该捡起来的捡，该跪着学的学）；
+3. 操着卖白粉的心，拿着擦皮鞋的钱。 从技术选型到实操不知道看了多少文档，配置过程中也是一堆的bug亟待解决。有些时候也搜不出来个什么正经的解决方案，做的过程中也是一边摸索一边前进，再次感叹一个好的文档能节省相当多的开发时间以及扼杀脱发！！
