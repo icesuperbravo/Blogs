@@ -58,11 +58,11 @@ two wildcards: # and +
 消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0；    
 Ref: https://mosquitto.org/man/mqtt-7.html
 ## 配置Telegraf
-step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））   
+step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））      
 [此处有图]
-step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins)    
-配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题](InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题)及[配置中使用的MQTT](配置中使用的MQTT)   
-processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中     
+step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins)       
+配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题]及[配置中使用的MQTT]   
+processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中         
 ```
 [[outputs.influxdb]]
   urls = ["https://localhost:8086"] # required
