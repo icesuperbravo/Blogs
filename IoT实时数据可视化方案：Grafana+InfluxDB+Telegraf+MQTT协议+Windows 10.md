@@ -78,8 +78,8 @@ step 3:重启influxdb
 `/influxdb/folder: influxd --config influxdb.conf`  
 step 4:测试  
 和官方文档一致，点[这里](https://docs.influxdata.com/influxdb/v1.4/administration/https_setup/#setup-https-with-a-self-signed-certificate
-) 
-step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！
+)  
+step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！  
 ## 配置grafana datasource
 这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点是不是太不程序员友好了，疯狂diss ）
 在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）
