@@ -2,7 +2,9 @@
 * 最近被论文折磨的死去活来，实时数据可视化方案是我论文的题目。 每天都被这些技术玩弄于股掌之间，靠看文档延续生命和出成果。不得不说，做完这个论文可能以后不敢乱写readme了。 由此大胆推测大家的发量问题有都是看文档时产生的， 可见一个好的文档对开发人员有多么重要！！！  
 * 网络上关于windows系统下搭建从数据源到前端可视化工具Grafana的解决方案甚少，且适合我自己本身开发所需情况的方案就更加少了。 在翻阅大量官方文档，github issues以及英文博客后，终于得到了可运行的demo。把相关详细的配置过程记录下来，方便以后学习或工作复用并造福于有相似需求的朋友。  
 # 服务构架
+```
 IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB---->Hosted Grafana(Cloud)
+```
 # 配置安装流程
 ## 数据来源
 数据来源在IoT Case下一般来自各个传感设备。 因为身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。   
