@@ -161,12 +161,16 @@ step 4:测试
 step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！  
 ## 配置grafana datasource
 这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点是不是太不程序员友好了，疯狂diss ）
-[在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/2.PNG)
-![使用之后！Bang！](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/1.PNG)
+在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！  
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/4.PNG)
+inspect后终于在console看到了错误详细情况： 
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/3.PNG)
+使用之后！Bang！    
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/1.PNG)
 注意此处不要选择proxy模式，让grafana的后端服务代理请求，这样处于本地服务器的influxdb无法接受到grafana的请求；
 ## DEMO
 最后一个折腾了我很久才得到的一个很粗略的demo。
-[此处有图]
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/2.PNG)
 # 心得
 1. 作为开源产品Grafana和InfluxDB,两者的documentation和error hint做的都不是特别好，在开发过程中，我花了大量时间理解文档内容和错误提示。可以说是非常心累了，作为开源产品应该更加注重文档撰写和错误提示开发不是吗？  
 2. 要提前熟悉一下SQL,对数据处理会比较有帮助（该捡起来的捡，该跪着学的学）；
