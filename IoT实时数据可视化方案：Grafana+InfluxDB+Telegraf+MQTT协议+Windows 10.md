@@ -5,6 +5,7 @@
 ```
 IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB---->Hosted Grafana(Cloud)
 ```
+![](https://github.com/icesuperbravo/Blogs/blob/e4328ad2258632ea9677469f5b5ab0dc415f2361/Grafana/9.PNG)
 # 配置安装流程
 ## 数据来源
 数据来源在IoT Case下一般来自各个传感设备。 因为身边没有可用的传感器设备，于是在github上搜了个[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。   
@@ -151,7 +152,8 @@ Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的G
 在配置过程中我使用的证书是self-signed-certificate,使用windows系统的配置过程稍有不同（windows真是伤不起，连个配置说明都没有）
 step 1:使用openssl（没有的朋友要安装一下）生成证书和密钥；
 `sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /route/to/your/dir/influxdb-selfsigned.key -out /route/to/your/route/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>`  
-进入文件所在目录，双击证书文件并安装证书（注意！要安装在受信任的根目录下）  
+进入文件所在目录，双击证书文件并安装证书（注意！要安装在受信任的根目录下） 
+![](https://github.com/icesuperbravo/Blogs/blob/e4328ad2258632ea9677469f5b5ab0dc415f2361/Grafana/8.PNG)
 step 2:配置influxDB;
 和官方文档一致，点[这里](https://docs.influxdata.com/influxdb/v1.4/administration/https_setup/#setup-https-with-a-self-signed-certificate
 )  
