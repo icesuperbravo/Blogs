@@ -1,12 +1,13 @@
 # 为什么写这篇博客？
-* 最近被论文折磨的死去活来，实时数据可视化方案是我论文的题目。 每天都被这些技术玩弄于股掌之间，靠看文档延续生命和出成果。不得不说，做完这个论文可能以后不敢乱写readme了，大家的发量问题有可能都是看文档时产生的吧。 由此可见一个好的文档对开发人员有多么重要！！！  
-* 网络上关于windows系统下搭建从数据源到前端可视化工具Grafana的解决方案甚少，且适合我自己本身开发所需情况的方案就更加少了。 在翻阅大量官方文档，github issues以及英文博客后，终于得到了可运行的demo。把相关详细的配置过程记录下来，方便以后学习或工作复用并造福于有相似需求的朋友。  被
+* 最近被论文折磨的死去活来，实时数据可视化方案是我论文的题目。 每天都被这些技术玩弄于股掌之间，靠看文档延续生命和出成果。不得不说，做完这个论文可能以后不敢乱写readme了。 由此大胆推测大家的发量问题有都是看文档时产生的， 可见一个好的文档对开发人员有多么重要！！！  
+* 网络上关于windows系统下搭建从数据源到前端可视化工具Grafana的解决方案甚少，且适合我自己本身开发所需情况的方案就更加少了。 在翻阅大量官方文档，github issues以及英文博客后，终于得到了可运行的demo。把相关详细的配置过程记录下来，方便以后学习或工作复用并造福于有相似需求的朋友。  
 # 服务构架
 IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB---->Hosted Grafana(Cloud)
-# 产品服务介绍
+# 配置安装流程
 ## 数据来源
-数据来源在IoT情景下一般来自各个传感设备。 因为没有身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器,该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。  
+数据来源在IoT Case下一般来自各个传感设备。 因为身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。  
 唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。
+如果你的case中有使用真实的iot设备和通讯协议可自动忽略此part。
 **安装和配置相关请参照readme**  
 在mySimConfigjson中对MQTT进行配置（参见[配置中使用的MQTT](配置中使用的MQTT)）
 ```
@@ -59,6 +60,10 @@ step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker�
 step 4: 检查数据是否已写入数据库
 
 ## 配置InfluxDB
+influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。
+step 1: 按照官网文档下载并解压influxdb  
+step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)  
+在influxdb解压的文件目录下： `influxd`
 ### InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
 Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的Grafana服务则强制采用HTTPS确保数据传输的安全性。 众所周知，HTTPS协议是HTTP协议的安全版本，其安全性能的实现主要依靠在Transport Layer之上增加的TLS/SSL层实现文本及数据的加密。HTTPS与HTTP一个重要的区别在于HTTPS增加了对身份的验证功能，因此第三方无法伪造服务端或客户端身份，引入的证书认证机制就是用来确保这一功能的实现。
 为了确保网络间通讯的安全，我将InfluxDB的接口也进行了相关配置，让其利用TLS层使用HTTPS协议进行数据的传输。
@@ -76,7 +81,7 @@ step 4:测试
 ) 
 step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！
 ## 配置grafana datasource
-这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点这是太不程序员友好了，疯狂diss ）
+这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点是不是太不程序员友好了，疯狂diss ）
 在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）
 
 使用之后！Bang！（不要选proxy模式）
