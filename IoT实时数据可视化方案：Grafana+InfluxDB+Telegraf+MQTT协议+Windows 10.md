@@ -7,7 +7,7 @@ IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB-
 ```
 # 配置安装流程
 ## 数据来源
-数据来源在IoT Case下一般来自各个传感设备。 因为身边没用可用的传感器设备，在github上搜到个使用[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。   
+数据来源在IoT Case下一般来自各个传感设备。 因为身边没有可用的传感器设备，于是在github上搜了个[小工具](https://github.com/acesinc/json-data-generator)来模拟数据发射器。该工具可输出自定义的json格式数据，并且支持MQTT，HTTP（s)，Azure IoT hub, Kafka等主流协议/工具，应用范围和场景广泛是我选择该工具的主要原因。   
 唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。   
 如果你的case中有使用真实的iot设备和通讯协议可自动忽略此part。   
 **安装和配置相关请参照readme**  
@@ -58,8 +58,8 @@ two wildcards: # and +
 消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0；    
 Ref: https://mosquitto.org/man/mqtt-7.html
 ## 配置Telegraf
-step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））      
-[此处有图]
+step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））      
+![此处有图]()
 step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins)       
 配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题]及[配置中使用的MQTT]   
 processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中         
@@ -161,10 +161,9 @@ step 4:测试
 step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！  
 ## 配置grafana datasource
 这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点是不是太不程序员友好了，疯狂diss ）
-在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）
-[此处有图]
-使用之后！Bang！（不要选proxy模式）
-[此处有图]
+[在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/2.PNG)
+![使用之后！Bang！](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/1.PNG)
+注意此处不要选择proxy模式，让grafana的后端服务代理请求，这样处于本地服务器的influxdb无法接受到grafana的请求；
 ## DEMO
 最后一个折腾了我很久才得到的一个很粗略的demo。
 [此处有图]
