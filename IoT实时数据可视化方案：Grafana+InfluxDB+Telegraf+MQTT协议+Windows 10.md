@@ -64,8 +64,8 @@ Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的G
 为了确保网络间通讯的安全，我将InfluxDB的接口也进行了相关配置，让其利用TLS层使用HTTPS协议进行数据的传输。
 在配置过程中我使用的证书是self-signed-certificate,使用windows系统的配置过程稍有不同（windows真是伤不起，连个配置说明都没有）
 step 1:使用openssl（没有的朋友要安装一下）生成证书和密钥；
-`sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /route/to/your/dir/influxdb-selfsigned.key -out /route/to/your/route/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>`
-进入文件所在目录，安装证书（注意！要安装在受信任的根目录下）
+`sudo openssl req -x509 -nodes -newkey rsa:2048 -keyout /route/to/your/dir/influxdb-selfsigned.key -out /route/to/your/route/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>`  
+进入文件所在目录，双击证书文件并安装证书（注意！要安装在受信任的根目录下）  
 step 2:配置influxDB;
 和官方文档一致，点[这里](https://docs.influxdata.com/influxdb/v1.4/administration/https_setup/#setup-https-with-a-self-signed-certificate
 )  
@@ -76,8 +76,9 @@ step 4:测试
 ) 
 step 5：如果有使用telegraf，记得要将telegraf中output plugin的相关API也改成https！
 ## 配置grafana datasource
-这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。这点这是太不程序员友好了，疯狂diss；  
-在没有使用https之前grafana报错：
+这一步也是卡了很久，grafana的错误提示基本形同虚设，最好inpect一下页面看看dev tool的错误提示。（这点这是太不程序员友好了，疯狂diss ）
+在没有使用https之前grafana报错（谁能知道这个undefined是什么鬼意思！！）
+
 使用之后！Bang！（不要选proxy模式）
 
 ## DEMO
