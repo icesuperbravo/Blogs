@@ -11,7 +11,7 @@ IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB-
 唯一的缺点是输出的json默认为object, 不支持对array of object json的扩展，在API config的时候可能会遇到一些工具只能识别array of json object 的情况（比如power bi的rest api)。   
 如果你的case中有使用真实的iot设备和通讯协议可自动忽略此part。   
 **安装和配置相关请参照readme**  
-在mySimConfigjson中对MQTT进行配置（参见[配置中使用的MQTT](配置中使用的MQTT)）
+在mySimConfigjson中对MQTT进行配置，语法参见[配置中使用的MQTT]   
 ```
  {
             "type": "mqtt",
@@ -28,12 +28,12 @@ IoT Simulator(publisher)----> MQTT broker---->Telegraf(subscriber)---->InfluxDB-
 ## 使用MQTT协议
 ### 什么是MQTT协议？
 MQTT为MQ Telemetry Transport的缩写，该协议定义了在机器对机器或物联网环境下的通信规则。它采用发布/订阅的模式传输数据，设计思想是在尽力保证一定程度的数据可达性及稳定性的同时，减少对网络带宽和设备资源的依赖。MQTT协议简洁且轻量，适用于低带宽，高延迟或不稳定的网络环境中的设备，同时也适用于带宽和电源受限的移动应用.  
-Ref:http://mqtt.org/faq   
+ref:http://mqtt.org/faq   
 ### 为什么使用MQTT协议？
 在使用Power BI作为可视化方案时，曾成功使用REST API直接将数据源通过HTTP推送到POWER BI所提供的endpoint。因此在架构这套服务之初，我并没有打算使用MQTT作为数据传输协议。但经过一番研究后，在我的案例当中，发现使用HTTP协议有以下局限性：  
 1. 在Telegraf的input plugins中，和HTTP相关的插件有两个：一个是HTTP JSON，另一个是HTTP Listener（HTTP Response由于不符合个体案例没有做研究）； HTTP JSON主要通过向拥有数据的HTTP URLs发送请求，并从对应响应中的json中获取数据。由于我的IoT设备仅仅是一个模拟的数据发送器且并没有为其部署本地服务器或云端服务器，因此无法分配到URL地址和端口，同时另一个考虑是希望减少在部署服务器上花费的成本，更好的集中在可视化工具上的研究上。 因此这个插件并不适合我的情况；HTTP Listener主要监听HTTP POST上的消息。Telegraf可以作为代理服务器来处理原本通过InfluxDB HTTP API 上 /write 写入的数据。听起来这个似乎深得我心，没有多余的学习成本---与使用POWER　BI时情景类似，可以将数据直接推入InfluxDB的API终端，然后设置Telegraf作为代理在写入数据库之前对数据流做process或aggregation的工作，使得数据变得更加具有可读性（meaningful）。简单粗暴快捷。唯一也是致命的缺点是如果使用HTTP Listener将仅支持[InfluxDB line protocol format](https://docs.influxdata.com/telegraf/v1.5/concepts/data_formats_input/) 作为数据写入格式。这就使得数据源的格式大大受限，数据输入格式解析的功能也相当于无法使用了，那么使用telegraf的意义就变得不那么大（对数据流进行格式解析和聚合）；  
 2. 我使用的IoT Simulator对MQTT协议有较为全面的支持，无需二次开发接口；  
-Ref:https://docs.influxdata.com/telegraf/v1.5/plugins/inputs/
+ref:https://docs.influxdata.com/telegraf/v1.5/plugins/inputs/
 ### 配置中使用的MQTT
 * 如何安装MQTT Broker: 参见[这里](http://www.steves-internet-guide.com/install-mosquitto-broker/)，以及[这里](https://sivatechworld.wordpress.com/2015/06/11/step-by-step-installing-and-configuring-mosquitto-with-windows-7/)
 
@@ -56,10 +56,10 @@ two wildcards: # and +
 2: The broker/client will deliver the message exactly once by using a four step handshake.  
 * Downgrade for QoS    
 消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0；    
-Ref: https://mosquitto.org/man/mqtt-7.html
+ref: https://mosquitto.org/man/mqtt-7.html
 ## 配置Telegraf
 step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））      
-![此处有图]()
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/7.PNG)
 step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins)       
 配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题]及[配置中使用的MQTT]   
 processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中         
@@ -134,13 +134,15 @@ processor plugin的功能主要是打印从mqtt broker订阅的数据并显示�
   [[processors.printer]]
 ```
 step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保influxdb能订阅到稳定的数据流，否则influxdb有可能会报错监听不到数据写入。    
-`to\your\dir: telegraf --config telegraf.conf`   
-step 4: 检查数据是否已写入数据库   
-[此处有图]     
+`to\your\dir: telegraf --config telegraf.conf`     
+由于配置了printer plugin，在telegraf正常运行的情况下可以看到数据流打印在console中  
+step 4: 检查数据是否已写入数据库   
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/5.PNG)     
 ref: https://docs.influxdata.com/telegraf/v1.5/
 ## 配置InfluxDB
 influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。  
-step 1: 按照官网文档下载并解压influxdb     
+step 1: 按照官网文档下载并解压influxdb   
+![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/6.PNG)   
 step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)   
 `to\your\dir：influxd`
 ### InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
