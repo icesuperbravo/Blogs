@@ -51,14 +51,15 @@ two wildcards: # and +
 0: The broker/client will deliver the message once, with no confirmation.  
 1: The broker/client will deliver the message at least once, with confirmation required.  
 2: The broker/client will deliver the message exactly once by using a four step handshake.  
-* Downgrade for QoS  
-消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0； 
+* Downgrade for QoS    
+消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0；    
 Ref: https://mosquitto.org/man/mqtt-7.html
 ## 配置Telegraf
-step 1: 安装并解压telegraf  
-step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins) 
-配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题](InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题)及[配置中使用的MQTT](配置中使用的MQTT)
-processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中；
+step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））   
+[此处有图]
+step 2: 修改配置文件telegraf.conf（主要配置input，output&processor plugins)    
+配置主要参见：[InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题](InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题)及[配置中使用的MQTT](配置中使用的MQTT)   
+processor plugin的功能主要是打印从mqtt broker订阅的数据并显示在console中     
 ```
 [[outputs.influxdb]]
   urls = ["https://localhost:8086"] # required
@@ -129,14 +130,15 @@ processor plugin的功能主要是打印从mqtt broker订阅的数据并显示�
   
   [[processors.printer]]
 ```
-step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保influxdb能订阅到稳定的数据流，否则influxdb有可能会报错监听不到数据写入。 
-`to\your\dir: telegraf --config telegraf.conf`
+step 3: 运行telegraf，运行前先开启数据模拟发射器和MQTT broker确保influxdb能订阅到稳定的数据流，否则influxdb有可能会报错监听不到数据写入。    
+`to\your\dir: telegraf --config telegraf.conf`   
 step 4: 检查数据是否已写入数据库
-[此处有图]  
+[此处有图]     
 ref: https://docs.influxdata.com/telegraf/v1.5/
 ## 配置InfluxDB
 influxDB作为数据和终端可视化工具之间的桥梁，角色尤为重要。influxDB作为一个time-series database非常适合实时IoT数据的存储。 配置influxdb的过程较为简单，主要解决的问题集中在从http到https协议转换问题。  
 step 1: 按照官网文档下载并解压influxdb  
+
 step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)   
 在influxdb解压的文件目录下： `influxd`
 ### InfluxDB HTTP API和Hosted Grafana HTTPS 通讯的冲突问题
