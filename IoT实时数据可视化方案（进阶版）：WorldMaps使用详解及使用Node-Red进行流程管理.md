@@ -3,9 +3,8 @@
 想着我还有些模拟的地理数据没有做可视化，数据信息的内容放在名为location的属性之下，具体格式如： 
 ```json
 {
-//...
   "location": {
-   "lat":12.345，
+   "lat":12.345,
    "lon":56.789
   }
  }
@@ -29,15 +28,19 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混�
 **“以country code和geohash为区分，详述在不同数据库下针对这两种数据源的配置方法”**---用这样的方法组织文档，一目了然，结构清晰；读者按图索骥，效率大大提高，至少好过现在的文档。而全文档如此重要的一句话，竟然放在一个毫不起眼的角落。恕我实在无法理解撰写者的意图。
 
 ## 可能的解决方案： 
-为了hack这个让我如鲠在喉，不痛不痒的娘嬉皮问题，我绞尽脑汁在google各种搜刮信息，最后得到以下几种可能的解决方法：
-1. 在原始数据中添加对应经纬度信息的country code或geo hash等信息；
-2. Telegraf plug-in development---->need to develop a small plug-in with Golang；
-3. Kapacitor---->need to develop a small plug-in with Golang, need to customize script to add geohash function；
-4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash)node.js，处理添加geohash tag再存入influxdb；  
+为了解决这个如鲠在喉的数据匹配问题，几种可能的解决方法初现原形（各种绞尽脑汁花式变换关键词问google+欲罢不能看文档之后）：
+~~1. 在原始数据中人工硬是添加个country code field或geohash field；~~
+最容易想到的方法。简单粗暴快捷！但是考虑到这样的方法并不能适配所有的IoT设备，且大部分的GPS产生的数据还是经纬度。排除排除！
+~~2. 在Telegraf中添加能够对经纬度数据对做处理并产生geohash的plug-in；~~
+可惜我并没有找到这样可以直接使用的plug-in。转念想到可以自己开发plug-in,但是对我而言时间，学习成本太。高。（Golang小白,geohash算法不了解）。两个字：排除！  
+P.S:有兴趣的朋友可以看看telegraf的文档，他们是欢迎各种形式的plugin PR的。暗中观察，这样的plug-in应该要归在processor plug-in一类中。而目前官方只在这类中给了个printer。基本等于没什么卵用，就是在cmd里打印下数据流。亟待小伙伴填坑！
+ref: 
+3. 使用Kapacitor, ；
+4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash)，处理添加geohash tag后再存入influxdb；  
 ref[1]: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2
 5. use Node-Red service to add geohash encode/decode functionality.
 
-首先最容易想到的方法就是对我的原始数据做处理。要不就是在json数据包里额外添加一些code属性，要不就加上geohash信息。简单粗暴快捷！可是加上它们本身就很不容易，因为从经纬度到这些人类可读的信息需要经过一些计算得到，而这些计算是否能在IoT设备本身计算得到呢？这点我并不确定。其次，我所使用的模拟器设备并不支持geohash数据的模拟。因此解决方法中的1被我否掉了，还是要保持json数据的高傲和纯洁；  
+
 ## 解决方案详细配置及步骤
 ### 配置Node-Red
 prerequisite: **node.js**  
