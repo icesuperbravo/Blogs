@@ -1,8 +1,8 @@
 ## 万万没想到，我这一世英名葬送在了地图坑里
 继上次搭建完框架得到了个粗糙的demo以后，我天真的以为我离真理的距离简直就只有一步之遥了。
 ## 睁大双眼，认真审题（这屎一样的文档）
-Grafana和InfluxDB的文档大概是我有生以来看到过写的最一片混乱的文档的文档之一了。
-数据分类明明是以code和geohash为区分，不知道为什么文档作妖按什么table data, time series data和json分。恕在下是真的没看懂。  
+Grafana和InfluxDB的文档大概是我有生以来看到过写的最一片混乱的文档的文档之一了，之前那篇博客就已经吐槽了N遍。
+请大家继续欣赏WorldMap Panel的[documentation](https://github.com/grafana/worldmap-panel)。 说实话我一口气看了三遍竟然都没看懂这文档在说个啥。该强调的重点不强调，不该强调的倒是像老奶奶的裹脚布，又长又臭；比如数据分类明明是以code和geohash为区分，不知道为什么文档作妖按什么table data, time series data和json分。恕在下是真的没看懂。  
 扫视N遍后发现最重要的话隐藏在不经意的角落：   
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates.
 对于code： 可以使用grafana预先定义的code， 也可以自定义一些code并用json/jsonp方式导入;  
