@@ -28,14 +28,14 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混�
 **“以country code和geohash为区分，详述在不同数据库下针对这两种数据源的配置方法”**---用这样的方法组织文档，一目了然，结构清晰；读者按图索骥，效率大大提高，至少好过现在的文档。而全文档如此重要的一句话，竟然放在一个毫不起眼的角落。恕我实在无法理解撰写者的意图。
 
 ## Chap.2 各种绞尽脑汁花式变换关键词问google+欲罢不能看文档之后的结果
-为了解决这个如鲠在喉的数据匹配问题，几种可能的解决方法一番折腾后初现原形：
-~~1. 在原始数据中人工硬是添加个country code field或geohash field；~~
-最容易想到的方法。简单粗暴快捷！但是考虑到这样的方法并不能适配所有的IoT设备，且大部分的GPS产生的数据还是经纬度。排除排除！
-~~2. 在Telegraf中添加能够对经纬度数据对做处理并产生geohash的plug-in；~~
-可惜我并没有找到这样可以直接使用的plug-in。转念想到可以自己开发plug-in,但是对我而言时间，学习成本太。高。（Golang小白,geohash算法不了解）。两个字：排除！  
-P.S:有兴趣的朋友可以看看telegraf的文档，他们是欢迎各种形式的plugin PR的。暗中观察，这样的plug-in应该要归在processor plug-in一类中。而目前官方只在这类中给了个printer。基本等于没什么卵用，就是在cmd里打印下数据流。亟待小伙伴填坑！
-ref: 
-3. 使用Kapacitor, ；
+为了解决这个如鲠在喉的数据匹配问题，几种可能的解决方法一番折腾后初现原形：  
+~~1. 在原始数据中人工硬是添加个country code field或geohash field；~~  
+最容易想到的方法。简单粗暴快捷！但是考虑到这样的方法并不能适配所有的IoT设备，且大部分的GPS产生的数据还是经纬度。排除排除！  
+~~2. 在Telegraf中添加能够对经纬度数据对做处理并产生geohash的plug-in；~~  
+可惜我并没有找到这样可以直接使用的plug-in。转念想到可以自己开发plug-in,但是对我而言时间，学习成本太。高。（Golang小白,geohash算法不了解）。两个字：排除！    
+P.S:有兴趣的朋友可以看看telegraf的文档，他们是欢迎各种形式的plugin PR的。暗中观察，这样的plug-in应该要归在processor plug-in一类中。而目前官方只在这类中给了个printer。基本等于没什么卵用，就是在cmd里打印下数据流。亟待小伙伴填坑！  
+ref:   
+3. 使用Kapacitor；  
 4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash)，处理添加geohash tag后再存入influxdb；  
 ref[1]: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2
 5. use Node-Red service to add geohash encode/decode functionality.
