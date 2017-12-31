@@ -35,10 +35,10 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混�
 ~~2. 在Telegraf中添加能够对经纬度数据对做处理并产生geohash的plug-in；~~    
 可惜我并没有找到这样可以直接使用的plug-in。转念想到可以自己开发plug-in,但是对我而言时间，学习成本太。高。（Golang小白,geohash算法不了解）。两个字：排除！    
 P.S:有兴趣的朋友可以看看telegraf的文档，他们是欢迎各种形式的plugin PR的。暗中观察，这样的plug-in应该要归在processor plug-in一类中。而目前官方只在这类中给了个printer。基本等于没什么卵用，就是在cmd里打印下数据流。亟待小伙伴填坑！  
-ref:   
-~~3. 使用Kapacitor对流出数据库的数据分析处理，后而送至可视化终端；~~
-Kapacitor是influxdata四个开源核心产品之一（TICK stack, K--Kapacitor)，可以对数据进行相应的分析处理，比如使用机器学习模型处理分析数据。具体其他功能不是特别清楚没做仔细调研，有兴趣的同学移架[这里]()。    
-至于排除的原因和2类似，没有可用的脚本，开发成本太高。    
+ref:  
+~~3. 使用Kapacitor对流出数据库的数据分析处理，后而送至可视化终端；~~  
+Kapacitor是influxdata四个开源核心产品之一（TICK stack, K--Kapacitor)，可以对数据进行相应的分析处理，比如使用机器学习模型处理分析数据。具体其他功能不是特别清楚没做仔细调研，有兴趣的同学移架[这里]()。  
+至于排除的原因和2类似，没有可用的脚本，开发成本太高。  
 ~~4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash)等开源插件, 后端语言（如node.js)处理,向数据库直接添加geohash tag并写入值；~~  
 看起来似乎是个物美价廉的正经解决方法。不过由于本文讨论的是实时IoT数据的可视化，可能每分钟就会向数据库内写入大量的数据，如果在数据存储后再对数据进行操作，则要频繁地调用数据库I/O进行读写操作,将已经存入的数据记录逐条处理并写回，增加了数据库负担。因此排除。  
 ref[1]: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2  
