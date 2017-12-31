@@ -15,7 +15,7 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最一片混�
 1. 在原始数据中添加对应经纬度信息的country code或geo hash等信息；
 2. Telegraf plug-in development---->need to develop a small plug-in with Golang；
 3. Kapacitor---->need to develop a small plug-in with Golang, need to customize script to add geohash function；
-4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash) pull data，处理添加geohash tag再存入influxdb；
+4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash)node.js，处理添加geohash tag再存入influxdb；  
 ref[1]: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2
 5. use Node-Red service to add geohash encode/decode functionality.
 
@@ -69,6 +69,11 @@ if(msg.location.geohash!==null)
 }
 return msg;
 ```
+### 检查数据库内的数据格式是否正确
+到这里，数据应该安然无恙地被telegraf简单处理后存入数据库。这时对数据库进行简单的操作检查数据是否如自己预期地被写入了指定数据库。
+![](correct-dbformat.jpg)
+
+### 配置grafana
 
 
 
