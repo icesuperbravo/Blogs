@@ -15,7 +15,8 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最一片混�
 1. 在原始数据中添加对应经纬度信息的country code或geo hash等信息；
 2. Telegraf plug-in development---->need to develop a small plug-in with Golang；
 3. Kapacitor---->need to develop a small plug-in with Golang, need to customize script to add geohash function；
-4. 使用node-influx和node-geohash pull data，处理添加geohash tag再存入influxdb；
+4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash) pull data，处理添加geohash tag再存入influxdb；
+ref[1]: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2
 5. use Node-Red service to add geohash encode/decode functionality.
 
 首先最容易想到的方法就是对我的原始数据做处理。要不就是在json数据包里额外添加一些code属性，要不就加上geohash信息。简单粗暴快捷！可是加上它们本身就很不容易，因为从经纬度到这些人类可读的信息需要经过一些计算得到，而这些计算是否能在IoT设备本身计算得到呢？这点我并不确定。其次，我所使用的模拟器设备并不支持geohash数据的模拟。因此解决方法中的1被我否掉了，还是要保持json数据的高傲和纯洁；  
