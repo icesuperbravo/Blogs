@@ -1,7 +1,7 @@
 ## 万万没想到，我这一世英名葬送在了地图坑里
 继上次搭建完框架得到了个粗糙的demo以后，我天真地以为我离真理的距离简直就只有一步之遥了。基本的图形组件试了个遍没什么。  
 想着我还有些模拟的地理数据没有做可视化，数据信息的内容放在名为location的属性之下，具体格式如： 
-```
+```json
 {
 ...
   "location": {
@@ -14,7 +14,7 @@
 关于基于地图的信息可视化，Power BI上的Map工具给我留下了用户友好简单易用的好印象。只要使用直接的经纬度数据对就能在地图上对位置定位并展示。逻辑惯性让我想当然了，天真地以为所有的地图插件都一样”单纯”。
 首先，在Grafana的标准可视化工具中是不包括地图相关的工具的， 但在插件库中官方发布了一款名为World Map Pannal基于地图可视化的工具，符合我的需求看起来效果也不错。    
 在简单地下载安装了这个插件后，我发现事情并没有想象简单。该工具和我的可视化框架最大的冲突是：  
-**World Map Pannel并不支持通过经纬度数据对在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。 
+**World Map Pannel并不支持通过经纬度数据对 e.g. (latitude, longtitude)在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。 
 以下从官方文档中摘出的这句话很好地的解释了这两种数据类型。  
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates。   
 ### Tips:睁大双眼，认真审题（这屎一样的文档）
@@ -22,13 +22,11 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混�
 在这新年之际，我要邀请大家继续欣赏出自Grafana官方WorldMap Panel的[documentation](https://github.com/grafana/worldmap-panel)。 说实话我一口气看了三遍后竟然比看第一遍时还要混乱。文档以table data, time series data和json为data source的介绍相关配置实在是相当混乱。以我的构架为例：首先，使用influxdb得到的数据照理说应该是time series data吧？毕竟人家influxdb号称time-series数据库，以写入数据库时的时间戳作为表格的唯一索引。 然而最后使用的配置方法竟然归档在table data下(influxdb: 我不要面子的哦)；
 其次"time-series data"这个称谓也许还能够直观地理解是以时间戳为索引的数据（更有甚者我这样的理解其实是错误的），那么“table data”该如何去理解呢？"time-series data"难道不是以表格的形式组织排列储存的吗？至于“json”就更为模糊了，是以json为格式的数据？还是通过json的形式传递的数据？ 那么json这种格式的数据就不能同时是"time-series data"或"table data"吗？这三种类型的数据不具备互斥性，由此可见这种分类方法是不科学的。 
 我个人主观认为正确的分类方法正如文档开头所说，我在本文的第一章节也引用了这句话:
-> There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates。   
-对于code： 可以使用grafana预先定义的code， 也可以自定义一些code并用json/jsonp方式导入;  
-对于geohash: 主要是为了支持elasticsearch， 但是对于influxdb， 可以人工添加geohash的tag，并将数据看作是表格读取geohash tag中的内容； 
+> There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates.   
+注解：对于code： 可以使用grafana预先定义的code， 也可以自定义一些code并用json/jsonp方式导入;  
+     对于geohash: 主要是为了支持elasticsearch， 但是对于influxdb， 可以人工添加geohash的tag，并将数据看作是表格读取geohash tag中的内容； 
 
 **“以country code和geohash为区分，详述在不同数据库下针对这两种数据源的配置方法”**---用这样的方法组织文档，一目了然，结构清晰；读者按图索骥，效率大大提高，至少好过现在的文档。而全文档如此重要的一句话，竟然放在一个毫不起眼的角落。恕我实在无法理解撰写者的意图。
-## 问题所在
-一个悲伤的事实是： influxdb不支持对geohash格式，而我的数据源产生的数据也不包括geohash或者country/state code。geohash实在是一种太高级的地理数据格式了，作为一个朴素的IoT设备，通常的地理数据是通过GPS采集到的经纬度信息 e.g. (latitude, longtitude);  
 
 ## 可能的解决方案： 
 为了hack这个让我如鲠在喉，不痛不痒的娘嬉皮问题，我绞尽脑汁在google各种搜刮信息，最后得到以下几种可能的解决方法：
