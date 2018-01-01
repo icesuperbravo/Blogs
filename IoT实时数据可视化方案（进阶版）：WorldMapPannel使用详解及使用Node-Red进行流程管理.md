@@ -51,7 +51,7 @@ ref: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2
 **权衡之后，决定采取最后一种方案。**    
 
 ## Chap.3 解决方案详细步骤
-### 配置Node-Red
+### 1. 配置Node-Red
 tips: 使用Node-Red的前提条件是保证**node.js**已安装;
 * 已安装过node.js的盆友们可以跳过这一趴！  
 如果是和我一样使用windows系统的小伙伴们， 推荐一个插件叫做chocolately, 从此Windows也拥有了软件包管理工具，命令行安装package不是梦！
@@ -66,7 +66,7 @@ tips: 使用Node-Red的前提条件是保证**node.js**已安装;
 ![](red-node-success.PNG)
 * 用浏览器打开途中高亮地址，进入node-red的用户界面---新世界大门打开，噔噔！
 ![](UIlayout.PNG)
-### 在Red-Node上创建data flow
+### 2. 在Red-Node上创建data flow
 location-preprocessor的code:    
 ```javascript
 //The main purpose of this snippet is to extract the location info from msg.payload and then put it to msg.location to get the calculated geohash. 
@@ -94,12 +94,21 @@ if(msg.location.geohash!==null)
 }
 return msg;
 ```
-### 检查数据库内的数据格式是否正确
+### 3. 检查数据库内的数据格式是否正确
 到这里，数据应该安然无恙地被telegraf简单处理后存入数据库。这时对数据库进行简单的操作检查数据是否如自己预期地被写入了指定数据库。
 ![](correct-dbformat.jpg)
 
-### 配置Grafana World Map Panel settings
-根据Grafana的官方文档
+### 4. 配置Grafana Worldmap Panel settings
+既然到这里已经保证数据库里有了可用的数据，那么接下来开始设置Worldmap Panel工具吧！  
+欣喜伴随着绝望。又要开始研究文档T.T。
+关于配置最重要的一段话就是这里了： 
+>An example of Table Data would using InfluxDB and then formatting the data returned from the metric query as Table.
+
+>Similar to the Elasticsearch query above, 3 fields are expected (2 of them are mandatory)
+* a field named metric
+* a geohash tag named geohash
+* an optional location name (shown in the mouse over). This location name has to be specified in the Worldmap settings tab too.
+
 
 
 
