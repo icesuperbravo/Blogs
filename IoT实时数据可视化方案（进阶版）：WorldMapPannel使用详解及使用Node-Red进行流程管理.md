@@ -32,19 +32,23 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混�
 为了解决这个如鲠在喉的数据匹配问题，几种可能的解决方法一番折腾后初现原形：  
 ~~1. 在原始数据中人工硬是添加个country code field或geohash field；~~  
 最容易想到的方法。简单粗暴快捷！但是考虑到这样的方法并不能适配所有的IoT设备，且大部分的GPS产生的数据还是经纬度。排除排除!   
+
 ~~2. 在Telegraf中添加能够对经纬度数据对做处理并产生geohash的plug-in；~~    
 可惜我并没有找到这样可以直接使用的plug-in。转念想到可以自己开发plug-in,但是对我而言时间，学习成本太。高。（Golang小白,geohash算法不了解）。两个字：排除！    
 P.S:有兴趣的朋友可以看看telegraf的文档，他们是欢迎各种形式的plugin PR的。暗中观察，这样的plug-in应该要归在processor plug-in一类中。而目前官方只在这类中给了个printer。基本等于没什么卵用，就是在cmd里打印下数据流。亟待小伙伴填坑！  
 ref:https://github.com/influxdata/telegraf/blob/master/docs/AGGREGATORS_AND_PROCESSORS.md  
+
 ~~3. 使用Kapacitor对流出数据库的数据分析处理，后而送至可视化终端；~~  
 Kapacitor是influxdata四个开源核心产品之一（TICK stack, K--Kapacitor)，可以对数据进行相应的分析处理，比如使用机器学习模型处理分析数据。具体其他功能不是特别清楚没做仔细调研，有兴趣的同学移架[这里](https://github.com/influxdata/kapacitor)。  
 至于排除的原因和2类似，没有可用的脚本，开发成本太高。  
+
 ~~4. 使用[node-influx](https://github.com/node-influx/node-influx)和[node-geohash](https://github.com/sunng87/node-geohash)等开源插件, 后端语言（如node.js)处理,向数据库直接添加geohash tag并写入值；~~  
 看起来似乎是个物美价廉的正经解决方法。不过由于本文讨论的是实时IoT数据的可视化，可能每分钟就会向数据库内写入大量的数据，如果在数据存储后再对数据进行操作，则要频繁地调用数据库I/O进行读写操作,将已经存入的数据记录逐条处理并写回，增加了数据库负担。因此排除。  
 ref: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2  
-5.  使用Node-Red对数据流向管理，在数据存入数据库之前利用已有的集成块调用接口计算geohash以减轻对数据库的负担。  
-Node-Red为开源项目，主要用于可视化IoT数据的流向并且对数据流向进行管理。 依赖于活跃node.js社区，拥有大量可用资源的强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，处理语言使用javascript，对前端工程师十分友好， node.js在背后的强大支撑更让该工具如虎添翼。  
-权衡之后，决定采取最后一种方案。    
+
+**5.  使用Node-Red对数据流向管理，在数据存入数据库之前利用已有的集成块调用接口计算geohash以减轻对数据库的负担。**  
+[Node-Red](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，处理语言使用javascript，对前端工程师十分友好， node.js在背后的强大支撑更让该工具如虎添翼。  
+**权衡之后，决定采取最后一种方案。**    
 
 ## Chap.3 解决方案详细步骤
 ### 配置Node-Red
