@@ -104,9 +104,9 @@ return msg;
 关于配置最重要的一段话就是这里了： 
 >An example of Table Data would using InfluxDB and then formatting the data returned from the metric query as Table.
 >Similar to the Elasticsearch query above, 3 fields are expected (2 of them are mandatory)
-* a field named metric
-* a geohash tag named geohash
-* an optional location name (shown in the mouse over). This location name has to be specified in the Worldmap settings tab too.
+>* a field named metric
+>* a geohash tag named geohash
+>* an optional location name (shown in the mouse over). This location name has to be specified in the Worldmap settings tab too.
 
 
 
