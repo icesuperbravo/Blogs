@@ -99,14 +99,19 @@ return msg;
 ![](correct-dbformat.jpg)
 
 ### 4. 配置Grafana Worldmap Panel settings
-既然到这里已经保证数据库里有了可用的数据，那么接下来开始设置Worldmap Panel工具吧！  
-欣喜伴随着绝望。又要开始研究文档T.T。
-关于配置最重要的一段话就是这里了： 
+既然到这里已经保证数据库里有了可用的数据，那么接下来开始设置Worldmap Panel工具吧！  
+欣喜伴随着绝望。又要开始研究文档T.T。  
+瞅来瞅去，文章里关于配置最重要的一段话就是这里了： 
 >An example of Table Data would using InfluxDB and then formatting the data returned from the metric query as Table.
 >Similar to the Elasticsearch query above, 3 fields are expected (2 of them are mandatory)
 >* a field named metric
 >* a geohash tag named geohash
 >* an optional location name (shown in the mouse over). This location name has to be specified in the Worldmap settings tab too.
+我给大家用直白的话翻译一下这段话的意思： 老子Worldmap Panel只认两个兄弟，一个叫做metric，还有一个就是geohash！location name的这个人可以考虑，但是可有可无。其他的都滚一边去！
+geohash就是个打手，Worldmap Panel说让它去哪儿它就得去哪儿，该在那个地理位置就给定在哪里；  
+metric是个师爷，在geohash的定位基础上，每个点要显示的值都靠metric去提供。但是师爷这种人聪明绝顶，行走江湖容易遭人暗算，所以metric是个化名，真正名字叫什么，主要看数据库给什么值了。总之在Worldmap上他就叫metric。  
+这样一来我们就可以设置数据集按照geohash来定位，而在每个geohash的点上需要显示的值则由metric确定。比如从我的需求出发，需要显示我的每台设备在地图上的定位并能让用户看到每台机器的当前运行的温度情况，那么我就应该这样来设置的的query。
+![]()
 
 
 
