@@ -63,10 +63,11 @@ tips: 使用Node-Red的前提条件是保证**node.js**已安装;
 * 运行node-red：
 `用户app路径\npm\node_modules\node-red>node-red`
 * cmd提示成功信息
-![](red-node-success.PNG)
+![red-node-success](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/red-node-success.PNG?raw=true)
 * 用浏览器打开途中高亮地址，进入node-red的用户界面---新世界大门打开，噔噔！
-![](UIlayout.PNG)
+![UIlayout](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/node-red-UIlayout.PNG?raw=true)
 ### 2. 在Red-Node上创建data flow
+![UIlayout](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/process_graph.PNG?raw=true)
 location-preprocessor的code:    
 ```javascript
 //The main purpose of this snippet is to extract the location info from msg.payload and then put it to msg.location to get the calculated geohash. 
@@ -96,9 +97,7 @@ return msg;
 ```
 ### 3. 检查数据库内的数据格式是否正确
 到这里，数据应该安然无恙地被telegraf简单处理后存入数据库。这时对数据库进行简单的操作检查数据是否如自己预期地被写入了指定数据库。
-![](correct-dbformat.jpg)
-
-### 4. 配置Grafana Worldmap Panel settings
+![correct-dbformat](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/correct_dbformat.PNG?raw=true)
 既然到这里已经保证数据库里有了可用的数据，那么接下来开始设置Worldmap Panel工具吧！  
 欣喜伴随着绝望。又要开始研究文档T.T。  
 瞅来瞅去，文章里关于配置最重要的一段话就是这里了： 
@@ -112,7 +111,7 @@ return msg;
 geohash就是个打手，Worldmap Panel说让它去哪儿它就得去哪儿，该在那个地理位置就给定在哪里  
 metric是个师爷，在geohash的定位基础上，每个点要显示的值都靠metric去提供。但是师爷这种人聪明绝顶，行走江湖容易遭人暗算，所以metric是个化名，真正名字叫什么，主要看数据库给什么值了。总之在Worldmap上他就叫metric。  
 这样一来我们就可以设置数据集按照geohash来定位，而在每个geohash的点上需要显示的值则由metric确定。比如从我的需求出发，需要显示我的每台设备在地图上的定位并能让用户看到每台机器的当前运行的温度情况，那么我就应该这样来设置我的query。  
-![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/metrics.PNG?raw=true)
+![query settings](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/metrics.PNG?raw=true)
 同时，在worldmap一栏对map data options进行设置：
 ![map data options](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/datasource.PNG?raw=true)
 location data一定要选择table,且一般table field name设置为geohash；
