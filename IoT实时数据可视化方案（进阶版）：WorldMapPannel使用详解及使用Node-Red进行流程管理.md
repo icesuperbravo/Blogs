@@ -119,7 +119,8 @@ location data一定要选择table,且一般table field name设置为geohash；
 
 ### 5. Demo
 到这里应该可以看到美腻的demo了！Worldmap panel到这里终于可用了！
-
+![demo1](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/10.PNG?raw=true)
+![demo2](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/11.PNG?raw=true)
 ## Chap.4 聆听来自我内心的新年总结
 脸上笑嘻嘻，心里真是mmp啊！朋友们填坑不易，且填且珍惜哦！  
 也不知道自己还能坚持填坑多久，前路漫漫啊前路漫漫！  
