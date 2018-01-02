@@ -18,7 +18,7 @@
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates。   
 #### Tips:睁大双眼，认真审题（这屎一样的文档）
 Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混乱的文档之一了，吐槽请见[上篇博客](https://segmentfault.com/a/1190000012514865)。
-在这新年之际，我要邀请大家继续欣赏出自Grafana官方WorldMap Panel的[documentation](https://github.com/grafana/worldmap-panel)。 说实话我一口气看了三遍后竟然比看第一遍时还要混乱。文档以table data, time series data和json为data source的介绍相关配置实在是相当混乱。以我的构架为例：首先，使用influxdb得到的数据照理说应该是time series data吧？毕竟人家influxdb号称time-series数据库，以写入数据库时的时间戳作为表格的唯一索引。 然而最后使用的配置方法竟然归档在table data下(influxdb: 我不要面子的哦)；  
+在这新年之际，我要邀请大家继续欣赏出自Grafana官方WorldMap Panel的[documentation](https://github.com/grafana/worldmap-panel)。 说实话我一口气看了三遍后竟然比看第一遍时还要混乱。文档以table data, time series data和json为data source的介绍相关配置实在是非常地不明智之举。以我的构架为例：首先，使用influxdb得到的数据照理说应该是time series data吧？毕竟人家influxdb号称time-series数据库，以写入数据库时的时间戳作为表格的唯一索引。 然而最后使用的配置方法竟然归档在table data下(influxdb: 我不要面子的哦)；  
 其次"time-series data"这个称谓也许还能够直观地理解是以时间戳为索引的数据（更有甚者我这样的理解其实是错误的），那么“table data”该如何去理解呢？"time-series data"难道不是以表格的形式组织排列储存的吗？至于“json”就更为模糊了，是以json为格式的数据？还是通过json的形式传递的数据？ 那么json这种格式的数据就不能同时是"time-series data"或"table data"吗？这三种类型的数据不具备互斥性，由此可见这种分类方法是不科学的。 
 我个人主观认为正确的分类方法正如文档开头所说，我在本文的第一章节也引用了这句话:
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates.   
@@ -46,9 +46,9 @@ Kapacitor是influxdata四个开源核心产品之一（TICK stack, K--Kapacitor)
 ref: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2  
 
 **5.  使用Node-Red对数据流向管理，在数据存入数据库之前利用已有的集成块调用接口计算geohash以减轻对数据库的负担。**  
-[Node-RED](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，支持javascript对数据流的处理，因此对前端工程师十分友好。  
-而吸引我使用Red-Node很重要的一个原因是:Node-RED中有一个名为[node-red-node-geohash](https://flows.nodered.org/node/node-red-node-geohash)的结点模块，在Node-RED项目中使用npm简单安装后，即可将数据中的经纬度数据对直接编码成geohash码，反之亦然。这样就避免了我投入大量时间成本和开发成本在geohash到经纬度的转码上；
-其次，Node-RED对数据流向进行管理和编辑处理的强大功能，允许在流向中插入自定义的javascript功能代码；这让数据流向设计的灵活度大大提高了，因此也能充分利用这种灵活度将我的数据在存入数据库之前将关于经纬度的数据转译成geohash，这样一来就避免了方法4中对数据库资源的浪费和复写；
+[Node-RED](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，支持javascript对数据流的处理，因此对前端工程师十分友好。   
+而吸引我使用Red-Node很重要的一个原因是:Node-RED中有一个名为[node-red-node-geohash](https://flows.nodered.org/node/node-red-node-geohash)的结点模块，在Node-RED项目中使用npm简单安装后，即可将数据中的经纬度数据对直接编码成geohash码，反之亦然。这样就避免了我投入大量时间成本和开发成本在geohash到经纬度的转码上；  
+其次，Node-RED对数据流向进行管理和编辑处理的强大功能，允许在流向中插入自定义的javascript功能代码；这让数据流向设计的灵活度大大提高了，因此也能充分利用这种灵活度将我的数据在存入数据库之前将关于经纬度的数据转译成geohash，这样一来就避免了方法4中对数据库资源的浪费和复写；  
 最后，Node-RED的可视化编辑界面能有效将数据流向以一种简单直接的方式表达出来，是选择使用该工具的加分点。**权衡性价比之后，决定采取最后一种方案。**  
 
 ## Chap.3 解决方案详细步骤
@@ -69,9 +69,18 @@ tips: 使用Node-RED的前提条件是保证**node.js**已安装;
 * 用浏览器打开途中高亮地址，进入node-red的用户界面---新世界大门打开，噔噔！
 ![UIlayout](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/node-red-UIlayout.PNG?raw=true)
 ### 2. 在Node-RED上创建data flow
-Node-RED的数据流向编辑器采用模块拖拽的形式，用户很容易理解和使用，因此上手不难，学习曲线平缓。 界面如下：  
+Node-RED的数据流向编辑器采用模块拖拽的形式，用户很容易理解和使用，因此上手不难，学习曲线平缓。  
+根据我的案例情况，在Node-RED上搭建的数据流向如下
 ![UIlayout](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/process_graph.PNG?raw=true)
-location-preprocessor的code:    
+从我机器上的MQTT broker上订阅从我的模拟器中发出的特定话题的数据后，利用geohash结点模块处理经纬度数据，生成geohash，然后再一次利用MQTT broker发布一个新的话题，用于传递经过处理的数据， 这时只要数据库订阅这个新话题，就能利用telegraf顺利地将数据存入数据库中。
+在这个流向中除了必备的mqtt和geohash节点，我还利用了两个function节点来自定义代码。它们分别用于处理流入geohash结点之前的数据，和geohash结点之后的数据。
+根据官方文档中的描述，geohash节点将会直接读取msg.payload中的lat和lon属性，如果规定了精确度即msg.payload.precision存在，那么会一并处理生成唯一的geohash码。具体描述如下： 
+>A function that encodes lat,lon to and from a geohash.
+>If the msg.payload is an object with properties lat or latitude and lon or longitude - it will add a geohash property to the payload.
+>The precision can be set by msg.payload.precision from 1 to 9.
+>Note: If the msg contains a .location property it will operate on that in preference to the .payload.
+在第一章中，我提到过，我的地理数据是被包裹在location属性中的，即msg.payload.location。因此geohash无法直接得到经纬度信息。这时就借助了location-preprocessor的功能节点将location中的信息提取出来。注意在引用的文档叙述中的最后一句， 如果msg中包含了location属性，会直接处理location属性中的lat,lon属性，忽略payload中的信息。 借助这一点，我们则可以将msg.payload.location中的信息直接放入msg.location让其计算geohash。
+location-preprocessor的代码:    
 ```javascript
 //The main purpose of this snippet is to extract the location info from msg.payload and then put it to msg.location to get the calculated geohash. 
 var message=JSON.parse(msg.payload);
@@ -86,6 +95,7 @@ if(message[0].location!==null)
 }
 return msg;
 ```
+当得到有效的geohash码后，此时，只需将msg.location.geohash的值复制进入msg.payload中，此时数据中就拥有了geohash码了。 
 location-afterprocessor:  
 ```javascript
 //The main purpose for this snippet is to put the geohash property into msg.payload which is then transferred by mqtt-broker via certain topic
@@ -99,7 +109,8 @@ if(msg.location.geohash!==null)
 return msg;
 ```
 ### 3. 检查数据库内的数据格式是否正确
-到这里，数据应该安然无恙地被telegraf简单处理后存入数据库。这时对数据库进行简单的操作检查数据是否如自己预期地被写入了指定数据库。
+到这里，数据应该安然无恙地被telegraf简单处理后存入数据库。这时对数据库进行简单的操作检查数据是否如自己预期地被写入了指定数据库。  
+**注意，在使用telegraf时，要将geohash一项设置为tag才能被Worldpanel识别和使用。**
 ![correct-dbformat](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/correct_dbformat.PNG?raw=true)
 既然到这里已经保证数据库里有了可用的数据，那么接下来开始设置Worldmap Panel工具吧！  
 欣喜伴随着绝望。又要开始研究文档T.T。  
@@ -110,8 +121,8 @@ return msg;
 >* a geohash tag named geohash
 >* an optional location name (shown in the mouse over). This location name has to be specified in the Worldmap settings tab too.
 
-我给大家用直白的话翻译一下这段话的意思： 老子Worldmap Panel只认两个兄弟，一个叫做metric，还有一个就是geohash！location name的这个人可以考虑，但是可有可无。其他的都滚一边去！
-geohash就是个打手，Worldmap Panel说让它去哪儿它就得去哪儿，该在那个地理位置就给定在哪里  
+我给大家用直白的话翻译一下这段话的意思： 老子Worldmap Panel只认两个兄弟，一个叫做metric，还有一个就是geohash！location name的这个人可以考虑，但是可有可无。其他的都滚一边去！  
+geohash就是个打手，Worldmap Panel说让它去哪儿它就得去哪儿，该在那个地理位置就给定在哪里；  
 metric是个师爷，在geohash的定位基础上，每个点要显示的值都靠metric去提供。但是师爷这种人聪明绝顶，行走江湖容易遭人暗算，所以metric是个化名，真正名字叫什么，主要看数据库给什么值了。总之在Worldmap上他就叫metric。  
 这样一来我们就可以设置数据集按照geohash来定位，而在每个geohash的点上需要显示的值则由metric确定。比如从我的需求出发，需要显示我的每台设备在地图上的定位并能让用户看到每台机器的当前运行的温度情况，那么我就应该这样来设置我的query。  
 ![query settings](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/metrics.PNG?raw=true)
