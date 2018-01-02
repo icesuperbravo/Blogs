@@ -46,8 +46,10 @@ Kapacitor是influxdata四个开源核心产品之一（TICK stack, K--Kapacitor)
 ref: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2  
 
 **5.  使用Node-Red对数据流向管理，在数据存入数据库之前利用已有的集成块调用接口计算geohash以减轻对数据库的负担。**  
-[Node-RED](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，支持javascript对数据流的处理，因此对前端工程师十分友好。   
-而吸引我使用Red-Node很重要的一个原因是:Node-RED中有一个名为[node-red-node-geohash](https://flows.nodered.org/node/node-red-node-geohash)的结点模块，在Node-RED项目中使用npm简单安装后，即可将数据中的经纬度数据对直接编码成geohash码，反之亦然。这样就避免了我投入大量时间成本和开发成本在geohash到经纬度的转码上；  
+[Node-RED](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，支持javascript对数据流的处理，因此对前端工程师十分友好。
+
+** *而吸引我使用Red-Node很重要的一个原因是:Node-RED中有一个名为[node-red-node-geohash](https://flows.nodered.org/node/node-red-node-geohash)的结点模块，在Node-RED项目中使用npm简单安装后，即可将数据中的经纬度数据对直接编码成geohash码，反之亦然。这样就避免了我投入大量时间成本和开发成本在geohash到经纬度的转码上；** 
+
 其次，Node-RED对数据流向进行管理和编辑处理的强大功能，允许在流向中插入自定义的javascript功能代码；这让数据流向设计的灵活度大大提高了，因此也能充分利用这种灵活度将我的数据在存入数据库之前将关于经纬度的数据转译成geohash，这样一来就避免了方法4中对数据库资源的浪费和复写；  
 最后，Node-RED的可视化编辑界面能有效将数据流向以一种简单直接的方式表达出来，是选择使用该工具的加分点。**权衡性价比之后，决定采取最后一种方案。**  
 
