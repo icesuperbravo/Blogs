@@ -6,14 +6,16 @@
   "location": {
    "lat":12.345,
    "lon":56.789
-  }
+  },
+  "temperature": 49.966,
+  "more-props": value
  }
  ```
 一个很自然而然想法萌生了---用地图来展示相关信息。但！万万那没想到，一进地图的坑，卡了10天都没出坑。（部分原因是圣诞节让我懒惰[写不出来就让圣诞节背锅哈哈哈哈]，没有做功课)。  
 关于基于地图的信息可视化，Power BI上的Map工具给我留下了用户友好简单易用的好印象。只要使用直接的经纬度数据对就能在地图上对位置定位并展示。逻辑惯性让我想当然了，天真地以为所有的地图插件都一样”单纯”。  
 首先，在Grafana的标准可视化工具中是不包括地图相关的工具的， 但在插件库中官方发布了一款名为World Map Pannal基于地图可视化的工具，符合我的需求看起来效果也不错。
 
-在简单地下载安装了这个插件后，我发现事情并没有想象简单。该工具和我的可视化框架最大的冲突是:
+在简单地下载安装了这个插件后，我发现事情并没有想象简单。该工具和我的可视化框架最大的冲突是:  
 **Worldmap Panel并不支持通过经纬度数据对 e.g. (latitude, longtitude)在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。 
 
 以下从官方文档中摘出的这句话很好地的解释了这两种数据类型。  
@@ -28,7 +30,7 @@ Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混�
 > 注解：对于code： 可以使用grafana预先定义的code， 也可以自定义一些code并用json/jsonp方式导入;   
        对于geohash: 主要是为了支持elasticsearch， 但是对于influxdb， 可以人工添加geohash的tag，并将数据看作是表格读取geohash tag中的内容； 
 
-**“以country code和geohash为区分，详述在不同数据库下针对这两种数据源的配置方法”**---用这样的方法组织文档，一目了然，结构清晰；读者按图索骥，效率大大提高，至少好过现在的文档。而全文档如此重要的一句话，竟然放在一个毫不起眼的角落。恕我实在无法理解撰写者的意图。
+**“以country code和geohash为区分，详述在不同数据库下针对这两种数据源的配置方法”**---如果用这样的方法组织文档，一目了然，结构清晰；读者按图索骥，效率大大提高，至少好过现在的文档。而全文档如此重要的一句话，竟然放在一个毫不起眼的角落。恕我实在无法理解撰写者的意图。
 
 ## Chap.2 各种绞尽脑汁花式变换关键词问google+欲罢不能看文档之后的结果
 为了解决这个如鲠在喉的数据匹配问题，几种可能的解决方法一番折腾后初现原形：  
@@ -77,7 +79,8 @@ tips: 使用Node-RED的前提条件是保证**node.js**已安装;
 Node-RED的数据流向编辑器采用模块拖拽的形式，用户很容易理解和使用，因此上手不难，学习曲线平缓。  
 根据我的案例情况，在Node-RED上搭建的数据流向如下
 ![myflow](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/process_graph.PNG?raw=true)
-
+![mqtt-in](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/mqtt-in.PNG?raw=true)
+![mqtt-out](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/mqtt-out.PNG?raw=true)
 从我机器上的MQTT broker上订阅从我的模拟器中发出的特定话题的数据后，利用geohash结点模块处理经纬度数据，生成geohash，然后再一次利用MQTT broker发布一个新的话题，用于传递经过处理的数据， 这时只要数据库订阅这个新话题，就能利用telegraf顺利地将数据存入数据库中。
 在这个流向中除了必备的mqtt和geohash节点，我还利用了两个function节点来自定义代码。它们分别用于处理流入geohash结点之前的数据，和geohash结点之后的数据。
 根据官方文档中的描述，geohash节点将会直接读取msg.payload中的lat和lon属性，如果规定了精确度即msg.payload.precision存在，那么会一并处理生成唯一的geohash码。具体描述如下： 
