@@ -13,8 +13,8 @@
 关于基于地图的信息可视化，Power BI上的Map工具给我留下了用户友好简单易用的好印象。只要使用直接的经纬度数据对就能在地图上对位置定位并展示。逻辑惯性让我想当然了，天真地以为所有的地图插件都一样”单纯”。  
 首先，在Grafana的标准可视化工具中是不包括地图相关的工具的， 但在插件库中官方发布了一款名为World Map Pannal基于地图可视化的工具，符合我的需求看起来效果也不错。
 
-|在简单地下载安装了这个插件后，我发现事情并没有想象简单。该工具和我的可视化框架最大的冲突是:  |
-|**Worldmap Panel并不支持通过经纬度数据对 e.g. (latitude, longtitude)在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。|  
+在简单地下载安装了这个插件后，我发现事情并没有想象简单。该工具和我的可视化框架最大的冲突是:
+**Worldmap Panel并不支持通过经纬度数据对 e.g. (latitude, longtitude)在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。 
 
 以下从官方文档中摘出的这句话很好地的解释了这两种数据类型。  
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates。  
