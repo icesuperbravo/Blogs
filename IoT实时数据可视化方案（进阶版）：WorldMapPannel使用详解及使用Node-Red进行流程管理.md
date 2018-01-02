@@ -13,17 +13,16 @@
 关于基于地图的信息可视化，Power BI上的Map工具给我留下了用户友好简单易用的好印象。只要使用直接的经纬度数据对就能在地图上对位置定位并展示。逻辑惯性让我想当然了，天真地以为所有的地图插件都一样”单纯”。  
 首先，在Grafana的标准可视化工具中是不包括地图相关的工具的， 但在插件库中官方发布了一款名为World Map Pannal基于地图可视化的工具，符合我的需求看起来效果也不错。  
 在简单地下载安装了这个插件后，我发现事情并没有想象简单。该工具和我的可视化框架最大的冲突是:  
-**World Map Pannel并不支持通过经纬度数据对 e.g. (latitude, longtitude)在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。  
+**Worldmap Panel并不支持通过经纬度数据对 e.g. (latitude, longtitude)在地图上定位与可视化， 其支持的数据格式有且仅有两种：Country/State Code或geohash**。  
 以下从官方文档中摘出的这句话很好地的解释了这两种数据类型。  
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates。   
 #### Tips:睁大双眼，认真审题（这屎一样的文档）
 Grafana和InfluxDB的文档大概是我有生以来看到过写的最逻辑混乱的文档之一了，吐槽请见[上篇博客](https://segmentfault.com/a/1190000012514865)。
-在这新年之际，我要邀请大家继续欣赏出自Grafana官方WorldMap Panel的[documentation](https://github.com/grafana/worldmap-panel)。 说实话我一口气看了三遍后竟然比看第一遍时还要混乱。文档以table data, time series data和json为data source的介绍相关配置实在是相当混乱。以我的构架为例：首先，使用influxdb得到的数据照理说应该是time series data吧？毕竟人家influxdb号称time-series数据库，以写入数据库时的时间戳作为表格的唯一索引。 然而最后使用的配置方法竟然归档在table data下(influxdb: 我不要面子的哦)；
+在这新年之际，我要邀请大家继续欣赏出自Grafana官方WorldMap Panel的[documentation](https://github.com/grafana/worldmap-panel)。 说实话我一口气看了三遍后竟然比看第一遍时还要混乱。文档以table data, time series data和json为data source的介绍相关配置实在是相当混乱。以我的构架为例：首先，使用influxdb得到的数据照理说应该是time series data吧？毕竟人家influxdb号称time-series数据库，以写入数据库时的时间戳作为表格的唯一索引。 然而最后使用的配置方法竟然归档在table data下(influxdb: 我不要面子的哦)；  
 其次"time-series data"这个称谓也许还能够直观地理解是以时间戳为索引的数据（更有甚者我这样的理解其实是错误的），那么“table data”该如何去理解呢？"time-series data"难道不是以表格的形式组织排列储存的吗？至于“json”就更为模糊了，是以json为格式的数据？还是通过json的形式传递的数据？ 那么json这种格式的数据就不能同时是"time-series data"或"table data"吗？这三种类型的数据不具备互斥性，由此可见这种分类方法是不科学的。 
 我个人主观认为正确的分类方法正如文档开头所说，我在本文的第一章节也引用了这句话:
 > There are currently two ways to connect data with points on a map. Either by matching a tag or series name to a **country code/state code** (e.g. SE for Sweden, TX for Texas) or by using **geohashes** to map against geographic coordinates.   
-
-> 注解：对于code： 可以使用grafana预先定义的code， 也可以自定义一些code并用json/jsonp方式导入;  
+> 注解：对于code： 可以使用grafana预先定义的code， 也可以自定义一些code并用json/jsonp方式导入;   
        对于geohash: 主要是为了支持elasticsearch， 但是对于influxdb， 可以人工添加geohash的tag，并将数据看作是表格读取geohash tag中的内容； 
 
 **“以country code和geohash为区分，详述在不同数据库下针对这两种数据源的配置方法”**---用这样的方法组织文档，一目了然，结构清晰；读者按图索骥，效率大大提高，至少好过现在的文档。而全文档如此重要的一句话，竟然放在一个毫不起眼的角落。恕我实在无法理解撰写者的意图。
@@ -47,13 +46,15 @@ Kapacitor是influxdata四个开源核心产品之一（TICK stack, K--Kapacitor)
 ref: https://community.influxdata.com/t/mapping-influx-data-to-maps/341/2  
 
 **5.  使用Node-Red对数据流向管理，在数据存入数据库之前利用已有的集成块调用接口计算geohash以减轻对数据库的负担。**  
-[Node-Red](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，处理语言使用javascript，对前端工程师十分友好， node.js在背后的强大支撑更让该工具如虎添翼。  
+[Node-RED](https://nodered.org/)为一个开源的IoT设备数据流编辑器，主要用于可视化IoT数据的流向并且对数据流向进行管理和连接。 它依赖于活跃的node.js社区，拥有大量可用资源和强大的社区支持。 既能有效地将数据从源头历经的各个技术栈以流程图的形式表达出来，又能对数据流进行简单管理，支持javascript对数据流的处理，因此对前端工程师十分友好。  
+而吸引我使用Red-Node很重要的一个原因是:Node-RED中有一个名为[node-red-node-geohash](https://flows.nodered.org/node/node-red-node-geohash)的结点模块，在Node-RED项目中使用npm简单安装后，即可将数据中的经纬度数据对直接编码成geohash码，反之亦然。这样就避免了我投入大量时间成本和开发成本在geohash到经纬度的转码上；
+其次，Node-RED可以对数据流向进行管理和编辑处理，可以在流向中插入自定义的javascript功能代码；
+Node-RED的可视化编辑界面能有效将数据流向以一种简单直接的方式表达出来，也是一个使用该工具的加分点。
 **权衡之后，决定采取最后一种方案。**  
-原因有以下几点： 
-1. 能可视化数据流向，有效直观；
-2. 能够直接使用Node-Red中关于geohash的资源，直接将经纬度数据对生成geohash码；
+
 
 ## Chap.3 解决方案详细步骤
+###### 注：整个方案详细步骤参考了该博客内容（https://primalcortex.wordpress.com/2017/04/06/using-node-red-worldmap/）
 ### 1. 配置Node-Red
 tips: 使用Node-Red的前提条件是保证**node.js**已安装;
 * 已安装过node.js的盆友们可以跳过这一趴！  
@@ -124,6 +125,8 @@ location data一定要选择table,且一般table field name设置为geohash；
 ![demo1](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/10.PNG?raw=true)
 ![demo2](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/11.PNG?raw=true)
 ![demo3](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/12PNG.PNG?raw=true)
+
+
 ## Chap.4 聆听来自我内心的新年总结
 脸上笑嘻嘻，心里真是mmp啊！朋友们填坑不易，且填且珍惜哦！  
 也不知道自己还能坚持填坑多久，前路漫漫啊前路漫漫！  
