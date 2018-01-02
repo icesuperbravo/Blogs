@@ -8,7 +8,7 @@
    "lon":56.789
   },
   "temperature": 49.966,
-  "more-props": value
+  "more-props": "value"
  }
  ```
 一个很自然而然想法萌生了---用地图来展示相关信息。但！万万那没想到，一进地图的坑，卡了10天都没出坑。（部分原因是圣诞节让我懒惰[写不出来就让圣诞节背锅哈哈哈哈]，没有做功课)。  
@@ -79,8 +79,8 @@ tips: 使用Node-RED的前提条件是保证**node.js**已安装;
 Node-RED的数据流向编辑器采用模块拖拽的形式，用户很容易理解和使用，因此上手不难，学习曲线平缓。  
 根据我的案例情况，在Node-RED上搭建的数据流向如下
 ![myflow](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/process_graph.PNG?raw=true)
-![mqtt-in](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/mqtt-in.PNG?raw=true)
-![mqtt-out](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/mqtt-out.PNG?raw=true)
+![mqtt-in](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/mqtt_in.PNG?raw=true)
+![mqtt-out](https://github.com/icesuperbravo/Blogs/blob/master/Node-Red-config/mqtt_out.PNG?raw=true)
 从我机器上的MQTT broker上订阅从我的模拟器中发出的特定话题的数据后，利用geohash结点模块处理经纬度数据，生成geohash，然后再一次利用MQTT broker发布一个新的话题，用于传递经过处理的数据， 这时只要数据库订阅这个新话题，就能利用telegraf顺利地将数据存入数据库中。
 在这个流向中除了必备的mqtt和geohash节点，我还利用了两个function节点来自定义代码。它们分别用于处理流入geohash结点之前的数据，和geohash结点之后的数据。
 根据官方文档中的描述，geohash节点将会直接读取msg.payload中的lat和lon属性，如果规定了精确度即msg.payload.precision存在，那么会一并处理生成唯一的geohash码。具体描述如下： 
