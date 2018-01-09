@@ -8,6 +8,8 @@ Meanwhile Angular is specially targeted at Angular 2.0+, which is an Type-script
 
 ### Components
 
-
+### isolated scope for angular components
+Every angularjs component has an isolated scope. It does not access $scope values from **parent elements**, nor does it provide values on $scope for **children components** to access.  
+If you want to transfer props from parent to children comps(or vice versa), then you have to use **binding** in config bag;
 ### Component Router
 ![](https://docs.angularjs.org/img/guide/component-based-architecture.svg)
