@@ -3,7 +3,7 @@ AngularJS refers to Angular 1.X, which is a javascript open-source front-end lib
 Meanwhile Angular is specially targeted at Angular 2.0+, which is an Type-script open-source front-end library.
 
 ### IntelliJ configs: 
-1. use browser-sync to auto-refresh the dev pages; 
+1. use browser-sync to auto-refresh the dev pages;  
 run the command under the dir of your project: `browser-sync start --server --files "css/*.css"`  
 2. Add angular as external library in Intellij to add more coding assitance such as auto-filling and documentation helper.
 
