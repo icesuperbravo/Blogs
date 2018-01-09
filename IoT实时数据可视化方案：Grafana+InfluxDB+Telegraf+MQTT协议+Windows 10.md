@@ -58,6 +58,8 @@ two wildcards: # and +
 * Downgrade for QoS    
 消息订阅者允许在消息发布者制定的QoS级别上进行降级；例如mqtt_pub规定qos=2， 则mqtt_sub可以使qos=2 or 1 or 0；    
 ref: https://mosquitto.org/man/mqtt-7.html
+* 注意！根据不同的前端可视化工具对MQTT的支持不尽相同。对于mosquitto本身而言只是MQTT协议的一种实现方式，虽然在mosquitto文档中明确提及其支持对mqtt和websocket两种通讯方式的支持。但在windows版本下的mosquitto仍不支持websocket，主要原因涉及到ws的分发许可支持问题。 
+ref: https://github.com/eclipse/mosquitto/issues/444
 ## 配置Telegraf
 step 1: 安装并解压telegraf （如果没有wget请自行下载（恕在下直言，windows简直就是个辣鸡））      
 ![](https://github.com/icesuperbravo/Blogs/blob/master/Grafana/7.PNG)
