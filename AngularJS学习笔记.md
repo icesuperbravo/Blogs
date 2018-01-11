@@ -42,7 +42,7 @@ $location in HTML5 mode requires a <base> tag to be present!
             //parent: 'programmeState'
         };
   ```
-  生成的url为 /programme#about;  
+生成的url为 /programme#about;  
 We can also mix nested states with state parameters: 
 ```javascript
 .config(function($stateProvider) {
@@ -57,7 +57,7 @@ We can also mix nested states with state parameters:
             name: 'Programme.dropdown',
             url: '#{dropdownName}'
         };
-        ```
+ ```
 在view上应用parameters:
 ```html
 <ul class="dropdown-menu dropdown-restyle" aria-labelledby="{{pane.name}}Dropdown"  ng-show="pane.dropdowns!=null">
@@ -66,4 +66,5 @@ We can also mix nested states with state parameters:
                     <a ui-sref="Programme.dropdown({dropdownName: dropdown.toLowerCase() })">{{dropdown}}</a>
                 </li>
             </ul>
-            ```
+```
+生成的url: /programme#{dropdownName}
