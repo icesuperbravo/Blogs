@@ -13,4 +13,30 @@ run the command under the dir of your project: `browser-sync start --server --fi
 Every angularjs component has an isolated scope. It does not access $scope values from **parent elements**, nor does it provide values on $scope for **children components** to access.  
 If you want to transfer props from parent to children comps(or vice versa), then you have to use **binding** in config bag;
 ### Component Router
+component router is decrapted for 1.6.5, replace it with ngRoute or ui-router. 
+$location in HTML5 mode requires a <base> tag to be present!
 ![](https://docs.angularjs.org/img/guide/component-based-architecture.svg)
+
+
+#### ui-router
+>A **ui-sref** is a directive, and behaves similar to an html href. Instead of referencing a url like an href, it references a state. **The ui-sref directive automatically builds a href attribute for you (<a href=...></a>) based on your state’s url.**
+
+该项解答了ui-sref directive可以与href混合使用的现象（当然不能作用于同一标签，但可以作用于比如有两个不同的<a>tag）  
+
+>When naming a state, prepending another state’s name (and a dot) creates a parent/child relationship. In this case, the people.person state is **a child** of the people state.
+>Another way to create a parent/child relationship is with the parent: property of a state definition.
+
+第二种方法申明`state: parent: state variable name`
+ ```javascript
+ var programmeState = {
+            name: 'Programme',
+            url: '/programme',
+            abstract: true,
+            component: 'programme'
+        };
+        var progAbtState = {
+            name: 'about',
+            url: '#about'
+            //parent: 'programmeState'
+        };
+  ```
