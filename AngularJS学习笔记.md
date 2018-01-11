@@ -71,3 +71,4 @@ We can also mix nested states with state parameters:
 
 * 如何使Hackathon.html#!/programme#about变成Hackathon.html/programme#about？
 * ui-sref-active如何用？
+* fix my windows 10 cmd: there is no 'ls' command
