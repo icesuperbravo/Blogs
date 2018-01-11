@@ -68,3 +68,6 @@ We can also mix nested states with state parameters:
             </ul>
 ```
 生成的url: /programme#{dropdownName}
+
+* 如何使Hackathon.html#!/programme#about变成Hackathon.html/programme#about？
+* ui-sref-active如何用？
