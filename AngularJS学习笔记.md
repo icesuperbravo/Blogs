@@ -19,10 +19,12 @@ $location in HTML5 mode requires a <base> tag to be present!
 
 
 #### ui-router
+* ui-sref
 >A **ui-sref** is a directive, and behaves similar to an html href. Instead of referencing a url like an href, it references a state. **The ui-sref directive automatically builds a href attribute for you (<a href=...></a>) based on your state’s url.**
 
 该项解答了ui-sref directive可以与href混合使用的现象（当然不能作用于同一标签，但可以作用于比如有两个不同的<a>tag）  
 
+* nested states
 >When naming a state, prepending another state’s name (and a dot) creates a parent/child relationship. In this case, the people.person state is **a child** of the people state.
 >Another way to create a parent/child relationship is with the parent: property of a state definition.
 
@@ -40,3 +42,28 @@ $location in HTML5 mode requires a <base> tag to be present!
             //parent: 'programmeState'
         };
   ```
+  生成的url为 /programme#about;  
+We can also mix nested states with state parameters: 
+```javascript
+.config(function($stateProvider) {
+        var programmeState = {
+            name: 'Programme',
+            url: '/programme',
+            abstract: true,
+            component: 'programme'
+        };
+        //children states for programmeState;
+        var dropdownState = {
+            name: 'Programme.dropdown',
+            url: '#{dropdownName}'
+        };
+        ```
+在view上应用parameters:
+```html
+<ul class="dropdown-menu dropdown-restyle" aria-labelledby="{{pane.name}}Dropdown"  ng-show="pane.dropdowns!=null">
+                <li ng-repeat="dropdown in pane.dropdowns">
+                    <!--<a href="javascript:; " ng-click="$ctrl.scrollToId(dropdown)">{{dropdown}}</a>-->
+                    <a ui-sref="Programme.dropdown({dropdownName: dropdown.toLowerCase() })">{{dropdown}}</a>
+                </li>
+            </ul>
+            ```
