@@ -10,6 +10,10 @@ However, this became problematic in terms of performance and cost generation whe
 4. Flexibility – the solution is accessible via APIs
 * For data aggregation and visualization:
 The caveat/downside is:  both of them work along the time axis. We do not have the ability to create our custom metrics or edit data either.
+![Architecture before Azure TSI implementation](https://predica.pl/wp-content/uploads/2017/07/Original-architecture.png)
+Figure 1. Architecture before Azure TSI implementation.
+![Architecture after Azure TSI implementation.](https://predica.pl/wp-content/uploads/2017/07/Changed-architecture.png)
+Figure 2. Architecture after Azure TSI implementation.
 
 reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
