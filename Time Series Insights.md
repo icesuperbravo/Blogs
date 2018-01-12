@@ -5,7 +5,7 @@
 However, this became problematic in terms of performance and cost generation when the number of devices exceeded several hundred thousand.
 * Benefits:
 1. Reducing the number of services, and therefore costs – thanks to replacing Stream Analytics and databases which we no longer needed
-2. Simplicity – the whole logic of data aggregation is prepared in one tool
+2. Simplicity – the whole logic of data aggregation is prepared in one tool  
 **3. Real-time analytics – there is a live data preview via line graph and a heat map**
 4. Flexibility – the solution is accessible via APIs
 * For data aggregation and visualization:
