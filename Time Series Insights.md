@@ -5,15 +5,16 @@ There are a few glittering keywords which really catch my attention when I read 
 1. **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE** 
 换言之，我们可以说 Azure TSI=database+query system(powerful analysis)+visualization layer**. 
 另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品。因此可能会非常好部署且易上手。
-![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)
-而从这张来自于Microsoft官方图上，也侧面印证了我们的想法。它阐述了在IoT数据可视化领域，现在客户的普遍痛点。根据设计Time Series Insights的产品经理Andrew Shannon所说，TSI原本只是一款Microsoft公司内部使用的产品，而正是因为他们发现其他公司也有着和微软同样的痛点，他们决定将这款产品放如Azure生态环境中。
 Also, 'Fully Managed' indicates that Time Series Insights probably is an out-of-the-box solution with no complex architecture and easy configuration. From the aboce formula that we gave, we can also infer that TSI is an handy and easy-to-deploy product.
 2. **BILLIONS OF IOT EVENTS SIMULTANEOUSLY**  
 TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展示数据，'extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.'（特别适用于当IoT设备数量超过十万的情景。此时Power BI可能都没有这样的能力做到这一点）
 3. **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**
 TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源分析能力，而这一切的实现几乎都发生在实时。
 
-
+* TSI所解决的用户痛点：
+![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)  
+而从这张来自于Microsoft官方图上，也侧面印证了我们的想法。它阐述了在IoT数据可视化领域，现在客户的普遍痛点。根据设计Time Series Insights的产品经理Andrew Shannon所说，TSI原本只是一款Microsoft公司内部使用的产品，而正是因为他们发现其他公司也有着和微软同样的痛点，他们决定将这款产品放如Azure生态环境中。
+* 一张图对TSI的总结
 ![core scenarios](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure2.PNG?raw=true)
 * Benefits:
 1. Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed;
