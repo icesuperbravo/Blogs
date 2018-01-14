@@ -16,9 +16,13 @@ TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展�
 TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源分析能力，而这一切的操作实现几乎都在实时。
 
 * TSI所解决的用户痛点：
-![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)  
-这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017针对TSI的一个presentation中一张幻灯片。  
-它阐述了在IoT数据可视化领域，现今客户的普遍痛点。  
+![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)
+
+这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017中对TSI的演讲。  
+它阐述了在IoT数据可视化领域，现今客户的普遍痛点。
+  * 数据总是被储存本地，无法在云端共享；
+  * 工程师或数据分析师没有时间做可视化前的数据处理准备
+  * 
 根据微软的另一产品经理Andrew Shannon在IoTSWC 2017会议中所描述，TSI原本只是一款Microsoft公司内部使用的产品，而正是因为他们发现其他公司也有着和微软同样的痛点，他们决定将这款产品商业化，并放入Azure生态环境。
 * 一张图对TSI的总结
 ![core scenarios](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure2.PNG?raw=true)
