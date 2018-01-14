@@ -69,6 +69,7 @@ TSI explorer为一款云端基于web的可视化及分析工具，其主要界�
 在图标上选择特定时间范围，右选后看到弹出的菜单可以选择Zoom或Explore Data。 Zoom可以进一步放大时间区间的数据，Explore Data后则出现图中右下角的图形框。可以看到时间范围内各个数据指标的图形可视化(Stats)和所有的数据库记录（Events）；  
 在图形部分的左侧Filter Series下方的区域，选择右键，可以看到弹出的菜单。选择Spilt this series by...可以看到TSI按照数据不同自动生成的schema。侧面印证了TSI内部包含了对数据的流处理。 在我的例子我针对了不同设备的名称来拆分我的数据流。
 * 实时图形刷新频率<=60s    
+
 The data update interval is usually within 60 seconds. And it only automatically refresh the line graph of the belowing query sector. 
 ![auto-refresh](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/time-series-insights.PNG?raw=true)
 当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以小于等于1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。  
@@ -78,9 +79,13 @@ The data update interval is usually within 60 seconds. And it only automatically
 总结一下TSI的优缺点：
 #### Benefits:
 1.易用 - TSI能自动对数据进行流处理，分析出可用的指标和数据结构，供客户进行可视化和分析。无编程技能的要求，适合各类人员的使用； 
+
 2.简单 - 从IoT Hub或Event Hub流出后所有数据处理可视化和分析都集成在了一个工具中。因此也能有效降低架构复杂度和成本（Simplicity - the whole logic of data aggregation is prepared in one tool; Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed）；
+
 3. 实时数据分析 - 数据进入TSI的延迟小于等于60s, TSI对数据的分析显示都是基于近乎实时的基础上(Real-time analytics – there is a live data preview via line graph and a heat map)；
+
 4. 灵活 - 可以利用REST API构建您自己的APP，自定义可视化类型（Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI）；
+
 5. 可伸缩 - 针对多设备地理位置分布的不同遥感设备产生的大数据，提供统一全局的管理和视图，可随意伸缩扩展适合观测走势趋向帮助决策或异常侦测根源分析（ scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this）。
 #### Caveats:
 1.仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub）；  
