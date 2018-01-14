@@ -9,7 +9,7 @@ According to Time Series Insights' official documentation:
 （There are a few glittering keywords which really catch my attention when I read this paragrah: ） 
 1. **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE**  
 换言之， **Azure TSI=SQL Database+Query System(powerful analysis)+Visualization Layer**. 
-另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配的。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品，因此推测可能会非常易部署和上手。
+另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配的。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品，因此推测可能会非常易部署和上手。  
 (Also, 'Fully Managed' indicates that Time Series Insights is probably an out-of-the-box solution with no complex architecture and easy configuration. From the above formula that we gave, it can also be inferred that TSI is an handy and easy-to-deploy product.)
 2. **BILLIONS OF IoT EVENTS SIMULTANEOUSLY**  
 TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展示数据，'extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.'（特别适用于当IoT设备数量超过十万的情景。此时Power BI可能都没有这样的能力做到这一点）
@@ -20,8 +20,8 @@ TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源�
 ![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)
 
 这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017中针对TSI的产品展示。  
-它阐述了在IoT数据可视化领域，现今客户的普遍痛点：  
-  * 数据总是被储存本地，无法在云端共享；  
+它阐述了在IoT数据可视化领域，现今客户的普遍痛点：    
+  * 数据总是被储存本地，无法在云端共享;
   * 工程师或数据分析师没有时间做可视化前的数据处理准备;  
   * 很难去可视化IoT大量级数据（比如当数据的数量超过10万以上）；
   * 可视化的工具能够公司被不同层级不同岗位的人员使用，易用易上手；
