@@ -6,13 +6,13 @@ According to Time Series Insights' official documentation:
 >AZURE TIME SERIES INSIGHTS IS A **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE** THAT MAKES IT SIMPLE TO EXPLORE AND ANALYZE **BILLIONS OF IOT EVENTS SIMULTANEOUSLY**. IT GIVES YOU A GLOBAL VIEW OF YOUR DATA, LETTING YOU QUICKLY VALIDATE YOUR IOT SOLUTION AND AVOID COSTLY DOWNTIME TO MISSION-CRITICAL DEVICES BY HELPING YOU DISCOVER **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**.  
 
 在这段言简意赅的浓缩概括中，几个闪亮的关键词引起了我的特别注意：  
-（There are a few glittering keywords which really catch my attention when I read this paragrah: ） 
-1. **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE**  
+（There are a few glittering keywords which really catch my attention when I read this paragraph: ） 
+*  **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE**  
 换言之， **Azure TSI=SQL Database+Query System(powerful analysis)+Visualization Layer**.   
-另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配的。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品，因此推测可能会非常易部署和上手(Also, 'Fully Managed' indicates that Time Series Insights is probably an out-of-the-box solution with no complex architecture and easy configuration. From the above formula that we gave, it can also be inferred that TSI is an handy and easy-to-deploy product)。
-2. **BILLIONS OF IoT EVENTS SIMULTANEOUSLY**    
+另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配的。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品，因此推测可能会非常易部署和上手(Also, 'Fully Managed' indicates that Time Series Insights is probably an out-of-the-box solution with no complex architecture and easy configuration. From the above formula that we gave, it can also be inferred that TSI is a handy and easy-to-deploy product)。
+* **BILLIONS OF IoT EVENTS SIMULTANEOUSLY**    
 TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展示数据，'extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this（特别适用于当IoT设备数量超过十万的情景。此时Power BI可能都没有这样的能力做到这一点）.'  
-3. **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**  
+* **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**  
 TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源分析能力，而这一切的操作实现几乎都在实时。
 
 * TSI所解决的用户痛点：
@@ -47,7 +47,7 @@ Comparison A. Architecture before Azure TSI implementation.
 Comparison B. Architecture after Azure TSI implementation.  
 可以看到，在使用TSI后，架构设计中减少了产品使用的数量。并且省去了在存入数据库前对数据的预先流处理的环节。而TSI能完美地代替Stream Analytics,利用这些未经处理的原始数据自动生成可用的Schema供用户分析选择。**这样一来不仅简化的了产品架构的复杂程度，也节省了一定的人力和金钱成本**。
 
-### 3. Using Time Series Insights to expore your data
+### 3. Using Time Series Insights to explore your data
 * 配置过程  
 TSI配置过程较为简单，注意使用TSI的前提条件为： 
 1. Azure可用的账户;
@@ -70,7 +70,7 @@ TSI explorer为一款云端基于web的可视化及分析工具，其主要界�
 在图形部分的左侧Filter Series下方的区域，选择右键，可以看到弹出的菜单。选择Spilt this series by...可以看到TSI按照数据不同自动生成的schema。侧面印证了TSI内部包含了对数据的流处理。 在我的例子我针对了不同设备的名称来拆分我的数据流。
 * 实时图形刷新频率<=60s    
 
-The data update interval is usually within 60 seconds. And it only automatically refresh the line graph of the belowing query sector. 
+The data update interval is usually within 60 seconds. And it only automatically refreshes the line graph of the following query sector. 
 ![auto-refresh](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/time-series-insights.PNG?raw=true)
 当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以小于等于1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。  
 在每次更改query条件或手动刷新也能让TSI展示数据库内的最新数据。**但是就不要期待TSI能有流动的事实数据展示了，它做不到像POWER BI streaming dashboard中接近于实时的数据图形流动效果**。 
@@ -88,16 +88,15 @@ The data update interval is usually within 60 seconds. And it only automatically
 
 5. 可伸缩 - 针对多设备地理位置分布的不同遥感设备产生的大数据，提供统一全局的管理和视图，可随意伸缩扩展适合观测走势趋向帮助决策或异常侦测根源分析（ scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this）。
 #### Caveats:
-1.仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub）；  
+1.仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Environment----only accepts source from IoT Hub and Event Hub）；  
 2. 仅具备heatmap和line graph两种图形的可视化，无法自定义图形或修改图形，同样无法修改仪表板样式或图表样式。可视化限制性强（Only Line Graph and Heatmap, no customization or any edit）；
 3. 不适用于实时数据的监测，无报警功能，无实时数据可视的能力；更适合于海量数据的可视化分析。
 
 综上所述， TSI这款产品比较适合于
 * 各类开发资源有限的  
-* IoT设备多且位置分布，种类各异的（例如石油，生产等传统行业的工厂—）  
+* IoT设备多且位置分布，种类各异的（例如石油，生产等传统行业的工厂）  
 * 所提供的可视化数据及分析需要提供给公司不同人员使用（如工程师，数据分析师，客户经理等等）  
 * 着重于实时数据分析，而不是实时数据的可视化仪表盘，对单个设备的数据监测需求不高的公司或客户方。  
-
 
 ### [Appendix]Reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
