@@ -21,10 +21,10 @@ TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源�
 
 这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017中针对TSI的产品展示。  
 它阐述了在IoT数据可视化领域，现今客户的普遍痛点：    
-  * 数据总是被储存本地，无法在云端共享;
-  * 工程师或数据分析师没有时间做可视化前的数据处理准备;  
-  * 很难去可视化IoT大量级数据（比如当数据的数量超过10万以上）；
-  * 可视化的工具能够公司被不同层级不同岗位的人员使用，易用易上手；
+* 数据总是被储存本地，无法在云端共享;
+* 工程师或数据分析师没有时间做可视化前的数据处理准备;  
+* 很难去可视化IoT大量级数据（比如当数据的数量超过10万以上）；
+* 可视化的工具能够公司被不同层级不同岗位的人员使用，易用易上手。
 根据微软的另一产品经理Andrew Shannon在IoTSWC 2017会议中所描述，TSI原本只是一款Microsoft公司内部使用的产品，而正是因为他们发现其他公司也有着和微软同样的痛点，他们决定将这款产品商业化，并放入Azure生态环境。
 * 一张图对TSI的总结
 ![core scenarios](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure2.PNG?raw=true)
@@ -55,6 +55,11 @@ Figure 2. Architecture after Azure TSI implementation.
 The data update interval is usually within 60 seconds. And it only automatically refresh the line graph of the belowing query sector. 
 ![auto-refresh](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/time-series-insights.PNG?raw=true)
 当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以约1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。
+### 4. Conclusion
+
+### Benefits:
+
+### Caveats: 
 
 ### Reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
