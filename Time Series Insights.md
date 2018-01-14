@@ -55,23 +55,31 @@ TSI配置过程较为简单，注意使用TSI的前提条件为：
 由于无复杂的构架，具体配置过程可参见[微软官方手册](https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-get-started)。  
 其他相关配置操作请参见上述链接中左方导航栏的How-to Guide。
 
-* 产品界面
+* 产品界面  
 TSI explorer为一款云端基于web的可视化及分析工具，其主要界面如下图所示： 
-
-Line Graph: 针对时间序列的数据可视化，Y-axis中展示的值可以根据界面中左方Query中的Measure来选择; 时间间隔也可以通过左上角的Time interval灵活调配  
-Heatmap: 针对根源分析。能快速发现设备在某个时刻的异常，根据异常的数据记录逐层分析出根本原因；
-
+![TSI-layout](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/tsi-uilayout.PNG?raw=true)
+界面无法进行自定义设计和拖拽，相较于Power BI显然没那么灵活。可以在主仪表盘进行多个图表的展示。点击＋号可添加图表。 
+逐个点击仪表盘中的每个图标，可以看到关于该图标的详细信息及界面展示：
+* Line Graph: 针对时间序列的数据可视化，Y-axis中展示的值可以根据界面中左方Query中的Measure来选择调配。**使用与观察数据在某一项（例如设备温度）指标的走势趋向，方便决策和规避风险**。
+![line-graph](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/tsi-linegraph.PNG?raw=true)  
+* Heatmap: 整个界面与line-graph相似。同样针对于时间序列。 **适用于根源分析和异常侦测。**能快速发现设备在某个时刻的异常动向（颜色标识明显），根据异常的数据记录逐层分析出根本原因；
+![Heatmap](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/tsi-heatmap.PNG?raw=true)   
+两个图表都能通过左上角滑动条灵活调配图表中的时间间隔；  
+左下角的Query能够对显示的数据做一些限制，例如只显示温度超过20度的数据等，query无需使用任何特定的编程语言只要进行简单的设置即可使用；  
+在图标上选择特定时间范围，右选后看到弹出的菜单可以选择Zoom或Explore Data。 Zoom可以进一步放大时间区间的数据，Explore Data后则出现图中右下角的图形框。可以看到时间范围内各个数据指标的图形可视化(Stats)和所有的数据库记录（Events）；  
+在图形部分的左侧Filter Series下方的区域，选择右键，可以看到弹出的菜单。选择Spilt this series by...可以看到TSI按照数据不同自动生成的schema。侧面印证了TSI内部包含了对数据的流处理。 在我的例子我针对了不同设备的名称来拆分我的数据流。
 * 实时图形刷新频率<=60s    
 The data update interval is usually within 60 seconds. And it only automatically refresh the line graph of the belowing query sector. 
 ![auto-refresh](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/time-series-insights.PNG?raw=true)
-当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以约1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。
+当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以小于等于1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。  
+在每次更改query条件或手动刷新也能让TSI展示数据库内的最新数据。**但是就不要期待TSI能有流动的事实数据展示了，它做不到像POWER BI streaming dashboard中接近于实时的数据图形流动效果**。 
+
 ### 4. Conclusion
 
 #### Benefits:
 1. Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed;
-2. Simplicity(Full-managed, highly integrated and an out-of-the-box solution) – the whole logic of data aggregation is prepared in one tool; 
-3. Free Schema
-**4. Real-time analytics – there is a live data preview via line graph and a heat map**
+2. Simplicity - the whole logic of data aggregation is prepared in one tool; 
+**3. Real-time analytics – there is a live data preview via line graph and a heat map**
 4. Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI.
 5. Big data scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.
 #### Caveats:
