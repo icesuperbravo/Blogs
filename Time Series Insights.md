@@ -44,7 +44,7 @@ TSI在这些核心场景中能展现其在市场中独特优势：
 ![Architecture before Azure TSI implementation](https://predica.pl/wp-content/uploads/2017/07/Original-architecture.png)  
 Comparison A. Architecture before Azure TSI implementation.
 ![Architecture after Azure TSI implementation.](https://predica.pl/wp-content/uploads/2017/07/Changed-architecture.png)  
-Comparison B. Architecture after Azure TSI implementation.
+Comparison B. Architecture after Azure TSI implementation.  
 可以看到，在使用TSI后，架构设计中减少了产品使用的数量。并且省去了在存入数据库前对数据的预先流处理的环节。而TSI能完美地代替Stream Analytics,利用这些未经处理的原始数据自动生成可用的Schema供用户分析选择。**这样一来不仅简化的了产品架构的复杂程度，也节省了一定的人力和金钱成本**。
 
 
