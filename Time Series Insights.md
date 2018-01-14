@@ -1,5 +1,5 @@
-(｡･∀･)ﾉﾞ嗨，盆友们，这次我胡汉三又回来啦！这次我们要讨论的另一款功能强大的可视化工具是与Power BI师出同门的Time Series Insights(微软爸爸的怀抱).
-俗话说的好，相亲前要先看简历！那么Time Series Insights简历会是什么样呢？我们从TSI的概念开始聊起吧！
+(｡･∀･)ﾉﾞ嗨，盆友们，这次我胡汉三又回来啦！这次我们要讨论的另一款功能强大的可视化工具是与Power BI师出同门的Time Series Insights(微软爸爸的怀抱).  
+俗话说的好，相亲前要先看简历！那么Time Series Insights简历会是什么样呢？他为什么能从众多追求竞争者中脱颖而出？是长相出众？还是个性独特？我们要从TSI的概念开始聊起！
 ### 1. Concept
 根据Time Series Insights官方文档所述： 
 According to Time Series Insights' official documentation:
@@ -17,7 +17,9 @@ TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源�
 
 * TSI所解决的用户痛点：
 ![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)  
-它阐述了在IoT数据可视化领域，现在客户的普遍痛点。根据设计Time Series Insights的产品经理Andrew Shannon所说，TSI原本只是一款Microsoft公司内部使用的产品，而正是因为他们发现其他公司也有着和微软同样的痛点，他们决定将这款产品放如Azure生态环境中。
+这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017针对TSI的一个presentation中一张幻灯片。  
+它阐述了在IoT数据可视化领域，现今客户的普遍痛点。  
+根据微软的另一产品经理Andrew Shannon在IoTSWC 2017会议中所描述，TSI原本只是一款Microsoft公司内部使用的产品，而正是因为他们发现其他公司也有着和微软同样的痛点，他们决定将这款产品商业化，并放入Azure生态环境。
 * 一张图对TSI的总结
 ![core scenarios](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure2.PNG?raw=true)
 * Benefits:
