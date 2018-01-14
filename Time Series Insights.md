@@ -5,14 +5,13 @@
 According to Time Series Insights' official documentation:
 >AZURE TIME SERIES INSIGHTS IS A **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE** THAT MAKES IT SIMPLE TO EXPLORE AND ANALYZE **BILLIONS OF IOT EVENTS SIMULTANEOUSLY**. IT GIVES YOU A GLOBAL VIEW OF YOUR DATA, LETTING YOU QUICKLY VALIDATE YOUR IOT SOLUTION AND AVOID COSTLY DOWNTIME TO MISSION-CRITICAL DEVICES BY HELPING YOU DISCOVER **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**.  
 
-在这段言简意赅的浓缩概括中，几个闪亮的关键词引起了我的特别注意：
+在这段言简意赅的浓缩概括中，几个闪亮的关键词引起了我的特别注意：  
 （There are a few glittering keywords which really catch my attention when I read this paragrah: ） 
 1. **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE**  
-换言之， **Azure TSI=SQL Database+Query System(powerful analysis)+Visualization Layer**. 
-另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配的。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品，因此推测可能会非常易部署和上手。  
-(Also, 'Fully Managed' indicates that Time Series Insights is probably an out-of-the-box solution with no complex architecture and easy configuration. From the above formula that we gave, it can also be inferred that TSI is an handy and easy-to-deploy product.)
+换言之， **Azure TSI=SQL Database+Query System(powerful analysis)+Visualization Layer**.   
+另外， 'Fully Managed' 可能暗示着TSI提供的解决方案是开箱即用的，无需工程师进行复杂的架构和调配的。从上述我们给出的公式也可以看出TSI是多种工具融合一体的产品，因此推测可能会非常易部署和上手(Also, 'Fully Managed' indicates that Time Series Insights is probably an out-of-the-box solution with no complex architecture and easy configuration. From the above formula that we gave, it can also be inferred that TSI is an handy and easy-to-deploy product)。
 2. **BILLIONS OF IoT EVENTS SIMULTANEOUSLY**  
-TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展示数据，'extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.'（特别适用于当IoT设备数量超过十万的情景。此时Power BI可能都没有这样的能力做到这一点）
+TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展示数据，'extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this（特别适用于当IoT设备数量超过十万的情景。此时Power BI可能都没有这样的能力做到这一点）.'  
 3. **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**
 TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源分析能力，而这一切的操作实现几乎都在实时。
 
@@ -30,12 +29,6 @@ TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源�
 ![core scenarios](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure2.PNG?raw=true)
 TSI在这些核心场景中能展现其在市场中独特优势： 
 
-* Benefits:
-1. Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed;
-2. Simplicity(Full-managed, highly integrated and an out-of-the-box solution) – the whole logic of data aggregation is prepared in one tool; 
-**3. Real-time analytics – there is a live data preview via line graph and a heat map**( But it is not a real-time visualiszaition). And also there exists a lantency on TSI to update new data, which will be within 60s.
-4. Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI.
-5. Big data scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.
 
 ### 2. Architecture
 ![TSI Architecture](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure1.PNG?raw=true)
@@ -57,9 +50,16 @@ The data update interval is usually within 60 seconds. And it only automatically
 当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以约1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。
 ### 4. Conclusion
 
-### Benefits:
-
-### Caveats: 
+#### Benefits:
+1. Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed;
+2. Simplicity(Full-managed, highly integrated and an out-of-the-box solution) – the whole logic of data aggregation is prepared in one tool; 
+3. Free Schema
+**3. Real-time analytics – there is a live data preview via line graph and a heat map**( But it is not a real-time visualiszaition). And also there exists a lantency on TSI to update new data, which will be within 60s.
+4. Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI.
+5. Big data scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.
+### Caveats:
+1. Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub
+2. Only Line Graph and Heatmap, no customization or any edit;
 
 ### Reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
