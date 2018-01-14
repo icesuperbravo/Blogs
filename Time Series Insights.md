@@ -1,8 +1,8 @@
 (｡･∀･)ﾉﾞ嗨，盆友们，这次我胡汉三又回来啦！这次我们要讨论的另一款功能强大的可视化工具是与Power BI师出同门的Time Series Insights(微软爸爸的怀抱).  
 俗话说的好，相亲前要先看简历！那么Time Series Insights简历会是什么样呢？他为什么能从众多追求竞争者中脱颖而出？是长相出众？还是个性独特？我们要从TSI的概念开始聊起！
 ### 1. Concept
-根据Time Series Insights官方文档所述： 
-According to Time Series Insights' official documentation:
+根据Time Series Insights官方文档所述:  
+According to Time Series Insights' official documentation:  
 >AZURE TIME SERIES INSIGHTS IS A **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE** THAT MAKES IT SIMPLE TO EXPLORE AND ANALYZE **BILLIONS OF IOT EVENTS SIMULTANEOUSLY**. IT GIVES YOU A GLOBAL VIEW OF YOUR DATA, LETTING YOU QUICKLY VALIDATE YOUR IOT SOLUTION AND AVOID COSTLY DOWNTIME TO MISSION-CRITICAL DEVICES BY HELPING YOU DISCOVER **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**.  
 
 在这段言简意赅的浓缩概括中，几个闪亮的关键词引起了我的特别注意：  
@@ -62,7 +62,7 @@ TSI explorer为一款云端基于web的可视化及分析工具，其主要界�
 逐个点击仪表盘中的每个图标，可以看到关于该图标的详细信息及界面展示：
 * Line Graph: 针对时间序列的数据可视化，Y-axis中展示的值可以根据界面中左方Query中的Measure来选择调配。**使用与观察数据在某一项（例如设备温度）指标的走势趋向，方便决策和规避风险**。
 ![line-graph](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/tsi-linegraph.PNG?raw=true)  
-* Heatmap: 整个界面与line-graph相似。同样针对于时间序列。 **适用于根源分析和异常侦测。**能快速发现设备在某个时刻的异常动向（颜色标识明显），根据异常的数据记录逐层分析出根本原因；
+* Heatmap: 整个界面与line-graph相似。同样针对于时间序列。 **适用于根源分析和异常侦测**。能快速发现设备在某个时刻的异常动向（颜色标识明显），根据异常的数据记录逐层分析出根本原因；
 ![Heatmap](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/tsi-heatmap.PNG?raw=true)   
 两个图表都能通过左上角滑动条灵活调配图表中的时间间隔；  
 左下角的Query能够对显示的数据做一些限制，例如只显示温度超过20度的数据等，query无需使用任何特定的编程语言只要进行简单的设置即可使用；  
@@ -75,16 +75,24 @@ The data update interval is usually within 60 seconds. And it only automatically
 在每次更改query条件或手动刷新也能让TSI展示数据库内的最新数据。**但是就不要期待TSI能有流动的事实数据展示了，它做不到像POWER BI streaming dashboard中接近于实时的数据图形流动效果**。 
 
 ### 4. Conclusion
-
+总结一下TSI的优缺点：
 #### Benefits:
-1. Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed;
-2. Simplicity - the whole logic of data aggregation is prepared in one tool; 
-**3. Real-time analytics – there is a live data preview via line graph and a heat map**
-4. Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI.
-5. Big data scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.
+1.易用 - TSI能自动对数据进行流处理，分析出可用的指标和数据结构，供客户进行可视化和分析。无编程技能的要求，适合各类人员的使用； 
+2.简单 - 从IoT Hub或Event Hub流出后所有数据处理可视化和分析都集成在了一个工具中。因此也能有效降低架构复杂度和成本（Simplicity - the whole logic of data aggregation is prepared in one tool; Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed）；
+3. 实时数据分析 - 数据进入TSI的延迟小于等于60s, TSI对数据的分析显示都是基于近乎实时的基础上(Real-time analytics – there is a live data preview via line graph and a heat map)；
+4. 灵活 - 可以利用REST API构建您自己的APP，自定义可视化类型（Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI）；
+5. 可伸缩 - 针对多设备地理位置分布的不同遥感设备产生的大数据，提供统一全局的管理和视图，可随意伸缩扩展适合观测走势趋向帮助决策或异常侦测根源分析（ scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this）。
 #### Caveats:
-1. Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub
-2. Only Line Graph and Heatmap, no customization or any edit;
+1.仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub）；  
+2. 仅具备heatmap和line graph两种图形的可视化，无法自定义图形或修改图形，同样无法修改仪表板样式或图表样式。可视化限制性强（Only Line Graph and Heatmap, no customization or any edit）;
+
+综上所述， TSI这款产品比较适合于
+* 各类开发资源有限的  
+* IoT设备多且位置分布，种类各异的（例如石油，生产等传统行业的工厂—）  
+* 所提供的可视化数据及分析需要提供给公司不同人员使用（如工程师，数据分析师，客户经理等等）  
+* 着重于实时数据分析，而不是实时数据的可视化仪表盘，对单个设备的数据监测需求不高的  
+公司或客户方；  
+
 
 ### [Appendix]Reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
