@@ -55,7 +55,13 @@ TSI配置过程较为简单，注意使用TSI的前提条件为：
 由于无复杂的构架，具体配置过程可参见[微软官方手册](https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-get-started)。  
 其他相关配置操作请参见上述链接中左方导航栏的How-to Guide。
 
-* 实时图形刷新频率<=60s  
+* 产品界面
+TSI explorer为一款云端基于web的可视化及分析工具，其主要界面如下图所示： 
+
+
+* 
+
+* 实时图形刷新频率<=60s  
 The data update interval is usually within 60 seconds. And it only automatically refresh the line graph of the belowing query sector. 
 ![auto-refresh](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/time-series-insights.PNG?raw=true)
 当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以约1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。
@@ -65,14 +71,14 @@ The data update interval is usually within 60 seconds. And it only automatically
 1. Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed;
 2. Simplicity(Full-managed, highly integrated and an out-of-the-box solution) – the whole logic of data aggregation is prepared in one tool; 
 3. Free Schema
-**3. Real-time analytics – there is a live data preview via line graph and a heat map**( But it is not a real-time visualiszaition). And also there exists a lantency on TSI to update new data, which will be within 60s.  
+**4. Real-time analytics – there is a live data preview via line graph and a heat map**
 4. Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI.
 5. Big data scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this.
 #### Caveats:
 1. Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub
 2. Only Line Graph and Heatmap, no customization or any edit;
 
-### Reference: 
+### [Appendix]Reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
 2. https://www.youtube.com/watch?v=uH4Eim6HqgY
 3. https://www.youtube.com/watch?v=BgJrhfpjdWs
