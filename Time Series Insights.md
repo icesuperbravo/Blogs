@@ -89,7 +89,8 @@ The data update interval is usually within 60 seconds. And it only automatically
 5. 可伸缩 - 针对多设备地理位置分布的不同遥感设备产生的大数据，提供统一全局的管理和视图，可随意伸缩扩展适合观测走势趋向帮助决策或异常侦测根源分析（ scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this）。
 #### Caveats:
 1.仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Envrionement----only accept source from IoT Hub and Event Hub）；  
-2. 仅具备heatmap和line graph两种图形的可视化，无法自定义图形或修改图形，同样无法修改仪表板样式或图表样式。可视化限制性强（Only Line Graph and Heatmap, no customization or any edit）。
+2. 仅具备heatmap和line graph两种图形的可视化，无法自定义图形或修改图形，同样无法修改仪表板样式或图表样式。可视化限制性强（Only Line Graph and Heatmap, no customization or any edit）；
+3. 不适用于实时数据的监测，无报警功能，无实时数据可视的能力；更适合于海量数据的可视化分析。
 
 综上所述， TSI这款产品比较适合于
 * 各类开发资源有限的  
