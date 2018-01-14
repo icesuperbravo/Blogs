@@ -58,10 +58,10 @@ TSI配置过程较为简单，注意使用TSI的前提条件为：
 * 产品界面
 TSI explorer为一款云端基于web的可视化及分析工具，其主要界面如下图所示： 
 
+Line Graph: 针对时间序列的数据可视化，Y-axis中展示的值可以根据界面中左方Query中的Measure来选择; 时间间隔也可以通过左上角的Time interval灵活调配  
+Heatmap: 针对根源分析。能快速发现设备在某个时刻的异常，根据异常的数据记录逐层分析出根本原因；
 
-* 
-
-* 实时图形刷新频率<=60s  
+* 实时图形刷新频率<=60s    
 The data update interval is usually within 60 seconds. And it only automatically refresh the line graph of the belowing query sector. 
 ![auto-refresh](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/time-series-insights.PNG?raw=true)
 当要搜索的时间区域确定后，主界面所展示的line graph和heatmap是不会随时间自动刷新的。但搜索区域的索引line graph是会以约1分钟/次的频率刷新的，不过条件是将界面右上角的autofresh功能打开。
