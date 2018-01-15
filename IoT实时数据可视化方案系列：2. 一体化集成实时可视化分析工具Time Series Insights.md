@@ -84,7 +84,7 @@ The data update interval is usually within 60 seconds. And it only automatically
 
 3. 实时数据分析 - 数据进入TSI的延迟小于等于60s, TSI对数据的分析显示都是基于近乎实时的基础上(Real-time analytics – there is a live data preview via line graph and a heat map)；
 
-4. 灵活 - 可以利用REST API构建您自己的APP，自定义可视化类型（Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI）；
+4. 灵活 - 可以利用REST API构建您自己的APP，自定义可视化类型（Flexibility – the solution is accessible via APIs. You can customize your visualization on the top of TSI. If you're building an application, either for internal consumption or for external customers to use, Time Series Insights can be used as a back-end for indexing, storing, and aggregating time series data. You can build a custom visualization and user experience on top. Time Series Insights exposes Query APIs to enable this scenario.）；
 
 5. 可伸缩 - 针对多设备地理位置分布的不同遥感设备产生的大数据，提供统一全局的管理和视图，可随意伸缩扩展适合观测走势趋向帮助决策或异常侦测根源分析（ scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this）。
 #### Caveats:
