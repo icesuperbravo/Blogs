@@ -2,7 +2,7 @@
 俗话说的好，相亲前要先看简历！那么Time Series Insights简历会是什么样呢？他为什么能从众多追求竞争者中脱颖而出？是长相出众？还是个性独特？我们要从TSI的概念开始聊起！
 ### 1. Concept
 根据Time Series Insights官方文档所述:  
-According to Time Series Insights' official documentation:  
+>According to Time Series Insights' official documentation:  
 >AZURE TIME SERIES INSIGHTS IS A **FULLY MANAGED ANALYTICS, STORAGE, AND VISUALIZATION SERVICE** THAT MAKES IT SIMPLE TO EXPLORE AND ANALYZE **BILLIONS OF IOT EVENTS SIMULTANEOUSLY**. IT GIVES YOU A GLOBAL VIEW OF YOUR DATA, LETTING YOU QUICKLY VALIDATE YOUR IOT SOLUTION AND AVOID COSTLY DOWNTIME TO MISSION-CRITICAL DEVICES BY HELPING YOU DISCOVER **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**.  
 
 在这段言简意赅的浓缩概括中，几个闪亮的关键词引起了我的特别注意：  
@@ -13,12 +13,12 @@ According to Time Series Insights' official documentation:
 * **BILLIONS OF IoT EVENTS SIMULTANEOUSLY**    
 TSI支持同时对上千万IoT时间数据的可视化，以全局视角来展示数据，'extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this（特别适用于当IoT设备数量超过十万的情景。此时Power BI可能都没有这样的能力做到这一点）.'  
 * **HIDDEN TRENDS, SPOT ANOMALIES, AND CONDUCT ROOT-CAUSE ANALYSES IN NEAR REAL-TIME**  
-TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源分析能力，而这一切的操作实现几乎都在实时。
+TSI能帮助用户发现数据潜在趋势，侦测设备异常且具备根源分析能力，而这一切的操作实现几乎都在实时完成。
 
 * TSI所解决的用户痛点：
 ![challenges](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure3.PNG?raw=true)
 
-这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017中针对TSI的产品展示。  
+这张截图来自微软首席项目经理OP Ravi在Microsoft Build 2017中针对TSI的产品展示演讲。  
 它阐述了在IoT数据可视化领域，现今客户的普遍痛点：    
 * 数据总是被储存本地，无法在云端共享;
 * 工程师或数据分析师没有时间做可视化前的数据处理准备;  
@@ -39,7 +39,7 @@ TSI在这些核心场景中能展现其在市场中独特优势：
 ### 2. Architecture
 ![TSI Architecture](https://github.com/icesuperbravo/Blogs/blob/master/time-series-insights/azure1.PNG?raw=true)
 
-作为Azure生态圈中一款IoT产品，TSI的架构自然以来于Azure中其他产品所组成。事件数据从不同遥感设备上传入到Azure IoT Hub或Azure Event Hub中。 通过简单的设置即可将数据储存在TSI自带的SQL数据库，数据将以时间为主索引进行排列整理，最终通过TSI Explorer图形化展示。
+作为Azure生态圈中一款IoT数据可视分析产品，TSI的架构主要依赖于Azure框架。事件数据从不同遥感设备上传入到Azure IoT Hub或Azure Event Hub中， 通过简单的设置即可将数据储存在TSI自带的SQL数据库，数据将以时间为主索引进行储存，最终通过TSI Explorer图形化展示。
 * 使用TSI后架构发生的变化(Comparison between 'before TSI' and 'after TSI')  
 ![Architecture before Azure TSI implementation](https://predica.pl/wp-content/uploads/2017/07/Original-architecture.png)  
 Comparison A. Architecture before Azure TSI implementation.
@@ -78,9 +78,9 @@ The data update interval is usually within 60 seconds. And it only automatically
 ### 4. Conclusion
 总结一下TSI的优缺点：
 #### Benefits:
-1.易用 - TSI能自动对数据进行流处理，分析出可用的指标和数据结构，供客户进行可视化和分析。无编程技能的要求，适合各类人员的使用； 
+1. 易用 - TSI能自动对数据进行流处理，分析出可用的指标和数据结构，供客户进行可视化和分析。无编程技能的要求，适合各类人员的使用； 
 
-2.简单 - 从IoT Hub或Event Hub流出后所有数据处理可视化和分析都集成在了一个工具中。因此也能有效降低架构复杂度和成本（Simplicity - the whole logic of data aggregation is prepared in one tool; Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed）；
+2. 简单 - 从IoT Hub或Event Hub流出后所有数据处理可视化和分析都集成在了一个工具中。因此也能有效降低架构复杂度和成本（Simplicity - the whole logic of data aggregation is prepared in one tool; Reducing the number of services, and therefore costs(cost effective) – thanks to replacing Stream Analytics and databases which we no longer needed）；
 
 3. 实时数据分析 - 数据进入TSI的延迟小于等于60s, TSI对数据的分析显示都是基于近乎实时的基础上(Real-time analytics – there is a live data preview via line graph and a heat map)；
 
@@ -88,7 +88,7 @@ The data update interval is usually within 60 seconds. And it only automatically
 
 5. 可伸缩 - 针对多设备地理位置分布的不同遥感设备产生的大数据，提供统一全局的管理和视图，可随意伸缩扩展适合观测走势趋向帮助决策或异常侦测根源分析（ scalable, extremely suitable for when the number of devices exceeded several hundred thousand. Even POWER BI doesn't have the ability to do this）。
 #### Caveats:
-1.仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Environment----only accepts source from IoT Hub and Event Hub）；  
+1. 仅针对Azure生态使用且仅目前仅接受来自于IoT Hub或Event Hub的数据（Azure Eco-Environment----only accepts source from IoT Hub and Event Hub）；  
 2. 仅具备heatmap和line graph两种图形的可视化，无法自定义图形或修改图形，同样无法修改仪表板样式或图表样式。可视化限制性强（Only Line Graph and Heatmap, no customization or any edit）；
 3. 不适用于实时数据的监测，无报警功能，无实时数据可视的能力；更适合于海量数据的可视化分析。
 
@@ -97,6 +97,7 @@ The data update interval is usually within 60 seconds. And it only automatically
 * IoT设备多且位置分布，种类各异的（例如石油，生产等传统行业的工厂）  
 * 所提供的可视化数据及分析需要提供给公司不同人员使用（如工程师，数据分析师，客户经理等等）  
 * 着重于实时数据分析，而不是实时数据的可视化仪表盘，对单个设备的数据监测需求不高的公司或客户方。  
+
 
 ### [Appendix]Reference: 
 1. https://predica.pl/blog/azure-time-series-insights-for-iot-devices/
