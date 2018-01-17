@@ -52,3 +52,6 @@ object-oriented way to represent it.
 classes and instances
 class and prop hierachy
 properties and constraints
+domain and range restrictions connecting props and classes
+
+
