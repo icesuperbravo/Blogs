@@ -154,6 +154,7 @@ step 2: 运行influxdb(如果不需要修改任何influxdb的config文件)
 Influx DB默认采用HTTP协议进行Client和Server端的通信，而云端的Grafana服务则强制采用HTTPS确保数据传输的安全性。 众所周知，HTTPS协议是HTTP协议的安全版本，其安全性能的实现主要依靠在Transport Layer之上增加的TLS/SSL层实现文本及数据的加密。HTTPS与HTTP一个重要的区别在于HTTPS增加了对身份的验证功能，因此第三方无法伪造服务端或客户端身份，引入的证书认证机制就是用来确保这一功能的实现。
 为了确保网络间通讯的安全，我将InfluxDB的接口也进行了相关配置，让其利用TLS层使用HTTPS协议进行数据的传输。
 在配置过程中我使用的证书是self-signed-certificate,使用windows系统的配置过程稍有不同（windows真是伤不起，连个配置说明都没有）
+
 step 1:使用openssl（没有的朋友要安装一下）生成证书和密钥；
 `openssl req -x509 -nodes -newkey rsa:2048 -keyout /route/to/your/dir/influxdb-selfsigned.key -out /route/to/your/dir/influxdb-selfsigned.crt -days <NUMBER_OF_DAYS>`   
 在录入信息时，CN一栏一定要对应你部署的域名！ ---> Common Name (e.g. server FQDN or YOUR name) []:localhost
