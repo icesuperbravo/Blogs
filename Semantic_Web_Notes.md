@@ -54,4 +54,14 @@ class and prop hierachy
 properties and constraints
 domain and range restrictions connecting props and classes
 
+### Linked Data and SPARQL
+
+#### 303 URIs vs Hash URIs
+Hash: good for only small RDF descriptions(e.g. schemas)
+#### Linked Data Interfaces and APIS
+Human Application Interface: Ordinary browsing/searching for application HTML pages;  
+Reading RDF data of a URL: for developers 
+Linked Data Browsing: DBpedia;
+SPARQL endpoint: For querying data in a standard way;  
+Download: download as an RDF data dump.  
 
