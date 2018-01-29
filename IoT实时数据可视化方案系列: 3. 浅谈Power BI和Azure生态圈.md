@@ -15,5 +15,5 @@ Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及�
 
 ### 2. 用Power BI构建实时数据可视化仪表板
  
-此章节内容主要从https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi 中翻译而来。
+此章节内容主要从博客![Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。
 ### 3
