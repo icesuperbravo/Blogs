@@ -9,8 +9,10 @@ IoT实时数据可视化方案系列写（憋）到今天，终于来到了Power
 Azure开发生态圈作为企业级服务体系中的影响巨大，奠定基础的一环，为企业级开发方案提供了涵盖IaaS, Paas及SaaS不同层面的架构开发相关产品及服务；  
 IaaS(Infrastructure as a Service)层包括了负载均衡（Load Balance），自动伸缩（auto-scaling），虚拟机（Virtual Machine）等基础设施服务；   
 PaaS(Platform as a Service)拥有云服务（Cloud Service），移动服务（Mobile Service），网页应用部署（Website Deployment）等平台服务；  
-SaaS（Service as a Service）则涵盖了如数据库（SQL， HDinsights...），IoT(Stream Analytics, IoT Hub, Event Hub)方面和数据分析可视化（Time Series Insights， Power BI）等不同领域的软件服务。  
-Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；  
+SaaS（Service as a Service）则涵盖了如数据库（SQL， HDinsights...），IoT(Stream Analytics, IoT Hub, Event Hub)方面和数据分析可视化（Time Series Insights， Power BI）等不同领域的软件服务。
+![]()
+Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；  
+使用Azure和Power BI能搭建一个完整的云端部署的可视化数据方案，让数据不在孤立于某个本地数据库或服务器中，在大数据时代下数据能够在云端有效共享，在终端设备多维展示，并能被实时分析，为推动公司方案决策，减少成本损失助力。
 
 
 
