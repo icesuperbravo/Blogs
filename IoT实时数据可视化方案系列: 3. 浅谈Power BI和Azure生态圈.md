@@ -12,7 +12,10 @@ PaaS(Platform as a Service)拥有云服务（Cloud Service），移动服务（M
 SaaS（Service as a Service）则涵盖了如数据库（SQL， HDinsights...），IoT(Stream Analytics, IoT Hub, Event Hub)方面和数据分析可视化（Time Series Insights， Power BI）等不同领域的软件服务。
 ![](Azure Dashboard)
 Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；  
-而之所以说Power BI是一套服务，在于Power BI旗下产品又可细分为Power BI Desktop, Power BI Cloud, Power BI Mobile三种对不同平台所支持的服务，且这三种产品在功能性上有较大的差异。   
+而之所以说Power BI是一套服务，在于Power BI旗下产品又可细分为Power BI Desktop, Power BI Cloud, Power BI Mobile三种对不同平台所支持的服务。这三种产品在功能性上有较大的差异，但在使用上又保持着千丝万缕的联系。
+Power BI Desktop功能主要集中在创建具有强交互性的数据报表；
+Power BI Cloud则集中于解决云端数据可视化方案，提供了仪表盘，数据警报，分享，流数据等诸多功能，同时兼容Desktop版本部分数据报表的功能；而我们要讨论的实时数据可视化方案依靠于Power BI Cloud提供的流数据方案。
+Power BI Mobile则主要解决移动设备上对已建立的数据报表和仪表盘的查看阅览问题，
 使用Azure和Power BI能搭建一个完整的云端部署的可视化数据方案，让数据不在孤立于某个本地数据库或服务器中，在大数据时代下数据能够在云端有效共享，在终端设备多维展示，并能被实时分析，为推动公司方案决策，减少成本损失助力。
 ![](Power BI Cloud Solution Architecture)
 
@@ -24,31 +27,42 @@ Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及�
 ![]()
 流式数据处理因而应运而生。这种处理方法能让数据处理表现几乎保持在实时。如果将数据比喻成水流，从数据源头流向数据终端，在这期间，我们在流经的某点建立起一座水进化处理工厂（即流式处理工具），对水流进行预先设置好的处理，在流经过程中完成整个处理过程，并提取聚合出我们对水流成分的感兴趣的一些信息，这样便能大大提高对数据处理的效率。而经过处理后的水流仍可以流向其终点，并使用传统的方法存入数据库供历史分析。  
 ![]()  
+ref:
+1. Real-Time Event Processing with Microsoft Azure Stream Analytics;
+
 ### 3. 用Power BI构建实时数据可视化仪表板 
 #### Power BI接受的两种数据流入方法
 Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎是敏锐地捕捉到这样的商机和市场需求，顺势推出了实时数据可视化的仪表盘，并且为了响应流式数据处理在IoT领域的强大需求，又推出了Azure Stream Analytics这一产品。使用Stream Analytics后能将数据无缝无延迟的推送到Power BI终端进行近乎实时的可视分析。而另一个使用该产品的好处是Stream Analytics能对数据进行预处理比如解析，聚合等，使得终端设备能够应对以各种形式组织的数据结构，大大增加了整个数据输入的横向可延展性（horizontal scalability）。  
 另一种较之稍逊的方法是使用Power BI的Rest API直接将流数据推入Power BI中。这样做的缺点是，数据无法被预处理因此则要求产生数据的应用或数据库有能力将数据组织成Power BI能够识别的简单结构。否则Power BI将因无法识别数据而报错。  
 还有一种叫做PubNub的方法局限性较大，在此不做讨论。
 #### 基于云部署的三种Power BI实时数据可视化架构方案
-注：此章节内容主要从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
+
+***
 1. 全云部署方案
 ![full-cloud]()
-性能指标： 
+
+性能指标：  
 执行能力：4颗星；  
 可伸缩性：4颗星；  
 开发成本：2颗星；  
 流数据处理能力：3颗星；  
 在该情景下，我们首先将保存在本地数据库中的数据全部复制到Azure SQL数据库中。然后利用Azure虚拟机服务，云端部署应用，该应用主要业务逻辑为连续每秒向SQL数据库中拉取新数据并转换为JSON格式，以便连接的Event/IoT Hub进行后续处理。最后，我们使用Azure Stream Analytics服务读取IoT/Event Hub中的事件消息并将消息中的数据塑造成可用于分析的形态。所有这些的处理发生在实时或近乎实时，如果我们能将数据拉取的过程控制在每秒。  
 这套方案将几乎全部依赖于微软的Azure服务。方案最大的特色是快速部署和低配置成本，这使得该方法具有高延展性和可移植性。通过仅仅几个步骤，就能使整个服务在几个小时内挂起运行。而所有你需要做的仅仅是将你的原始数据轻松嵌入Azure环境，Azure则会将数据自动实时“传播”到你的Power BI仪表盘。  
+***
 2. Event／IoT Hub + Stream Analytics
 ![iot-stream]()
+
+性能指标:  
 执行能力：4颗星；  
 可伸缩性：1颗星；  
 开发成本：3颗星；  
 流数据处理能力：3颗星；  
 一般而言，产生数据的终端通常是你使用的App。如果App本身有能力和外部网络进行通讯且你能够一定程度上控制App的行为，那么你就可能通过编码将数据直接推送至IoT/Event Hub，从而使得数据能够在云端共享。  
+***
 3. Power BI REST API 
 ![rest-api]()
+
+性能指标:  
 执行能力：2颗星；  
 可伸缩性：1颗星；  
 开发成本：4颗星；  
@@ -56,8 +70,10 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 最后，Power BI提供了REST API接口供用户控制和管理流式数据集。它允许用户将数据直接推送到Power BI并在此基础上建立可视化模块。不过你可能需要将你的应用在Azure Active Directory上注册以获得口令，然后用它来认证你流式数据的输入来源。  
 在此方法中， 明显优势表现在：  
 * Power BI REST API使得运行成本显著降低，只涉及Power BI服务本身所产生的费用；
-* 其开发成本也将大大降低，这得益于REST API的广泛流行。
+* 其开发成本也将大大降低，这得益于REST API的广泛流行。  
 而该方案可预见的限制在于：   
 * 必须在推入API之前将数据进行预处理，而数据产生中断通常并不是建立处理流数据逻辑的理想位置；
-* 通过实践开发经验表明，Power BI目前对产品版本的持续更新可能影响到数据源连接，维护成本大大增加； 
+* 通过实践开发经验表明，Power BI目前对产品版本的持续更新可能影响到数据源连接，维护成本大大增加；
+***
+注：此章节部分内容从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
 ### 3. 玩转Power BI可视化
