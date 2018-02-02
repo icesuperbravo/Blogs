@@ -24,11 +24,13 @@ Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及�
 流式数据处理因而应运而生。这种处理方法能让数据处理表现几乎保持在实时。如果将数据比喻成水流，从数据源头流向数据终端，在这期间，我们在流经的某点建立起一座水进化处理工厂（即流式处理工具），对水流进行预先设置好的处理，在流经过程中完成整个处理过程，并提取聚合出我们对水流成分的感兴趣的一些信息，这样便能大大提高对数据处理的效率。而经过处理后的水流仍可以流向其终点，并使用传统的方法存入数据库供历史分析。  
 ![]()  
 ### 3. 用Power BI构建实时数据可视化仪表板 
-注：此章节内容主要从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
 #### Power BI接受的两种数据流入方法
 Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎是敏锐地捕捉到这样的商机和市场需求，顺势推出了实时数据可视化的仪表盘，并且为了响应流式数据处理在IoT领域的强大需求，又推出了Azure Stream Analytics这一产品。使用Stream Analytics后能将数据无缝无延迟的推送到Power BI终端进行近乎实时的可视分析。而另一个使用该产品的好处是Stream Analytics能对数据进行预处理比如解析，聚合等，使得终端设备能够应对以各种形式组织的数据结构，大大增加了整个数据输入的横向可延展性（horizontal scalability）。  
 另一种较之稍逊的方法是使用Power BI的Rest API直接将流数据推入Power BI中。这样做的缺点是，数据无法被预处理因此则要求产生数据的应用或数据库有能力将数据组织成Power BI能够识别的简单结构。否则Power BI将因无法识别数据而报错。  
+还有一种叫做PubNub的方法局限性较大，在此不做讨论。
 #### 基于云部署的三种Power BI实时数据可视化架构方案
-1. 
-
+注：此章节内容主要从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
+1. 全云部署方案
+2. Stream Analytics+IoT Hub
+3. REST API 
 ### 3. 玩转Power BI可视化
