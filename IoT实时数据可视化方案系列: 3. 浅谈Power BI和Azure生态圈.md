@@ -31,6 +31,12 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 #### 基于云部署的三种Power BI实时数据可视化架构方案
 注：此章节内容主要从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
 1. 全云部署方案
-2. Stream Analytics+IoT Hub
-3. REST API 
+![]()
+性能指标： 
+执行能力：4颗星；
+可伸缩性：4颗星；
+执行成本： 2颗星；
+流数据处理：3颗星；
+2. Event／IoT Hub + Stream Analytics
+3. Power BI REST API 
 ### 3. 玩转Power BI可视化
