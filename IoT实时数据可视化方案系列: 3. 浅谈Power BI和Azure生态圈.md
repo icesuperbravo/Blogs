@@ -11,7 +11,8 @@ IaaS(Infrastructure as a Service)层包括了负载均衡（Load Balance），�
 PaaS(Platform as a Service)拥有云服务（Cloud Service），移动服务（Mobile Service），网页应用部署（Website Deployment）等平台服务；  
 SaaS（Service as a Service）则涵盖了如数据库（SQL， HDinsights...），IoT(Stream Analytics, IoT Hub, Event Hub)方面和数据分析可视化（Time Series Insights， Power BI）等不同领域的软件服务。
 ![](Azure Dashboard)
-Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；  
+Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；  
+而之所以说Power BI是一套服务，在于Power BI旗下产品又可细分为Power BI Desktop, Power BI Cloud, Power BI Mobile三种对不同平台所支持的服务，且这三种产品在功能性上有较大的差异。   
 使用Azure和Power BI能搭建一个完整的云端部署的可视化数据方案，让数据不在孤立于某个本地数据库或服务器中，在大数据时代下数据能够在云端有效共享，在终端设备多维展示，并能被实时分析，为推动公司方案决策，减少成本损失助力。
 ![](Power BI Cloud Solution Architecture)
 
@@ -31,12 +32,32 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 #### 基于云部署的三种Power BI实时数据可视化架构方案
 注：此章节内容主要从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
 1. 全云部署方案
-![]()
+![full-cloud]()
 性能指标： 
-执行能力：4颗星；
-可伸缩性：4颗星；
-执行成本： 2颗星；
-流数据处理：3颗星；
+执行能力：4颗星；  
+可伸缩性：4颗星；  
+开发成本：2颗星；  
+流数据处理能力：3颗星；  
+在该情景下，我们首先将保存在本地数据库中的数据全部复制到Azure SQL数据库中。然后利用Azure虚拟机服务，云端部署应用，该应用主要业务逻辑为连续每秒向SQL数据库中拉取新数据并转换为JSON格式，以便连接的Event/IoT Hub进行后续处理。最后，我们使用Azure Stream Analytics服务读取IoT/Event Hub中的事件消息并将消息中的数据塑造成可用于分析的形态。所有这些的处理发生在实时或近乎实时，如果我们能将数据拉取的过程控制在每秒。  
+这套方案将几乎全部依赖于微软的Azure服务。方案最大的特色是快速部署和低配置成本，这使得该方法具有高延展性和可移植性。通过仅仅几个步骤，就能使整个服务在几个小时内挂起运行。而所有你需要做的仅仅是将你的原始数据轻松嵌入Azure环境，Azure则会将数据自动实时“传播”到你的Power BI仪表盘。  
 2. Event／IoT Hub + Stream Analytics
+![iot-stream]()
+执行能力：4颗星；  
+可伸缩性：1颗星；  
+开发成本：3颗星；  
+流数据处理能力：3颗星；  
+一般而言，产生数据的终端通常是你使用的App。如果App本身有能力和外部网络进行通讯且你能够一定程度上控制App的行为，那么你就可能通过编码将数据直接推送至IoT/Event Hub，从而使得数据能够在云端共享。  
 3. Power BI REST API 
+![rest-api]()
+执行能力：2颗星；  
+可伸缩性：1颗星；  
+开发成本：4颗星；  
+流数据处理能力：1颗星；  
+最后，Power BI提供了REST API接口供用户控制和管理流式数据集。它允许用户将数据直接推送到Power BI并在此基础上建立可视化模块。不过你可能需要将你的应用在Azure Active Directory上注册以获得口令，然后用它来认证你流式数据的输入来源。  
+在此方法中， 明显优势表现在：  
+* Power BI REST API使得运行成本显著降低，只涉及Power BI服务本身所产生的费用；
+* 其开发成本也将大大降低，这得益于REST API的广泛流行。
+而该方案可预见的限制在于：   
+* 必须在推入API之前将数据进行预处理，而数据产生中断通常并不是建立处理流数据逻辑的理想位置；
+* 通过实践开发经验表明，Power BI目前对产品版本的持续更新可能影响到数据源连接，维护成本大大增加； 
 ### 3. 玩转Power BI可视化
