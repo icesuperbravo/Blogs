@@ -11,11 +11,12 @@ IaaS(Infrastructure as a Service)层包括了负载均衡（Load Balance），�
 PaaS(Platform as a Service)拥有云服务（Cloud Service），移动服务（Mobile Service），网页应用部署（Website Deployment）等平台服务；  
 SaaS（Service as a Service）则涵盖了如数据库（SQL， HDinsights...），IoT(Stream Analytics, IoT Hub, Event Hub)方面和数据分析可视化（Time Series Insights， Power BI）等不同领域的软件服务。
 ![](Azure Dashboard)
-Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；  
-而之所以说Power BI是一套服务，在于Power BI旗下产品又可细分为Power BI Desktop, Power BI Cloud, Power BI Mobile三种对不同平台所支持的服务。这三种产品在功能性上有较大的差异，但在使用上又保持着千丝万缕的联系。
-Power BI Desktop功能主要集中在创建具有强交互性的数据报表；
-Power BI Cloud则集中于解决云端数据可视化方案，提供了仪表盘，数据警报，分享，流数据等诸多功能，同时兼容Desktop版本部分数据报表的功能；而我们要讨论的实时数据可视化方案依靠于Power BI Cloud提供的流数据方案。
-Power BI Mobile则主要解决移动设备上对已建立的数据报表和仪表盘的查看阅览问题，
+Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；    
+而之所以说Power BI是一套服务，在于Power BI旗下产品又可细分为Power BI Desktop, Power BI Cloud, Power BI Mobile三种对不同平台所支持的服务。这三种产品在功能性上有较大的差异，但在使用上又保持着千丝万缕的联系。  
+Power BI Desktop功能主要集中在创建功能强大的查询语句，数据模型和具有强交互性的数据报表；且可以将已完成的工作发布到Power BI Cloud进行云端共享或创建仪表盘（Power BI Desktop lets you build advanced queries, models, and reports that visualize data. With Power BI Desktop, you can build data models, create reports, and share your work by publishing to the Power BI service.）  
+Power BI Cloud则集中于解决云端数据可视化方案，提供了仪表盘，数据警报，分享，流数据等诸多功能，同时兼容Desktop版本部分数据报表的功能；**而我们要讨论的实时数据可视化方案依靠于Power BI Cloud提供的流数据方案**。  
+Power BI Mobile则主要解决移动设备上对已建立的数据报表和仪表盘的查看阅览问题, 显然移动端对编辑报表和仪表盘的限制目前还是较大的。  
+将Power BI体系中的这几个工具组合起来使用，产生的功效是十分强大的。既能对非时间序列的数据集进行多角度展示，又能满足当下时代对实时数据可视化的强烈需求。   
 使用Azure和Power BI能搭建一个完整的云端部署的可视化数据方案，让数据不在孤立于某个本地数据库或服务器中，在大数据时代下数据能够在云端有效共享，在终端设备多维展示，并能被实时分析，为推动公司方案决策，减少成本损失助力。
 ![](Power BI Cloud Solution Architecture)
 
@@ -27,8 +28,8 @@ Power BI Mobile则主要解决移动设备上对已建立的数据报表和仪�
 ![]()
 流式数据处理因而应运而生。这种处理方法能让数据处理表现几乎保持在实时。如果将数据比喻成水流，从数据源头流向数据终端，在这期间，我们在流经的某点建立起一座水进化处理工厂（即流式处理工具），对水流进行预先设置好的处理，在流经过程中完成整个处理过程，并提取聚合出我们对水流成分的感兴趣的一些信息，这样便能大大提高对数据处理的效率。而经过处理后的水流仍可以流向其终点，并使用传统的方法存入数据库供历史分析。  
 ![]()  
-ref:
-1. Real-Time Event Processing with Microsoft Azure Stream Analytics;
+
+[1]. Real-Time Event Processing with Microsoft Azure Stream Analytics;
 
 ### 3. 用Power BI构建实时数据可视化仪表板 
 #### Power BI接受的两种数据流入方法
@@ -75,5 +76,5 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 * 必须在推入API之前将数据进行预处理，而数据产生中断通常并不是建立处理流数据逻辑的理想位置；
 * 通过实践开发经验表明，Power BI目前对产品版本的持续更新可能影响到数据源连接，维护成本大大增加；
 ***
-注：此章节部分内容从博客[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi)中翻译而来。  
+[2].[Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi) 
 ### 3. 玩转Power BI可视化
