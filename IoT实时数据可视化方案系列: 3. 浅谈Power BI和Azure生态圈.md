@@ -10,7 +10,7 @@ Azure开发生态圈作为企业级服务体系中的影响巨大，奠定基础
 IaaS(Infrastructure as a Service)层包括了负载均衡（Load Balance），自动伸缩（auto-scaling），虚拟机（Virtual Machine）等基础设施服务；   
 PaaS(Platform as a Service)拥有云服务（Cloud Service），移动服务（Mobile Service），网页应用部署（Website Deployment）等平台服务；  
 SaaS（Service as a Service）则涵盖了如数据库（SQL， HDinsights...），IoT(Stream Analytics, IoT Hub, Event Hub)方面和数据分析可视化（Time Series Insights， Power BI）等不同领域的软件服务。
-![](Azure Dashboard)
+![Azure Dashboard](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/azure.PNG?raw=true)
 Power BI作为SaaS服务中的一项，是一套强大的商业智能分析及数据可视化工具， 能快速地将复杂的原始数据组织成直观有效的数据图表使得数据分析师或工程师能根据图表展示出的数据逻辑及趋势迅速进行决策，有效避免未来开发成本的增加，降低运作风险；    
 而之所以说Power BI是一套服务，在于Power BI旗下产品又可细分为Power BI Desktop, Power BI Cloud, Power BI Mobile三种对不同平台所支持的服务。这三种产品在功能性上有较大的差异，但在使用上又保持着千丝万缕的联系。  
 Power BI Desktop功能主要集中在创建功能强大的查询语句，数据模型和具有强交互性的数据报表；且可以将已完成的工作发布到Power BI Cloud进行云端共享或创建仪表盘（Power BI Desktop lets you build advanced queries, models, and reports that visualize data. With Power BI Desktop, you can build data models, create reports, and share your work by publishing to the Power BI service.）  
@@ -18,16 +18,16 @@ Power BI Cloud则集中于解决云端数据可视化方案，提供了仪表盘
 Power BI Mobile则主要解决移动设备上对已建立的数据报表和仪表盘的查看阅览问题, 显然移动端对编辑报表和仪表盘的限制目前还是较大的。  
 将Power BI体系中的这几个工具组合起来使用，产生的功效是十分强大的。既能对非时间序列的数据集进行多角度展示，又能满足当下时代对实时数据可视化的强烈需求。   
 使用Azure和Power BI能搭建一个完整的云端部署的可视化数据方案，让数据不在孤立于某个本地数据库或服务器中，在大数据时代下数据能够在云端有效共享，在终端设备多维展示，并能被实时分析，为推动公司方案决策，减少成本损失助力。
-![](Power BI Cloud Solution Architecture)
-
+![Power BI Cloud Solution Architecture](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/concept.PNG?raw=true)
 
 ### 2. 聊聊一个系列开篇就应该回答的问题：我们为什么需要实时数据可视化的方案？ 
 在工业互联网时代到来的今天，大批的传统机械制造行业如石油，生产等都面临着严峻的生产设备和资产管理的数字转型（digital tranformation）。大部分工厂均为自己的设备配备了多维度的传感设备或遥感设备从而对自己的生产进程和设备健康进行监控和管理，而这些设备每天都将产生大量结构复杂且不易人类阅读的机器数据。这些机器数据将会被储存在不同的本地数据库中。大量的数据被孤立在本地不仅占用大量存储资源且无法为企业产生经济效益。为了解决这一痛点，首先这些数据需要被共享，以保证数据分析的正确性和利用最大化；其次数据应该能被实时流式处理，处理后的数据可以根据需要舍弃或保存；最后数据应该被统一的平台进行终端可视化，使得这些数据能快速被人类理解，分析以及基于数据进行预测。
 信息化社会的迅猛发展早早就造就了一系列强大的传统数据分析和商业智能分析工具的诞生，这些软件大多采用ETL（Extract, Transform, Load）的传统方法从数据库加载数据到工具中再供用户进行操纵；由于受数据库读取和写入性能的限制，就算是在最完美的情况下，完成整个数据获取的过程也需要一分钟。 而工业级传感设备一般在每秒就能产生将近百万条的机器数据，数据频繁在数据库的更新要求分析工具连续地对数据库发出读请求，这样会造成数据库巨大的读写业务压力。因此大部分的传统数据分析工具（例如Tableau, Qlik）对实时数据可视化的支持非常不好，或者说甚至没有。 
+![Traditional Method](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/traditional-analytics.PNG?raw=true)
 从理论分析来看，对数据响应而进行有效决策（actionable time-critical decision）的最佳黄金时间往往发生在秒级别（近乎实时）。 因此，这推动了我们获取一种让分析工具能更快更好获得数据的处理方法。   
-![]()
+![The diminishing value of data](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/diminishing%20value%20of%20data.PNG?raw=true)
 流式数据处理因而应运而生。这种处理方法能让数据处理表现几乎保持在实时。如果将数据比喻成水流，从数据源头流向数据终端，在这期间，我们在流经的某点建立起一座水进化处理工厂（即流式处理工具），对水流进行预先设置好的处理，在流经过程中完成整个处理过程，并提取聚合出我们对水流成分的感兴趣的一些信息，这样便能大大提高对数据处理的效率。而经过处理后的水流仍可以流向其终点，并使用传统的方法存入数据库供历史分析。  
-![]()  
+![Streaming Method](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/streaming-method.PNG?raw=true)  
 
 [1]. Real-Time Event Processing with Microsoft Azure Stream Analytics;
 
@@ -40,7 +40,7 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 
 ***
 3.2.1. 全云部署方案
-![full-cloud]()
+![full-cloud](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/fullcloud.PNG?raw=true)
 
 性能指标：  
 执行能力：4颗星；  
@@ -54,7 +54,7 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 * 由于存在将数据不间断复制进入云端数据库的操作过程，云端数据库可能存在较大的业务压力。而对每秒从数据库拉取新数据这一方法的实操性我暂保持怀疑态度；
 ***
 3.2.2.Azure Event／IoT Hub +Azure Stream Analytics
-![iot-stream]()
+![iot-stream](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/eventhub+streamanalytics.PNG?raw=true)
 
 性能指标:  
 执行能力：4颗星；  
@@ -69,7 +69,7 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 如果想要对数据源做任何的修改控制，都需要在产生数据的应用或程序中添加逻辑业务，这大大限制了其对数据控制的灵活性；
 ***
 3.2.3 Power BI REST API 
-![rest-api]()
+![rest-api](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/restapi.PNG?raw=true)
 
 性能指标:  
 执行能力：2颗星；  
