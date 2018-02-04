@@ -108,7 +108,7 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 这种丝滑的视觉体验主要表现在线性图中， 可以看到x时间轴会随着当前时间而移动，Power BI会根据每个时间点录入的数据产生平滑的曲线，并以一种连续流畅的动画效果呈现出来。这是市面上很多宣称自己是实时可视化的产品都无法达到的效果。   
 * Power BI实时可视化特色2： Current + Old Data Access = Push + Streaming Dataset（Push and Streaming Dataset for Live Dashboard）   
 根据Power BI的官方文档描述，能达到特色1中这样近乎完美的动态效果主要得益于Power BI内部的Redis Cache。而我们称这种可以近乎实时展示的数据集为Streaming。在Streaming Dataset中，流入的数据将被暂时保存在Power BI内嵌的Redis Cache中，仅对存入的数据进行缓存而不涉及ETL过程。Cache采用先进先出（FIFO）的策略，永远只保留最新流入的前20000行数据记录。 这是为什么这种数据集能保证数据到达**几乎无延迟显示即实时显示**的重要原因。  
-但正是因为这种完美的实时效果，这种技术也存在很大的局限性： 首先，这种技术只能保留最新的前20000行数据也意味着在Streaming数据集为基础上建立的可视化组件最大的时间窗口大概为1小时，因此对历史数据的支持性极差；另一方面，Power BI目前针对Streaming Dataset仅仅提高极小范围的可视化组件的选择： Line Chart，Stacked Bar Chart,Stacked ColumnChart, Gauge, Card，且这些图表上供可自定义的操作十分有限，几乎只能更改图标标题和一些辅助文字。     
+但正是因为这种完美的实时效果，这种技术也存在很大的局限性： 首先，这种技术只能保留最新的前20000行数据也意味着在Streaming数据集为基础上建立的可视化组件最大的时间窗口大概为1小时，因此对历史数据的支持性极差；另一方面，Power BI目前针对Streaming Dataset仅仅提高极小范围的可视化组件的选择： Line Chart，Stacked Bar Chart,Stacked ColumnChart, Gauge, Card，且这些图表上供可自定义的操作十分有限，几乎只能更改图标标题和一些辅助文字。  
 ![Streaming_Limit](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/streaming_dataset.gif?raw=true)   
 
 我们在前面的章节介绍过这张图，对于分析决策而言，尽管实时数据更有价值且更有助于进行有效决策，但是如果能将历史数据和实时数据进行结合使用，则能发挥更大的利用价值。 因此为了让Power BI同样支持对流数据的历史数据分析，Power BI还提供了一种名为Push的数据集。   
