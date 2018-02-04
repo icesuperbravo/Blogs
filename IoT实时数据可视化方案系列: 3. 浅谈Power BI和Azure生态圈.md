@@ -97,7 +97,10 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 因此以下章节的所有的可视化效果将均来自于方案2的架构，以后不再赘述；
 [2]. [Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi) 
 ### 3. 玩转Power BI实时可视化
-
-Power BI实时可视化特色1： 为流数据集而定制的流畅动画效果显示（Smooth Animation Effect for Streaming Dataset）
-Power BI实时可视化特色2： 强大的权限和数据管理功能（Powerful Admin&Data Management Access and Shareness）
+现在我们已经有了一个稳定的数据流和一个完整的云端架构体系, 接下来就到了各位的表演时间了！利用Power BI创建仪表盘和报表的操作十分简单直接，在搭建好环境后，自己摸索一下，几乎就可以上手了。  
+因此，我就根据自身的需求使用Power BI Cloud创建了一个供测试的实时监控仪表盘demo。
+![I am a demo](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/all_dashboard.gif?raw=true)
+不得不说还是Power BI数据流动的动态效果和整个界面简洁的设计感真是让人赏心悦目！接下来我们就来聊一聊Power BI在实时可视化这一领域究竟有哪一些独特之处！  
+Power BI实时可视化特色1： 为流数据集而定制的流畅动画效果显示（Smooth Animation Effect for Streaming Dataset）  
+Power BI实时可视化特色2： 强大的权限和数据管理功能（Powerful Admin&Data Management Access and Shareness）  
 
