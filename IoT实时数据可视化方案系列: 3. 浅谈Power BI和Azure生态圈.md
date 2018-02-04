@@ -93,9 +93,11 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 **而在方案2，3的比较中， 从公司需求和资源方面的角度考虑，方案2的性价比要优于方案3**。  
 首先从成本方面考虑， 虽然方案3的成本仅仅包含使用Power BI Cloud产品所产生的费用，但由于Azure是公司产品开发的主要平台，因此使用部分Azure云资源完全是可负担且易得的；  
 其次从实时性方面考虑，两种方案基本都能保持数据新鲜度和及时性，打成平手；  
-最后从传播数据的可控性来说，方案2完败方案3； 由于Azure Stream Analytics的存在，其对从数据源流出数据的控制力还是十分强大的，你可以用SQL Query甚至自定义javascript snippet对流数据做一定的处理， 而方案3基本对数据控制是毫无能力的；  
+最后从传播数据的可控性来说，方案2完败方案3； 由于Azure Stream Analytics的存在，其对从数据源流出数据的控制力还是十分强大的，你可以用SQL Query甚至自定义javascript snippet对流数据做一定的处理， 而方案3基本对数据控制是毫无能力的；  
 因此以下章节的所有的可视化效果将均来自于方案2的架构，以后不再赘述；
 [2]. [Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi) 
 ### 3. 玩转Power BI实时可视化
 
+Power BI实时可视化特色1： 为流数据集而定制的流畅动画效果显示（Smooth Animation Effect for Streaming Dataset）
+Power BI实时可视化特色2： 强大的权限和数据管理功能（Powerful Admin&Data Management Access and Shareness）
 
