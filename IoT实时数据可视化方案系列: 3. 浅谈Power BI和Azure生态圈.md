@@ -94,7 +94,7 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 首先从成本方面考虑， 虽然方案3的成本仅仅包含使用Power BI Cloud产品所产生的费用，但由于Azure是公司产品开发的主要平台，因此使用部分Azure云资源完全是可负担且易得的；  
 其次从实时性方面考虑，两种方案基本都能保持数据新鲜度和及时性，打成平手；  
 最后从传播数据的可控性来说，方案2完败方案3； 由于Azure Stream Analytics的存在，其对从数据源流出数据的控制力还是十分强大的，你可以用SQL Query甚至自定义javascript snippet对流数据做一定的处理， 而方案3基本对数据控制是毫无能力的；  
-因此以下章节的所有的可视化效果将均来自于方案2的架构，以后不再赘述；
+因此以下章节的所有的可视化效果将均来自于方案2的架构，以后不再赘述；  
 [2]. [Build Real-Time Dashboard in Power BI](https://www.agilebi.com.au/blog/build-real-time-dashboard-power-bi) 
 
 ### 4. 玩转Power BI实时可视化
@@ -108,8 +108,9 @@ Power BI作为商业智能分析工具的先驱和行业有利竞争者，似乎
 这种丝滑的视觉体验主要表现在线性图中， 可以看到x时间轴会随着当前时间而移动，Power BI会根据每个时间点录入的数据产生平滑的曲线，并以一种连续流畅的动画效果呈现出来。这是市面上很多宣称自己是实时可视化的产品都无法达到的效果。   
 * Power BI实时可视化特色2： Current + Old Data Access = Push + Streaming Dataset（Push and Streaming Dataset for Live Dashboard）   
 根据Power BI的官方文档描述，能达到特色1中这样近乎完美的动态效果主要得益于Power BI内部的Redis Cache。而我们称这种可以近乎实时展示的数据集为Streaming。在Streaming Dataset中，流入的数据将被暂时保存在Power BI内嵌的Redis Cache中，仅对存入的数据进行缓存而不涉及ETL过程。Cache采用先进先出（FIFO）的策略，永远只保留最新流入的前20000行数据记录。 这是为什么这种数据集能保证数据到达**几乎无延迟显示即实时显示**的重要原因。  
-但正是因为这种完美的实时效果，这种技术也存在很大的局限性： 首先，这种技术只能保留最新的前20000行数据也意味着在Streaming数据集为基础上建立的可视化组件最大的时间窗口大概为1小时，因此对历史数据的支持性极差；另一方面，Power BI目前针对Streaming Dataset仅仅提高极小范围的可视化组件的选择： Line Chart，Stacked Bar Chart,Stacked ColumnChart, Gauge, Card，且这些图表上供可自定义的操作十分有限，几乎只能更改图标标题和一些辅助文字。   
-![Streaming_Limit](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/streaming_dataset.gif?raw=true) 
+但正是因为这种完美的实时效果，这种技术也存在很大的局限性： 首先，这种技术只能保留最新的前20000行数据也意味着在Streaming数据集为基础上建立的可视化组件最大的时间窗口大概为1小时，因此对历史数据的支持性极差；另一方面，Power BI目前针对Streaming Dataset仅仅提高极小范围的可视化组件的选择： Line Chart，Stacked Bar Chart,Stacked ColumnChart, Gauge, Card，且这些图表上供可自定义的操作十分有限，几乎只能更改图标标题和一些辅助文字。     
+![Streaming_Limit](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/streaming_dataset.gif?raw=true)   
+
 我们在前面的章节介绍过这张图，对于分析决策而言，尽管实时数据更有价值且更有助于进行有效决策，但是如果能将历史数据和实时数据进行结合使用，则能发挥更大的利用价值。 因此为了让Power BI同样支持对流数据的历史数据分析，Power BI还提供了一种名为Push的数据集。   
 ![The diminishing value of data](https://github.com/icesuperbravo/Blogs/blob/master/Power%20BI/diminishing%20value%20of%20data.PNG?raw=true)  
 Push数据集不同于Streaming使用Redis Cache来缓存数据；为了保证所有数据的永久保存，它使用了SQL数据库作为储存工具。 因此在数据延迟方面将会体验到3-5s的滞后（time lag）。在不过分追求完全实时且对历史数据可得性有需求的情况下，使用Push数据集会是个不错的选择。  
@@ -126,7 +127,11 @@ Push数据集不同于Streaming使用Redis Cache来缓存数据；为了保证�
 听起来这一系列操作是不是就足够复杂了呢？除此之外，使用Power BI的同学们还要牢记一点，**仅仅只有Power BI Cloud这个服务是支持流数据可视化的**，也就是说Mobile和Desktop系列都不会支持实时数据的可视化。而其主要原因还是从功能性出发来分析：Mobile主要支持浏览，可以从移动端查看实时数据仪表盘，但不承担编辑工作；而Desktop主要是对报表的编辑和浏览做支持，自然而然也不会让用户对实时数据这一方面有过多的期待。  
 这些历史原因让实时数据可视化这样的一个功能在Power BI的体系中变得异常尴尬，似乎不论在Power BI哪个平台的产品中，实时数据都很难找到一个包容友好，对历史数据和实时展示功能完全支持的环境。这种情况的产生主要原因是Power BI从创始之初就将自己定位成一款*商业智能分析可视化软件*而并非一个*IoT数据实时可视化分析软件*，因此大多数功能都针对传统的静态数据而设计。但因今年物联网技术的迅猛发展，产生的大量机器数据被展示和分析的需求被无限扩大。Power BI团队这才后续做了这样一个功能使得Power BI同样能支持实时数据的可视化。但由于Power BI产品功能模块的设计早已成型，这才使得流数据可视化的位置在Power BI中显得无比尴尬。  
 另外还有一点需要做说明的是：对于每一个数据集（Dataset）只能建立一个针对该数据集的报表，Power BI不允许在一张报表上混合来自不同Dataset的数据；而仪表盘则与之相反，允许将来自不同报表或流数据的可视化图形相互混合。当单击由某个报表的pin来的图形组件时，Power BI将导航至该报表以便用户更深入的探索数据。  
-* Power BI实时可视化特色4： 强大的权限控制和分享功能  
-Power BI同样还具备亮眼的权限控制功能，除了日常的管理权限控制比如说通过限制组内成员不同的管理员身份来实现对报表/仪表盘/数据集的操作范围，
 
 ### 5.总结
+父老乡亲们！！叔叔阿姨们！！爷爷奶奶们！！当我写到总结两个字的时候，我内心充满了无限的激动！  
+![happy_ending](https://media.giphy.com/media/3ohs4k9pD1lpKWB6ec/giphy.gif)  
+![happy_ending2](https://media.giphy.com/media/xTiN0CNHgoRf1Ha7CM/giphy.gif)  
+对于Power BI，我总是抱着又爱又恨的态度。一方面，整个产品的设计界面，交互报表和实时数据流动性的展示真的做的很好；而另一方面，实时数据可视分析的功能始终无法媲美专业的IoT实时数据可视分析工具（尽管市面上能找到的专业工具也相当有限）。加之Power BI各种平台和各种数据源对功能的支持不尽相同，让使用Power BI的过程变得特别长，因为在构建图表之前，你总要大量的翻阅文档以支撑最后可以达到的实际效果。  
+Power BI社区目前已拥有24.9k的发帖量，总的来说保持着高度活跃的氛围；于此同时Power BI的技术团队对产品的更新迭代也一直在进行之中并保持着频繁的版本更新速度。随着实时信息在未来信息社会的分量越来越重，使用可视化工具的用户对这样的需求越来越强烈。我有理由相信，Power BI未来对实时数据可视或分析的能力也会越来越强。也许到某一天，微软甚至会将这一功能从Power BI中分离出来而单独做一款这样的工具。而目前在这个领域，还没有特别成熟的工具能够占据主要的市场份额。对微软，我充满了一个工程师对新工具无限的期待和未来的展望（希望微软爸爸看到这里能给我打红包）。   
+好了，该有的赞美都有了，该吐槽的也都吐槽完毕了。希望这会是一篇对Power BI合格的作业。如果能帮助到任何人，我会感到十分的开心和荣幸。（如果微软爸爸能看到，我会开心到灰起来吧！）
