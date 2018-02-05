@@ -41,3 +41,16 @@ npm是node环境中的包管理工具，会随着node.js的下载安装而同时
 3. 横向扩展的方案面临数据集中的问题，在进行分布式计算布局时考虑到数据间的逻辑关系始终不能无限的随意拆分数据，这使得分布式计算性能丢失或部分损失。  
 ref: http://lylhelin.iteye.com/blog/800298
 
+### 特设分析（Ad Hoc Analysis)  
+特设分析是设计用来回答**单一、确定**的商业问题的商业智能分析过程。特设分析的产品一般是统计模型、分析报告或者其它类型的资料汇总(Ad hoc analysis is a business intelligence process designed to answer a single, specific business question. The product of ad hoc analysis is typically a statistical model, analytic report, or other type of data summary)。-----Note: 特殊问题，特殊分析。无普适性的分析过程。  
+**OLAP 仪表盘**能提供对原始报告中的数据快速简单的访问， 是特意为特设分析而设计的(OLAP dashboards are specifically designed to facilitate ad hoc analysis by providing quick, easy access to data from the original report)。  
+
+### OLAP（Online Analytical Processing）
+
+### ODBC(Open Database Connectivity)
+ODBC是一个允许应用开发人员访问**任意**数据库的一个开放标准应用程序接口(API)(Open Database Connectivity (ODBC) is an open standard application programming interface (API) that allows application programmers to access any database)。  
+ODBC开发支持主要支持者及供应商为微软，但ODBC的接口技术主要基于The Open Group的SQL CLI。不过ODBC还有基于ISO/IEC的版本(The main proponent and supplier of ODBC programming support is Microsoft, but ODBC is based on and closely aligned with The Open Group standard Structured Query Language (SQL) Call-Level Interface (CLI). In addition to CLI specifications from The Open Group, ODBC also aligns with the ISO/IEC for database APIs)。  
+
+* ODBC如何工作？  
+ODBC主要由如图四部分构成。ODBC允许程序使用SQL请求在不知道特定数据库接口的情况下访问数据库，它将SQL请求转化成访问的数据据可以理解的语言(ODBC consists of four components, working together to enable functions. ODBC allows programs to use SQL requests that access databases without knowing the proprietary interfaces to the databases. ODBC handles the SQL request and converts it into a request each database system understands)。  
+![ODBC Structure](http://cdn.ttgtmedia.com/rms/onlineImages/oracle-odbc.jpg)
