@@ -46,6 +46,8 @@ ref: http://lylhelin.iteye.com/blog/800298
 **OLAP 仪表盘**能提供对原始报告中的数据快速简单的访问， 是特意为特设分析而设计的(OLAP dashboards are specifically designed to facilitate ad hoc analysis by providing quick, easy access to data from the original report)。  
 
 ### OLAP（Online Analytical Processing）
+OLAP (online analytical processing)是一个允许用户轻松并有选择性地从不同角度或维度提取并查看数据的计算机处理过程(OLAP is computer processing that enables a user to easily and selectively extract and view data from different points of view)。
+**Stay Tuned！(有待调查)**
 
 ### ODBC(Open Database Connectivity)
 ODBC是一个允许应用开发人员访问**任意**数据库的一个开放标准应用程序接口(API)(Open Database Connectivity (ODBC) is an open standard application programming interface (API) that allows application programmers to access any database)。  
