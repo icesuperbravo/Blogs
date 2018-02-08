@@ -56,3 +56,5 @@ ODBC开发支持主要支持者及供应商为微软，但ODBC的接口技术主
 * ODBC如何工作？  
 ODBC主要由如图四部分构成。ODBC允许程序使用SQL请求在不知道特定数据库接口的情况下访问数据库，它将SQL请求转化成访问的数据据可以理解的语言(ODBC consists of four components, working together to enable functions. ODBC allows programs to use SQL requests that access databases without knowing the proprietary interfaces to the databases. ODBC handles the SQL request and converts it into a request each database system understands)。  
 ![ODBC Structure](http://cdn.ttgtmedia.com/rms/onlineImages/oracle-odbc.jpg)
+
+### 关系型数据库(SQL Database) 非关系型数据库(noSQL Database) 时间序列数据库(Time Series Database)
