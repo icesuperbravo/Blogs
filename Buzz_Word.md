@@ -58,3 +58,7 @@ ODBC主要由如图四部分构成。ODBC允许程序使用SQL请求在不知道
 ![ODBC Structure](http://cdn.ttgtmedia.com/rms/onlineImages/oracle-odbc.jpg)
 
 ### 关系型数据库(SQL Database) 非关系型数据库(noSQL Database) 时间序列数据库(Time Series Database)
+
+### 长尾效应（Long Tail Effect）
+“头”（head）和“尾”（tail）是两个统计学名词。正态曲线中间的突起部分叫“头”；两边相对平缓的部分叫“尾”。从人们需求的角度来看，大多数的需求会集中在头部，而这部分我们可以称之为流行，而分布在尾部的需求是个性化的，零散的小量的需求。而这部分差异化的、少量的需求会在需求曲线上面形成一条长长的“尾巴”，而所谓长尾效应就在于它的数量上，将所有非流行的市场累加起来就会形成一个比流行市场还大的市场。  
+![long-tail](http://www.thelongtail.com/conceptual.jpg)
