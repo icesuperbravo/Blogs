@@ -20,7 +20,7 @@
 你是否曾经像我一样，曾经向往不一样的世界和生活，却往往苦于无门？  
 而每当追求到这片精神净土时，又感到孤单彷徨格格不入？  
 我懂，你一定也想在这段珍贵的海外生活里收获知识，彰显个性，表达想法，宣扬文化，传播和平。 告诉你简单两步，愿望即将成真！  
-Step 1. 申请EIT Digital Master Programme，选择Aalto University作为出/入口学校之一，谱写完美海外生活！   
+Step 1. 申请EIT Digital Master Programme，选择Aalto University作为出/入口学校之一，谱写完美海外生活！  
 什么是EIT Digital Master Programme？   
 由欧洲创新与技术研究院（European Institute of Innovation & Technology简称EIT）创办，欧盟投入27亿资金支持，隶属“人类史上投入最多”的“地平线2020项目”，将信息通讯技术研究，产业和教育相结合的相关双学位硕士项目。  
 在这里，你将获得：   
@@ -46,6 +46,7 @@ Step 2. 加入Aalto CSSA，从此不再孤单彷徨！
 
 而明年的春节活动的四方桌上，我对面的那个位置会不会是你？   
 狗富贵，互相旺，最后祝正在看的你们新年快乐！ 
+![狗富贵，互相旺](https://wpimg.wallstcn.com/f697a1a0-932e-4730-a789-0168b310d07d)
 
 
 
