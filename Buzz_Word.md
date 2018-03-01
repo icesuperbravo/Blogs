@@ -45,7 +45,7 @@ ref: http://lylhelin.iteye.com/blog/800298
 特设分析是设计用来回答**单一、确定**的商业问题的商业智能分析过程。特设分析的产品一般是统计模型、分析报告或者其它类型的资料汇总(Ad hoc analysis is a business intelligence process designed to answer a single, specific business question. The product of ad hoc analysis is typically a statistical model, analytic report, or other type of data summary)。-----Note: 特殊问题，特殊分析。无普适性的分析过程。  
 **OLAP 仪表盘**能提供对原始报告中的数据快速简单的访问， 是特意为特设分析而设计的(OLAP dashboards are specifically designed to facilitate ad hoc analysis by providing quick, easy access to data from the original report)。  
 
-### OLAP（Online Analytical Processing）vs OLTP(Online Transaction Processing) Data Warehouse vs Database
+### OLAP（Online Analytical Processing）vs OLTP(Online Transaction Processing) && Data Warehouse vs Database
 OLAP (online analytical processing)是一个允许用户轻松并有选择性地从不同角度或维度提取并查看数据的计算机处理过程(OLAP is computer processing that enables a user to easily and selectively extract and view data from different points of view)。  
 OLAP一般适用于Data Warehouse的设计, 用于支持高强度的读操作，适用于分析；  
 OLTP一般适用于Database的设计， 用于支持高强度的写操作，适用于于数据存储；  
