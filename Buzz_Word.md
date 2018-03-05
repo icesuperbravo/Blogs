@@ -67,3 +67,7 @@ ODBC主要由如图四部分构成。ODBC允许程序使用SQL请求在不知道
 ![long-tail](http://www.thelongtail.com/conceptual.jpg)
 
 ### SOA (Service Oriented Architecture)
+
+### Artificial Intelligence && Machine Learning && Deep Learning && Data Mining
+
+
