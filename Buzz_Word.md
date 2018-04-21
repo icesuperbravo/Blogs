@@ -70,4 +70,25 @@ ODBC主要由如图四部分构成。ODBC允许程序使用SQL请求在不知道
 
 ### Artificial Intelligence && Machine Learning && Deep Learning && Data Mining
 
+### Machine Learning
+* supervised learning
+Training: Examples X_train together with labels y_train.
+
+Testing: Given X_test, predict y_test.
+
+Examples:
+Classification (spam, sentiment analysis, ...)    
+Regression (stocks, sales, ...)  
+Ranking (retrieval, search, ...)  
+
+* unsupervised learning
+
+Examples X. Learn something about X.
+
+Examples:
+Dimensionality reduction  
+Clustering  
+Manifold learning  
+
+* reinforcement learning 
 
